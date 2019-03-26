@@ -35,7 +35,7 @@ class MyPrism extends CGFobject {
             // triangle normal computed by cross product of two edges
             var normal= [
                 saa-sa,
-                ca*saa-sa*caa,
+                0,
                 caa-ca
             ];
 
