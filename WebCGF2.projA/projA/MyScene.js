@@ -57,8 +57,6 @@ class MyScene extends CGFscene {
 
         //Apply default appearance
         this.setDefaultAppearance();
-
-        // ---- BEGIN Primitive drawing section
        
         //this.prism.display();
         this.cylinder.display();
