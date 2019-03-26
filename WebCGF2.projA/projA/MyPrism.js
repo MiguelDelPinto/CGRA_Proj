@@ -27,17 +27,16 @@ class MyPrism extends CGFobject {
             var ca=Math.cos(ang);
             var caa=Math.cos(ang+alphaAng);
 
-            this.vertices.push(ca,1,-sa);
-            this.vertices.push(caa, 1, -saa)
-            this.vertices.push(ca, 0, -sa);
-            this.vertices.push(caa, 0, -saa);
+            this.vertices.push(ca,1,-sa);       //0
+            this.vertices.push(caa, 1, -saa)    //1     
+            this.vertices.push(ca, 0, -sa);     //2
+            this.vertices.push(caa, 0, -saa);   //3
 
             // triangle normal computed by cross product of two edges
             var normal= [
                 saa-sa,
                 ca*saa-sa*caa,
-                caa-ca,
-                1
+                caa-ca
             ];
 
             // normalization
@@ -51,6 +50,7 @@ class MyPrism extends CGFobject {
             normal[2]/=nsize;
 
             // push normal once for each vertex of this triangle
+            this.normals.push(...normal);
             this.normals.push(...normal);
             this.normals.push(...normal);
             this.normals.push(...normal);
