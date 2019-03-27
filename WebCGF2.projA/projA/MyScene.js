@@ -26,6 +26,7 @@ class MyScene extends CGFscene {
         this.prism = new MyPrism(this, 6, 4);
         this.cylinder = new MyCylinder(this, 6, 5);
         this.unitCubeQuad = new MyUnitCubeQuad(this);
+        this.tree = new MyTree(this, 1, 0, 0, 0, 0, 0);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -61,7 +62,8 @@ class MyScene extends CGFscene {
        
         //this.prism.display();
         //this.cylinder.display();
-        this.unitCubeQuad.display();
+        //this.unitCubeQuad.display();
+        this.tree.display();
 
         // ---- END Primitive drawing section
     }
