@@ -21,17 +21,27 @@ class MyCylinder extends CGFobject {
         for(var i = 0; i < this.slices; i++){
 
             this.vertices.push(Math.cos(ang), 0, -Math.sin(ang));
-            this.vertices.push(Math.cos(ang), 1, -Math.sin(ang));
-            this.indices.push(2*i, (2*i+3) % (2*this.slices), (2*i+1)%(2*this.slices));
-            this.indices.push(2*i, (2*i+2) % (2*this.slices), (2*i+3)%(2*this.slices));
-            this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
-            this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
+            this.vertices.push(Math.cos(ang), 1, -Math.sin(ang));         
+            this.vertices.push(Math.cos(ang+alphaAng), 0, -Math.sin(ang+alphaAng));
+            this.vertices.push(Math.cos(ang+alphaAng), 1, -Math.sin(ang+alphaAng));
+
+            this.indices.push(4*i, (4*i+3) % (4*this.slices), (4*i+1)%(4*this.slices));
+            this.indices.push(4*i, (4*i+2) % (4*this.slices), (4*i+3)%(4*this.slices));
             
-            //TODO Change Later
+            this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
+            this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
+            this.normals.push(Math.cos(ang+alphaAng), 0, -Math.sin(ang+alphaAng));
+            this.normals.push(Math.cos(ang+alphaAng), 0, -Math.sin(ang+alphaAng));
+
+
+            //TODO Mudar para 1
             console.log("CHANGE THIS!");
-            this.texCoords.push(0, 1, 1, 0, 0, 0);
-            this.texCoords.push(0, 1, 1, 1, 1, 0);
-            ang+=alphaAng;
+            this.texCoords.push(0, 0.5);
+            this.texCoords.push(0, 0);
+            this.texCoords.push(0.5, 0.5);
+            this.texCoords.push(0.5, 0);
+
+            ang+=alphaAng;   
         }
 
 

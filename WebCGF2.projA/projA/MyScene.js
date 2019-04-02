@@ -18,15 +18,22 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
+        this.enableTextures(true);
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
 
+        //------ Applied Material
+
+        //------ Textures
+        this.texture1 = new CGFtexture(this, 'images/leaves.jpg');
+        this.texture2 = new CGFtexture(this, 'images/trunk.jpg');
+
         //Objects connected to MyInterface
-        this.prism = new MyPrism(this, 6, 4);
-        this.cylinder = new MyCylinder(this, 6, 5);
+        this.prism = new MyPrism(this, 10, 4);
+        this.cylinder = new MyCylinder(this, 10, 5);
         this.unitCubeQuad = new MyUnitCubeQuad(this);
-        this.tree = new MyTree(this, 1, 0, 0, 0, 0, 0);
+        this.tree = new MyTree(this, 1, 0.34, 1, 1, this.texture2, this.texture1);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
