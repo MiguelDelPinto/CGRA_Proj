@@ -8,15 +8,38 @@ class MyTreeGroupPatch extends CGFobject {
         
         this.trees = [];
 
-        var trunkHeight = 1 + this.scene.getRandomArbitrary(-0.2, 0.5);
-        var trunkRadius = 0.35 + this.scene.getRandomArbitrary(-0.05, 0.05);
-        var treeTopHeight = 1 + this.scene.getRandomArbitrary(-0.5, 0.2);
-        var treeTopRadius = 1 + this.scene.getRandomArbitrary(-0.2, 0.3);
-
         for(var i = 0; i < 9; i++) {
-            this.trees.push( new MyTree(trunkHeight, trunkRadius, treeTopHeight, treeTopRadius, trunkTexture, treeTopTexture));
-        }          
-                
+            this.trees.push(new MyTree(scene,
+            						1 + this.scene.getRandomArbitrary(-0.2, 0.5),
+            						0.35 + this.scene.getRandomArbitrary(-0.05, 0.05),
+            						1 + this.scene.getRandomArbitrary(-0.3, 0.4),
+            						0.8 + this.scene.getRandomArbitrary(-0.2, 0.1),
+            						trunkTexture,
+            						treeTopTexture)
+            				);
+        }         
+
+		this.x_positions = [];
+		this.z_positions = [];
+
+		let x = this.scene.getRandomArbitrary(-0.1, 0.1);
+		let z = this.scene.getRandomArbitrary(-0.1, 0.1);
+
+		for(let i = 0; i < 9; i++){
+			this.x_positions.push(x);
+			this.z_positions.push(z);
+				
+			if((i+1)%3 == 0){
+				x = this.scene.getRandomArbitrary(-0.1, 0.1);
+				z += 1.5;
+			}
+			else{
+				x += this.scene.getRandomArbitrary(1.5, 1.75);
+				z += this.scene.getRandomArbitrary(-0.1, 0.1);
+			}
+		}
+
+
         this.initBuffers();
     }
     
@@ -31,23 +54,11 @@ class MyTreeGroupPatch extends CGFobject {
     
     display() {
         
-        var count = 0;
-        var x = 0;
-
-        for(var i = 0; i < 3; i++) {
-
-            var z = 0;
-
-            for(var j = 0; j < 3; j++) {
-                
-                this.scene.pushMatrix();
-                this.scene.translate(x, 0, z);
-                this.trees[count].display();
-                this.scene.popMatrix();
-                z += 1;
-            }
-
-            x += 1;
-        }
+        for(let i = 0; i < 9; i++) {
+            this.scene.pushMatrix();
+            this.scene.translate(this.x_positions[i], 0, this.z_positions[i]);
+			this.trees[i].display();
+			this.scene.popMatrix();
+		}
     }
 }

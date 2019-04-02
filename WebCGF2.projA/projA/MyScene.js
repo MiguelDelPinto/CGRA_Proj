@@ -35,6 +35,7 @@ class MyScene extends CGFscene {
         this.unitCubeQuad = new MyUnitCubeQuad(this);
         this.tree = new MyTree(this, 1, 0.34, 1, 1, this.texture2, this.texture1);
         this.treeRowPatch = new MyTreeRowPatch(this, this.texture2, this.texture1);
+        this.treeGroupPatch = new MyTreeGroupPatch(this, this.texture2, this.texture1);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -72,8 +73,8 @@ class MyScene extends CGFscene {
         //this.cylinder.display();
         //this.unitCubeQuad.display();
         //this.tree.display();
-        this.treeRowPatch.display();
-        
+        //this.treeRowPatch.display();
+        this.treeGroupPatch.display();
 
         // ---- END Primitive drawing section
     }

@@ -30,7 +30,7 @@ class MyTreeRowPatch extends CGFobject {
 		}
 
 		for(let i = 0; i < 6; i++){
-			this.z_positions.push(this.scene.getRandomArbitrary(-0.5, 0.5));
+			this.z_positions.push(this.scene.getRandomArbitrary(-0.3, 0.3));
 		}
                 
         this.initBuffers();
