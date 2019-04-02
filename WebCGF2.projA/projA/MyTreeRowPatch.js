@@ -6,10 +6,17 @@ class MyTreeRowPatch extends CGFobject {
     constructor(scene, trunkTexture, treeTopTexture) {
         super(scene);
               
-        var trees = [];
+        this.trees = [];
                
         for(var i = 0; i < 6; i++){
-          trees.push(new MyTree(scene, 1 + this.scene.getRandomArbitrary(-0.2, 0.5), 0.3 + this.scene.getRandomArbitrary(0, 0.1), 1 + this.scene.getRandomArbitrary(-0.3, 0.4), 1 + this.scene.getRandomArbitrary(-0.2, 0.1), trunkTexture, treeTopTexture);   
+          this.trees.push(new MyTree(scene, 
+          						1 + this.scene.getRandomArbitrary(-0.2, 0.5), 
+          						0.3 + this.scene.getRandomArbitrary(0, 0.1), 
+          						1 + this.scene.getRandomArbitrary(-0.3, 0.4),
+          						1 + this.scene.getRandomArbitrary(-0.2, 0.1), 
+          						trunkTexture, 
+          						treeTopTexture)
+          			);   
         }
                 
         this.initBuffers();
@@ -29,10 +36,10 @@ class MyTreeRowPatch extends CGFobject {
       
       for(var i = 0; i < this.trees.length; i++){
         this.scene.pushMatrix();
-        this.scene.translate(x, 0, this.scene.getRandomArbitrary(-0.2, 0.2));
+        this.scene.translate(x, 0, 0);
         this.trees[i].display();
         this.scene.popMatrix();
-        x += this.scene.getRandomArbitrary(0.8, 1.2);
+        x += 2;
       }
     }
 }
