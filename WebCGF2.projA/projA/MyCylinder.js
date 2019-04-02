@@ -32,14 +32,11 @@ class MyCylinder extends CGFobject {
             this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
             this.normals.push(Math.cos(ang+alphaAng), 0, -Math.sin(ang+alphaAng));
             this.normals.push(Math.cos(ang+alphaAng), 0, -Math.sin(ang+alphaAng));
-
-
-            //TODO Mudar para 1
-            console.log("CHANGE THIS!");
-            this.texCoords.push(0, 0.5);
+            
+            this.texCoords.push(0, 1);
             this.texCoords.push(0, 0);
-            this.texCoords.push(0.5, 0.5);
-            this.texCoords.push(0.5, 0);
+            this.texCoords.push(1, 1);
+            this.texCoords.push(1, 0);
 
             ang+=alphaAng;   
         }
