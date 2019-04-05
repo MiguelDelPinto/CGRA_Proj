@@ -14,6 +14,7 @@ serialInclude(['../lib/CGF.js',
                 'MyTree.js',
                 'MyTreeRowPatch.js',
                 'MyTreeGroupPatch.js',
+                'MyHouse.js',
 
 main=function()
 {
