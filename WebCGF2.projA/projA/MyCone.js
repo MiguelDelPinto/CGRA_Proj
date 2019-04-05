@@ -24,6 +24,8 @@ class MyCone extends CGFobject {
             this.vertices.push(Math.cos(ang + alphaAng), 0, -Math.sin(ang + alphaAng));
 
             this.indices.push(2*i, (2*i+1) % (2*this.slices), 2*this.slices);
+            this.indices.push( 2*this.slices+1, (2*i+1) % (2*this.slices),2*i);
+       
 
             this.normals.push(Math.cos(ang), Math.cos(Math.PI/4.0), -Math.sin(ang));
             this.normals.push(Math.cos(ang + alphaAng), Math.cos(Math.PI/4.0), -Math.sin(ang + alphaAng));
@@ -37,6 +39,10 @@ class MyCone extends CGFobject {
         this.normals.push(0,1,0);
         this.texCoords.push(0.5,0);
 
+        this.vertices.push(0, 0, 0);
+        this.normals.push(0, -1, 0);
+        this.texCoords.push(0.5, 0);
+        
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();

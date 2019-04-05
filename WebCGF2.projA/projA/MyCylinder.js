@@ -27,7 +27,9 @@ class MyCylinder extends CGFobject {
 
             this.indices.push(4*i, (4*i+3) % (4*this.slices), (4*i+1)%(4*this.slices));
             this.indices.push(4*i, (4*i+2) % (4*this.slices), (4*i+3)%(4*this.slices));
-            
+            this.indices.push(4*i+1, (4*i+3) % (4*this.slices), 4*this.slices);
+            this.indices.push(4*this.slices+1, (4*i+2) % (4*this.slices), 4*i);
+
             this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
             this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
             this.normals.push(Math.cos(ang+alphaAng), 0, -Math.sin(ang+alphaAng));
@@ -40,7 +42,14 @@ class MyCylinder extends CGFobject {
 
             ang+=alphaAng;   
         }
+        
+        this.vertices.push(0, 1, 0);
+        this.normals.push(0, 1, 0);
+        this.texCoords.push(0.5, 0.5);
 
+        this.vertices.push(0, 0, 0);
+        this.normals.push(0, -1, 0);
+        this.texCoords.push(0.5, 0.5);
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
