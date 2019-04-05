@@ -50,7 +50,7 @@ class MyUnitCubeQuad extends CGFobject {
 	display(){
 		
 		//Applying Side Material
-		this.side_material.apply();
+		//this.side_material.apply();
 		//this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
 
 
