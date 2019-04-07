@@ -8,10 +8,7 @@ class MyHouse extends CGFobject {
                 
         this.walls = new MyUnitCubeQuad(scene,'images/wall.jpg');  
         this.roof = new MyPyramid(scene, 4, 1);
-        this.pillars = [];
-        for(let i = 0; i < 4; i++){
-        	this.pillars.push(new MyPrism(scene, 6, 1));
-        }      
+        this.pillar = new MyPrism(scene, 6, 1);
                 
         this.initMaterials();
         this.initBuffers();
@@ -28,8 +25,7 @@ class MyHouse extends CGFobject {
 
     initMaterials(){
         this.roof_texture = new CGFtexture(this.scene, 'images/roof.jpg');
-        //this.wall_texture = new CGFtexture(this.scene, 'images/wall.jpg');
-        this.pillar_texture = new CGFtexture(this.scene, 'images/pillar.jpg');
+ 	    this.pillar_texture = new CGFtexture(this.scene, 'images/pillar.jpg');
 
     	//Roof Material
         this.roof_material = new CGFappearance(this.scene);
@@ -38,16 +34,6 @@ class MyHouse extends CGFobject {
         this.roof_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.roof_material.setShininess(10.0);
         this.roof_material.setTexture(this.roof_texture);
-
-        //Walls Material 
-        /*
-        this.wall_material = new CGFappearance(this.scene);
-        this.wall_material.setAmbient(0.1, 0.1, 0.1, 1);
-        this.wall_material.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.wall_material.setSpecular(0.1, 0.1, 0.1, 1);
-        this.wall_material.setShininess(10.0);
-        this.wall_material.setTexture(this.wall_texture);
-        */
 
         //Pillar Material
         this.pillar_material = new CGFappearance(this.scene);
@@ -86,7 +72,7 @@ class MyHouse extends CGFobject {
 		this.scene.translate(0.75, 0, 0.75);
 		this.scene.pushMatrix();
 		this.scene.scale(0.25, 1, 0.25);
-		this.pillars[0].display();
+		this.pillar.display();
 		this.scene.popMatrix();
 		this.scene.popMatrix();
 
@@ -94,7 +80,7 @@ class MyHouse extends CGFobject {
 		this.scene.translate(-0.75, 0, 0.75);
 		this.scene.pushMatrix();
 		this.scene.scale(0.25, 1, 0.25);
-		this.pillars[1].display();
+		this.pillar.display();
 		this.scene.popMatrix();
 		this.scene.popMatrix();
 
@@ -102,7 +88,7 @@ class MyHouse extends CGFobject {
 		this.scene.translate(-0.75, 0, -0.75);
 		this.scene.pushMatrix();
 		this.scene.scale(0.25, 1, 0.25);
-		this.pillars[2].display();
+		this.pillar.display();
 		this.scene.popMatrix();
 		this.scene.popMatrix();
 
@@ -110,7 +96,7 @@ class MyHouse extends CGFobject {
 		this.scene.translate(0.75, 0, -0.75);
 		this.scene.pushMatrix();
 		this.scene.scale(0.25, 1, 0.25);
-		this.pillars[3].display();
+		this.pillar.display();
 		this.scene.popMatrix();
 		this.scene.popMatrix();
     }

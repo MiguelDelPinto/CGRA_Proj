@@ -77,8 +77,8 @@ class MyScene extends CGFscene {
         //this.tree.display();
         //this.treeRowPatch.display();
         //this.treeGroupPatch.display();
-        //this.house.display();
-        this.voxelHill.display();
+        this.house.display();
+        //this.voxelHill.display();
 
         // ---- END Primitive drawing section
     }
