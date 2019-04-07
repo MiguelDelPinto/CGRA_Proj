@@ -6,7 +6,7 @@ class MyHouse extends CGFobject {
     constructor(scene) {
         super(scene);
                 
-        this.walls = new MyUnitCubeQuad(scene);  
+        this.walls = new MyUnitCubeQuad(scene,'images/wall.jpg');  
         this.roof = new MyPyramid(scene, 4, 1);
         this.pillars = [];
         for(let i = 0; i < 4; i++){
@@ -28,7 +28,7 @@ class MyHouse extends CGFobject {
 
     initMaterials(){
         this.roof_texture = new CGFtexture(this.scene, 'images/roof.jpg');
-        this.wall_texture = new CGFtexture(this.scene, 'images/wall.jpg');
+        //this.wall_texture = new CGFtexture(this.scene, 'images/wall.jpg');
         this.pillar_texture = new CGFtexture(this.scene, 'images/pillar.jpg');
 
     	//Roof Material
@@ -39,13 +39,15 @@ class MyHouse extends CGFobject {
         this.roof_material.setShininess(10.0);
         this.roof_material.setTexture(this.roof_texture);
 
-        //Walls Material
+        //Walls Material 
+        /*
         this.wall_material = new CGFappearance(this.scene);
         this.wall_material.setAmbient(0.1, 0.1, 0.1, 1);
         this.wall_material.setDiffuse(0.9, 0.9, 0.9, 1);
         this.wall_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.wall_material.setShininess(10.0);
         this.wall_material.setTexture(this.wall_texture);
+        */
 
         //Pillar Material
         this.pillar_material = new CGFappearance(this.scene);
@@ -58,7 +60,7 @@ class MyHouse extends CGFobject {
     
     display() {
 		//Drawing Walls
-		this.wall_material.apply();
+		//this.wall_material.apply();
 		this.scene.pushMatrix();
 		this.scene.translate(0, 0.5, 0);
 		this.walls.display();

@@ -7,7 +7,7 @@ class MyVoxelHill extends CGFobject {
         super(scene);
         
         this.levels = levels;
-        this.cube = new MyUnitCubeQuad(scene);  
+        this.cube = new MyUnitCubeQuad(scene, 'images/wall.jpg', 'images/roof.jpg', 'images/trunk.jpg');  
                 
         this.initMaterials();
         this.initBuffers();
@@ -38,16 +38,20 @@ class MyVoxelHill extends CGFobject {
         let y = 0;
 
         for(let n = this.levels; n > 0; n--) {          //Movement in the y axis        
+            let limit = 2*n - 1;
             let x = -n + 1;
 
-            for(let i = 0; i < (2*n)-1; i++) {          //Movement in the x axis
+            for(let i = 1; i <= limit; i++) {          //Movement in the x axis
                 let z = -n + 1;
 
-                for(let j = 0; j < (2*n)-1; j++) {      //Movement in the z axis                    
-                    this.scene.pushMatrix();
-                    this.scene.translate(x, y, z);
-                    this.cube.display();
-                    this.scene.popMatrix();
+                for(let j = 1; j <= limit; j++) {      //Movement in the z axis  
+
+                    if(n == this.levels || i == 1 || i == limit || j == 1 || j == limit) {  //optimization
+                        this.scene.pushMatrix();
+                        this.scene.translate(x, y, z);
+                        this.cube.display();
+                        this.scene.popMatrix();
+                    }                
 
                     z++;
                 }

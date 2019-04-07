@@ -4,11 +4,15 @@
  * @param scene - Reference to MyScene object
  */
 class MyUnitCubeQuad extends CGFobject {
-	constructor(scene) {
+	constructor(scene, sideTexture, topTexture, bottomTexture) {
 		super(scene);
 		this.initBuffers();
 
 		this.quad = new MyQuad(scene);
+
+		this.sideTexture = sideTexture;
+		this.topTexture = topTexture;
+		this.bottomTexture = bottomTexture;
 
         this.initMaterials();
 	}
@@ -27,30 +31,40 @@ class MyUnitCubeQuad extends CGFobject {
         this.side_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
         this.side_material.setSpecular(0.8, 0.8, 0.8, 1.0);
         this.side_material.setShininess(10.0);
-        //this.side_material.loadTexture('images/mineSide.png');
-        //this.side_material.setTextureWrap('REPEAT', 'REPEAT');
+        
+        if(this.sideTexture){
+        	this.side_material.loadTexture(this.sideTexture);
+        	this.side_material.setTextureWrap('REPEAT', 'REPEAT');      	
+        }
+
 
         this.top_material = new CGFappearance(this.scene);
         this.top_material.setAmbient(0, 0, 0, 1.0);
         this.top_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
         this.top_material.setSpecular(0.8, 0.8, 0.8, 1.0);
         this.top_material.setShininess(10.0);
-        //this.top_material.loadTexture('images/mineTop.png');
-        //this.top_material.setTextureWrap('REPEAT', 'REPEAT');
+
+        if(this.topTexture) {
+        	this.top_material.loadTexture(this.topTexture);
+        	this.top_material.setTextureWrap('REPEAT', 'REPEAT');
+        }
 
         this.bottom_material = new CGFappearance(this.scene);
         this.bottom_material.setAmbient(0, 0, 0, 1.0);
         this.bottom_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
         this.bottom_material.setSpecular(0.8, 0.8, 0.8, 1.0);
         this.bottom_material.setShininess(10.0);
-        //this.bottom_material.loadTexture('images/mineBottom.png');
-        //this.bottom_material.setTextureWrap('REPEAT', 'REPEAT');
+
+        if(this.bottomTexture) {
+        	this.bottom_material.loadTexture(this.bottomTexture);
+        	this.bottom_material.setTextureWrap('REPEAT', 'REPEAT');
+        }
 	}
 
 	display(){
 		
 		//Applying Side Material
-		//this.side_material.apply();
+		this.side_material.apply();
 		//this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
 
 
