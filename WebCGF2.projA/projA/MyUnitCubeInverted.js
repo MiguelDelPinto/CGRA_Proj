@@ -100,6 +100,42 @@ class MyUnitCubeInverted extends CGFobject {
             20, 14, 2,
             20, 2, 8,
 		];
+
+		//Texture coordinates
+		this.texCoords = [
+			
+			0, 2/3,
+			1/4, 1,
+			1, 2/3,
+
+			3/4, 2/3,
+			2/4, 1,
+			3/4, 2/3,
+
+			0, 1/3,
+			1/4, 0,
+			1, 1/3,
+
+			3/4, 1/3,
+			2/4, 0,
+			3/4, 1/3,
+
+			1/4, 2/3,
+			1/4, 2/3,
+			1/4, 2/3,
+
+			2/4, 2/3,
+			2/4, 2/3,
+			2/4, 2/3,
+
+			1/4, 1/3,
+			1/4, 1/3,
+			1/4, 1/3,
+
+			2/4, 1/3,
+			2/4, 1/3,
+			2/4, 1/3,
+		];
 		
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();

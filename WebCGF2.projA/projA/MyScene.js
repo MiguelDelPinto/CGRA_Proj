@@ -80,7 +80,8 @@ class MyScene extends CGFscene {
         //this.treeGroupPatch.display();
         //this.house.display();
         //this.voxelHill.display();
-        this.cubeMap.display();
+        
+        //this.cubeMap.display();       //-------> gives an error
 
         // ---- END Primitive drawing section
     }
