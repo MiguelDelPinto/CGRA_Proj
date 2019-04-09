@@ -7,6 +7,8 @@ class MyCylinder extends CGFobject {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
+        this.wrap = true;
+
         this.initBuffers();
     }
     initBuffers() {
@@ -35,11 +37,19 @@ class MyCylinder extends CGFobject {
             this.normals.push(Math.cos(ang+alphaAng), 0, -Math.sin(ang+alphaAng));
             this.normals.push(Math.cos(ang+alphaAng), 0, -Math.sin(ang+alphaAng));
             
-            this.texCoords.push(0, 1);
-            this.texCoords.push(0, 0);
-            this.texCoords.push(1, 1);
-            this.texCoords.push(1, 0);
-
+            if(this.wrap){
+                this.texCoords.push(i/this.slices, 1);
+                this.texCoords.push(i/this.slices, 0);
+                this.texCoords.push((i+1)/this.slices, 1);
+                this.texCoords.push((i+1)/this.slices, 0);
+            }   
+            else{
+                this.texCoords.push(0, 1);
+                this.texCoords.push(0, 0);
+                this.texCoords.push(1, 1);
+                this.texCoords.push(1, 0);
+            }
+            
             ang+=alphaAng;   
         }
         

@@ -24,20 +24,31 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
 
         //------ Applied Material
-
+        //Grass Material
+        this.grass_material = new CGFappearance(this);
+        this.grass_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.grass_material.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.grass_material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.grass_material.setShininess(10.0);
+        this.grass_material.setTexture(new CGFtexture(this, 'images/grass.jpg'));
+        this.grass_material.setTextureWrap('REPEAT', 'REPEAT');
+        
         //------ Textures
         this.texture1 = new CGFtexture(this, 'images/leaves.jpg');
         this.texture2 = new CGFtexture(this, 'images/trunk.jpg');
 
         //Objects connected to MyInterface
-        this.prism = new MyPrism(this, 10, 4);
-        this.cylinder = new MyCylinder(this, 10, 5);
+
         this.unitCubeQuad = new MyUnitCubeQuad(this);
         this.tree = new MyTree(this, 1, 0.34, 1, 1, this.texture2, this.texture1);
-        this.treeRowPatch = new MyTreeRowPatch(this, this.texture2, this.texture1);
-        this.treeGroupPatch = new MyTreeGroupPatch(this, this.texture2, this.texture1);
+        //this.treeRowPatch = new MyTreeRowPatch(this, this.texture2, this.texture1);
+        //this.treeGroupPatch = new MyTreeGroupPatch(this, this.texture2, this.texture1);
         this.house = new MyHouse(this);
         this.voxelHill = new MyVoxelHill(this, 3);
+
+        var texCoords = [ 0, 10, 10, 10, 0, 0, 10, 0];
+        this.quad = new MyQuad(this, texCoords);
+
         this.cubeMap = new MyCubeMap(this);
     }
     initLights() {
@@ -72,6 +83,15 @@ class MyScene extends CGFscene {
         //Apply default appearance
         this.setDefaultAppearance();
        
+        this.pushMatrix();
+        this.scale(50, 1, 50);
+        this.pushMatrix();
+        this.rotate(-Math.PI/2, 1, 0, 0);
+        this.grass_material.apply();
+        this.quad.display();
+        this.popMatrix();
+        this.popMatrix();
+        
         //this.prism.display();
         //this.cylinder.display();
         //this.unitCubeQuad.display();

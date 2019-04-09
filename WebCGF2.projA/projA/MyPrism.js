@@ -7,6 +7,8 @@ class MyPrism extends CGFobject {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
+        this.wrap = true;
+
         this.initBuffers();
     }
     initBuffers() {
@@ -56,8 +58,16 @@ class MyPrism extends CGFobject {
             this.normals.push(...normal);
             this.normals.push(...normal);
 
-            // triangle tex         CHANGE LATER
-            this.texCoords.push(0, 0, 1, 0, 0, 1, 1, 1);
+            
+            if(this.wrap){
+                this.texCoords.push(i/this.slices, 0);
+                this.texCoords.push((i+1)/this.slices, 0);
+                this.texCoords.push(i/this.slices, 1);
+                this.texCoords.push((i+1)/this.slices, 1);
+            }
+            else{
+                this.texCoords.push(0, 0, 1, 0, 0, 1, 1, 1);
+            }
 
             this.indices.push(4*i, (4*i+2) , (4*i+1) , (4*i+1) , (4*i+2) , (4*i+3));
             this.indices.push(4*i, 4*i+1, 4*this.slices);

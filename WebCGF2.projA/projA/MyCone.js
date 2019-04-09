@@ -7,6 +7,8 @@ class MyCone extends CGFobject {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
+        this.wrap = true;
+        
         this.initBuffers();
     }
     initBuffers() {
@@ -17,7 +19,7 @@ class MyCone extends CGFobject {
 
         var ang = 0;
         var alphaAng = 2*Math.PI/this.slices;
-
+        
         for(var i = 0; i < this.slices; i++){
 
             this.vertices.push(Math.cos(ang), 0, -Math.sin(ang));
@@ -29,15 +31,22 @@ class MyCone extends CGFobject {
 
             this.normals.push(Math.cos(ang), Math.cos(Math.PI/4.0), -Math.sin(ang));
             this.normals.push(Math.cos(ang + alphaAng), Math.cos(Math.PI/4.0), -Math.sin(ang + alphaAng));
-            
-            this.texCoords.push(0,1);
-            this.texCoords.push(1,1);
+           
+            if (!this.wrap) {
+                this.texCoords.push(0,1);
+                this.texCoords.push(1,1);
+            } 
+            else {
+                this.texCoords.push(i/this.slices, 1);
+                this.texCoords.push((i+1)/this.slices, 1);
+            }
 
             ang+=alphaAng;
         }
         this.vertices.push(0,1,0);
         this.normals.push(0,1,0);
         this.texCoords.push(0.5,0);
+        
 
         this.vertices.push(0, 0, 0);
         this.normals.push(0, -1, 0);
