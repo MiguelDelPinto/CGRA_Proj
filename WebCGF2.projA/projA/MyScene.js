@@ -101,7 +101,7 @@ class MyScene extends CGFscene {
         //this.house.display();
         //this.voxelHill.display();
         
-        //this.cubeMap.display();       //-------> gives an error
+        this.cubeMap.display();       //-------> gives an error
 
         // ---- END Primitive drawing section
     }
