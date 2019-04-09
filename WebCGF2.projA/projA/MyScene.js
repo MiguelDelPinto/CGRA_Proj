@@ -38,6 +38,7 @@ class MyScene extends CGFscene {
         this.treeGroupPatch = new MyTreeGroupPatch(this, this.texture2, this.texture1);
         this.house = new MyHouse(this);
         this.voxelHill = new MyVoxelHill(this, 3);
+        this.cubeMap = new MyCubeMap(this);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -77,8 +78,9 @@ class MyScene extends CGFscene {
         //this.tree.display();
         //this.treeRowPatch.display();
         //this.treeGroupPatch.display();
-        this.house.display();
+        //this.house.display();
         //this.voxelHill.display();
+        this.cubeMap.display();
 
         // ---- END Primitive drawing section
     }
