@@ -7,6 +7,8 @@ class MyPyramid extends CGFobject {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
+        this.wrap = false;
+
         this.initBuffers();
     }
     initBuffers() {
@@ -57,9 +59,17 @@ class MyPyramid extends CGFobject {
             this.indices.push(3*i, (3*i+1), (3*i+2));
             this.indices.push(3*i+2, 3*i+1, 3*this.slices);
 
-            this.texCoords.push(0.5, 0);
-            this.texCoords.push(0, 1);
-            this.texCoords.push(1, 1);
+            
+            if(this.wrap){
+                this.texCoords.push(0.5, 0);
+                this.texCoords.push(i/this.slices, 1);
+                this.texCoords.push((i+1)/this.slices, 1);
+            }
+            else{
+                this.texCoords.push(0.5, 0);
+                this.texCoords.push(0, 1);
+                this.texCoords.push(1, 1);
+            }
 
             ang+=alphaAng;
         }
