@@ -46,7 +46,7 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this);
         this.voxelHill = new MyVoxelHill(this, 3);
 
-        var texCoords = [ 0, 1, 1, 1, 0, 0, 1, 0];
+        var texCoords = [ 0, 10, 10, 10, 0, 0, 10, 0];
         this.quad = new MyQuad(this, texCoords);
 
         this.cubeMap = new MyCubeMap(this);
@@ -83,7 +83,6 @@ class MyScene extends CGFscene {
         //Apply default appearance
         this.setDefaultAppearance();
        
-
         this.pushMatrix();
         this.scale(50, 1, 50);
         this.pushMatrix();
