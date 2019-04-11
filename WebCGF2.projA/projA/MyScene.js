@@ -41,12 +41,12 @@ class MyScene extends CGFscene {
 
         this.unitCubeQuad = new MyUnitCubeQuad(this);
         this.tree = new MyTree(this, 1, 0.34, 1, 1, this.texture2, this.texture1);
-        //this.treeRowPatch = new MyTreeRowPatch(this, this.texture2, this.texture1);
-        //this.treeGroupPatch = new MyTreeGroupPatch(this, this.texture2, this.texture1);
+        this.treeRowPatch = new MyTreeRowPatch(this, this.texture2, this.texture1);
+        this.treeGroupPatch = new MyTreeGroupPatch(this, this.texture2, this.texture1);
         this.house = new MyHouse(this);
         this.voxelHill = new MyVoxelHill(this, 3);
 
-        var texCoords = [ 0, 10, 10, 10, 0, 0, 10, 0];
+        var texCoords = [ 0, 25, 25, 25, 0, 0, 25, 0];
         this.quad = new MyQuad(this, texCoords);
 
         this.cubeMap = new MyCubeMap(this);
@@ -83,6 +83,16 @@ class MyScene extends CGFscene {
         //Apply default appearance
         this.setDefaultAppearance();
        
+        //Drawing Final Scene: Exercise 4
+        /*var size_of_scene = 200;
+        this.pushMatrix();
+        //this.translate(0, size_of_scene/2, 0);
+        this.pushMatrix();
+        this.scale(size_of_scene, size_of_scene, size_of_scene);
+        this.cubeMap.display();       //-------> gives an error
+        this.popMatrix();
+        this.popMatrix();*/
+
         this.pushMatrix();
         this.scale(50, 1, 50);
         this.pushMatrix();
@@ -91,17 +101,54 @@ class MyScene extends CGFscene {
         this.quad.display();
         this.popMatrix();
         this.popMatrix();
+
+        this.pushMatrix();
+        this.scale(3, 3, 3);
+        this.house.display();
+        this.popMatrix();
         
+        this.pushMatrix();
+        this.translate(-20, 0, -20);
+        this.pushMatrix();
+        this.scale(5, 5, 5);
+        this.voxelHill.display();
+        this.popMatrix();
+        this.popMatrix();
+        
+        this.pushMatrix();
+        this.translate(20, 0, -20);
+        this.pushMatrix();
+        this.scale(5, 5, 5);
+        this.voxelHill.display();
+        this.popMatrix();
+        this.popMatrix();
+        
+        this.pushMatrix();
+        this.translate(-20, 0, 10);
+        this.pushMatrix();  
+        this.scale(2, 3, 2);
+        this.pushMatrix();
+        this.rotate(-Math.PI/2, 0, 1, 0);
+        this.treeRowPatch.display();
+        this.popMatrix();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(5, 0, 15);
+        this.pushMatrix();  
+        this.scale(2, 3, 2);
+        this.pushMatrix();
+        this.treeRowPatch.display();
+        this.popMatrix();
+        this.popMatrix();
+
         //this.prism.display();
         //this.cylinder.display();
         //this.unitCubeQuad.display();
         //this.tree.display();
-        //this.treeRowPatch.display();
         //this.treeGroupPatch.display();
-        //this.house.display();
         //this.voxelHill.display();
         
-        this.cubeMap.display();       //-------> gives an error
 
         // ---- END Primitive drawing section
     }
