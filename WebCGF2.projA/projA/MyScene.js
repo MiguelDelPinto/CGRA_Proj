@@ -94,7 +94,7 @@ class MyScene extends CGFscene {
         this.popMatrix();*/
 
         this.pushMatrix();
-        this.scale(50, 1, 50);
+        this.scale(100, 1, 100);
         this.pushMatrix();
         this.rotate(-Math.PI/2, 1, 0, 0);
         this.grass_material.apply();
@@ -108,7 +108,7 @@ class MyScene extends CGFscene {
         this.popMatrix();
         
         this.pushMatrix();
-        this.translate(-20, 0, -20);
+        this.translate(-20, 2.5, -20);
         this.pushMatrix();
         this.scale(5, 5, 5);
         this.voxelHill.display();
@@ -116,7 +116,7 @@ class MyScene extends CGFscene {
         this.popMatrix();
         
         this.pushMatrix();
-        this.translate(20, 0, -20);
+        this.translate(20, 2.5, -20);
         this.pushMatrix();
         this.scale(5, 5, 5);
         this.voxelHill.display();
@@ -124,7 +124,7 @@ class MyScene extends CGFscene {
         this.popMatrix();
         
         this.pushMatrix();
-        this.translate(-20, 0, 10);
+        this.translate(-30, 0, 10);
         this.pushMatrix();  
         this.scale(2, 3, 2);
         this.pushMatrix();
@@ -132,13 +132,32 @@ class MyScene extends CGFscene {
         this.treeRowPatch.display();
         this.popMatrix();
         this.popMatrix();
+        this.popMatrix();
 
         this.pushMatrix();
-        this.translate(5, 0, 15);
+        this.translate(30, 0, 10);
         this.pushMatrix();  
         this.scale(2, 3, 2);
         this.pushMatrix();
+        this.rotate(-Math.PI/2, 0, 1, 0);
         this.treeRowPatch.display();
+        this.popMatrix();
+        this.popMatrix();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(-25, 0, 23);
+        this.pushMatrix();
+        this.scale(2, 3, 2);
+        this.treeGroupPatch.display();
+        this.popMatrix();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(-25, 0, 10);
+        this.pushMatrix();
+        this.scale(2, 3, 2);
+        this.treeGroupPatch.display();
         this.popMatrix();
         this.popMatrix();
 

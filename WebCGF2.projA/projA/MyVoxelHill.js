@@ -7,9 +7,8 @@ class MyVoxelHill extends CGFobject {
         super(scene);
         
         this.levels = levels;
-        this.cube = new MyUnitCubeQuad(scene, 'images/wall.jpg', 'images/roof.jpg', 'images/trunk.jpg');  
+        this.cube = new MyUnitCubeQuad(scene, 'images/mineSide.png', 'images/mineTop.png', 'images/mineBottom.png');  
                 
-        this.initMaterials();
         this.initBuffers();
     }
     
@@ -20,18 +19,6 @@ class MyVoxelHill extends CGFobject {
 		this.indices = [];
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
-    }
-
-    initMaterials(){
-        this.cube_texture = new CGFtexture(this.scene, 'images/roof.jpg');
-
-    	//Cube Material
-        this.cube_material = new CGFappearance(this.scene);
-        this.cube_material.setAmbient(0.1, 0.1, 0.1, 1);
-        this.cube_material.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.cube_material.setSpecular(0.1, 0.1, 0.1, 1);
-        this.cube_material.setShininess(10.0);
-        this.cube_material.setTexture(this.cube_texture);
     }
     
     display() {
