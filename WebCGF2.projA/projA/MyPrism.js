@@ -8,7 +8,8 @@ class MyPrism extends CGFobject {
         this.slices = slices;
         this.stacks = stacks;
         this.wrap = true;
-
+        
+        
         this.initBuffers();
     }
     initBuffers() {

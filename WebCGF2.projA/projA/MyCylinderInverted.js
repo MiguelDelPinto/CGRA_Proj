@@ -1,8 +1,8 @@
 /**
-* MyCylinder
+* MyCylinderInverted
 * @constructor
 */
-class MyCylinder extends CGFobject {
+class MyCylinderInverted extends CGFobject {
     constructor(scene, slices, stacks, hideTop) {
         super(scene);
 
@@ -30,18 +30,18 @@ class MyCylinder extends CGFobject {
             this.vertices.push(Math.cos(ang+alphaAng), 0, -Math.sin(ang+alphaAng));
             this.vertices.push(Math.cos(ang+alphaAng), 1, -Math.sin(ang+alphaAng));
 
-            this.indices.push(4*i, (4*i+3) % (4*this.slices), (4*i+1)%(4*this.slices));
-            this.indices.push(4*i, (4*i+2) % (4*this.slices), (4*i+3)%(4*this.slices));
+            this.indices.push((4*i+1)%(4*this.slices), (4*i+3) % (4*this.slices), 4*i);
+            this.indices.push((4*i+3)%(4*this.slices), (4*i+2) % (4*this.slices), 4*i);
             if(!this.hideTop){
-                this.indices.push(4*i+1, (4*i+3) % (4*this.slices), 4*this.slices);
-                this.indices.push(4*this.slices+1, (4*i+2) % (4*this.slices), 4*i);
+                this.indices.push(4*this.slices, (4*i+3) % (4*this.slices), 4*i+1);
+                this.indices.push(4*i, (4*i+2) % (4*this.slices), 4*this.slices+1);
             }else{
-                this.indices.push(4*this.slices, (4*i+2) % (4*this.slices), 4*i);
+                this.indices.push(4*i, (4*i+2) % (4*this.slices), 4*this.slices);
             }
-            this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
-            this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
-            this.normals.push(Math.cos(ang+alphaAng), 0, -Math.sin(ang+alphaAng));
-            this.normals.push(Math.cos(ang+alphaAng), 0, -Math.sin(ang+alphaAng));
+            this.normals.push(-Math.cos(ang), 0, Math.sin(ang));
+            this.normals.push(-Math.cos(ang), 0, Math.sin(ang));
+            this.normals.push(-Math.cos(ang+alphaAng), 0, Math.sin(ang+alphaAng));
+            this.normals.push(-Math.cos(ang+alphaAng), 0, Math.sin(ang+alphaAng));
             
             if(this.wrap){
                 this.texCoords.push(i/this.slices, 1);
@@ -61,12 +61,12 @@ class MyCylinder extends CGFobject {
         
         if(!this.hideTop){
             this.vertices.push(0, 1, 0);
-            this.normals.push(0, 1, 0);
+            this.normals.push(0, -1, 0);
             this.texCoords.push(0.5, 0.5);
         }
 
         this.vertices.push(0, 0, 0);
-        this.normals.push(0, -1, 0);
+        this.normals.push(0, 1, 0);
         this.texCoords.push(0.5, 0.5);
 
         this.primitiveType = this.scene.gl.TRIANGLES;

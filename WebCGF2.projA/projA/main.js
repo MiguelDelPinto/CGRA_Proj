@@ -18,6 +18,8 @@ serialInclude(['../lib/CGF.js',
                 'MyVoxelHill.js',
                 'MyUnitCubeInverted.js',
                 'MyCubeMap.js',
+                'MyFirePit.js',
+                'MyCylinderInverted.js',
 
 main=function()
 {

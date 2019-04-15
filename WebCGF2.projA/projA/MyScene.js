@@ -50,6 +50,7 @@ class MyScene extends CGFscene {
         this.quad = new MyQuad(this, texCoords);
 
         this.cubeMap = new MyCubeMap(this);
+        this.firePit = new MyFirePit(this);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -101,6 +102,19 @@ class MyScene extends CGFscene {
         this.quad.display();
         this.popMatrix();
         this.popMatrix();
+        
+        this.pushMatrix();
+        this.translate(0, -0.05, 0);
+        this.pushMatrix();
+        this.scale(100, 1, 100);
+        this.pushMatrix();
+        this.rotate(-Math.PI/2, 1, 0, 0);
+        this.rotate(Math.PI, 1, 0, 0);
+        this.quad.display();
+        this.popMatrix();
+        this.popMatrix();
+        this.popMatrix();
+
 
         this.pushMatrix();
         this.scale(3, 3, 3);
@@ -167,7 +181,11 @@ class MyScene extends CGFscene {
         //this.tree.display();
         //this.treeGroupPatch.display();
         //this.voxelHill.display();
-        
+
+        this.pushMatrix();
+        this.translate(0, 0, 10);
+        this.firePit.display();
+        this.popMatrix();
 
         // ---- END Primitive drawing section
     }
