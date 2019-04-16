@@ -64,6 +64,7 @@ class MyScene extends CGFscene {
 
         this.cubeMap = new MyCubeMap(this);
         this.firePit = new MyFirePit(this);
+        this.lake = new MyLake(this);
     }
     initLights() {
 
@@ -301,8 +302,17 @@ class MyScene extends CGFscene {
 
         // Fire Pit
         this.pushMatrix();
-        this.translate(0, 0, 10);
+        this.translate(0, 0.005, 10);
         this.firePit.display();
+        this.popMatrix();
+
+        //Lake
+        this.pushMatrix();
+        this.translate(50, 0.5, 15);
+        this.pushMatrix();
+        this.scale(2.5, 1, 2.5);
+        this.lake.display();
+        this.popMatrix();
         this.popMatrix();
 
 
