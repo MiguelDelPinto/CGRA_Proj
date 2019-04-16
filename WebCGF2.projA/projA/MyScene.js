@@ -150,15 +150,6 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
        
         //Drawing Final Scene: Exercise 4
-        /*var size_of_scene = 200;
-        this.pushMatrix();
-        //this.translate(0, size_of_scene/2, 0);
-        this.pushMatrix();
-        this.scale(size_of_scene, size_of_scene, size_of_scene);
-        this.cubeMap.display();       //-------> gives an error
-        this.popMatrix();
-        this.popMatrix();*/
-
 
         /*
          *  BEGIN DRAWING
@@ -252,11 +243,58 @@ class MyScene extends CGFscene {
         this.popMatrix();
         this.popMatrix();
 
+        this.pushMatrix();
+        this.translate(-15, 0, 10);
+        this.pushMatrix();
+        this.scale(2, 3, 2);
+        this.treeGroupPatch.display();
+        this.popMatrix();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(-15, 0, 23);
+        this.pushMatrix();
+        this.scale(2, 3, 2);
+        this.treeGroupPatch.display();
+        this.popMatrix();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(20, 0, 10);
+        this.pushMatrix();
+        this.scale(2, 3, 2);
+        this.treeGroupPatch.display();
+        this.popMatrix();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(20, 0, 23);
+        this.pushMatrix();
+        this.scale(2, 3, 2);
+        this.treeGroupPatch.display();
+        this.popMatrix();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(10, 0, 10);
+        this.pushMatrix();
+        this.scale(2, 3, 2);
+        this.treeGroupPatch.display();
+        this.popMatrix();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(10, 0, 23);
+        this.pushMatrix();
+        this.scale(2, 3, 2);
+        this.treeGroupPatch.display();
+        this.popMatrix();
+        this.popMatrix();
+
 
         // Cube Map
         this.pushMatrix();
         this.cubeMap_material.apply();
-        this.pushMatrix();
         this.translate(0, 0.3, 0);
         this.scale(100, 100, 100);
         this.cubeMap.display();
