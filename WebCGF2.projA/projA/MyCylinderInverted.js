@@ -3,14 +3,14 @@
 * @constructor
 */
 class MyCylinderInverted extends CGFobject {
-    constructor(scene, slices, stacks, hideTop) {
+    constructor(scene, slices, stacks, hideTop, wrapTexture) {
         super(scene);
 
         this.hideTop = hideTop;
         
         this.slices = slices;
         this.stacks = stacks;
-        this.wrap = false;
+        this.wrap = wrapTexture;
 
         this.initBuffers();
     }

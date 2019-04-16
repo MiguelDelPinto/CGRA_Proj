@@ -9,7 +9,6 @@ class MyPrism extends CGFobject {
         this.stacks = stacks;
         this.wrap = wrapTexture;
         
-        
         this.initBuffers();
     }
     initBuffers() {

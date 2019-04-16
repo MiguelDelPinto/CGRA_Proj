@@ -7,11 +7,16 @@ class MyFirePit extends CGFobject {
         super(scene);
                 
         this.exterior_wall = new MyCylinder(scene, 10, 1, true);
+        this.wrap_exterior_wall = new MyCylinder(scene, 10, 1, true, true);
+
         this.interior_wall = new MyCylinderInverted(scene, 10, 1, true);
+        this.wrap_interior_wall = new MyCylinderInverted(scene, 10, 1, true, true);
          
         this.wood = new MyPrism(scene, 8, 1);
+        this.wrap_wood = new MyPrism(scene, 8, 1, true);
 
         this.fire = new MyCone(scene, 8, 1);
+        this.wrap_fire = new MyCone(scene, 8, 1, true);
                 
         this.initMaterials();
         this.initBuffers();
@@ -72,7 +77,11 @@ class MyFirePit extends CGFobject {
 		this.scene.rotate(-Math.PI/4, 1, 0, 0);
 		this.scene.pushMatrix();
 		this.scene.scale(0.2, 1, 0.2);
-		this.wood.display();
+		if(this.scene.wrapTextures)
+			this.wrap_wood.display();
+		else
+			this.wood.display();
+		
 		this.scene.popMatrix();
 		this.scene.popMatrix();
 		this.scene.popMatrix();
@@ -83,6 +92,11 @@ class MyFirePit extends CGFobject {
 		this.scene.rotate(Math.PI/4, 1, 0, 0);
 		this.scene.pushMatrix();
 		this.scene.scale(0.2, 1, 0.2);
+		if(this.scene.wrapTextures)
+			this.wrap_wood.display();
+		else
+			this.wood.display();
+
 		this.wood.display();
 		this.scene.popMatrix();
 		this.scene.popMatrix();
@@ -94,6 +108,11 @@ class MyFirePit extends CGFobject {
 		this.scene.rotate(Math.PI/4, 1, 0, 1);
 		this.scene.pushMatrix();
 		this.scene.scale(0.2, 1, 0.2);
+		if(this.scene.wrapTextures)
+			this.wrap_wood.display();
+		else
+			this.wood.display();
+
 		this.wood.display();
 		this.scene.popMatrix();
 		this.scene.popMatrix();
@@ -105,6 +124,11 @@ class MyFirePit extends CGFobject {
 		this.scene.rotate(-Math.PI/6, 1, 0, 1);
 		this.scene.pushMatrix();
 		this.scene.scale(0.2, 1, 0.2);
+		if(this.scene.wrapTextures)
+			this.wrap_wood.display();
+		else
+			this.wood.display();
+
 		this.wood.display();
 		this.scene.popMatrix();
 		this.scene.popMatrix();
@@ -117,7 +141,11 @@ class MyFirePit extends CGFobject {
 		this.scene.translate(0, 0.9, 0);
 		this.scene.pushMatrix();
 		this.scene.scale(0.3, 0.5, 0.3);
-		this.fire.display();
+		if(this.scene.wrapTextures)
+			this.wrap_fire.display();
+		else
+			this.fire.display();
+		
 		this.scene.popMatrix();
 		this.scene.popMatrix();
 
@@ -125,7 +153,11 @@ class MyFirePit extends CGFobject {
 		this.scene.translate(0.2, 0.7, 0.2);
 		this.scene.pushMatrix();
 		this.scene.scale(0.3, 0.5, 0.3);
-		this.fire.display();
+		if(this.scene.wrapTextures)
+			this.wrap_fire.display()
+		else
+			this.fire.display();
+
 		this.scene.popMatrix();
 		this.scene.popMatrix();
 
@@ -133,7 +165,11 @@ class MyFirePit extends CGFobject {
 		this.scene.translate(0.2, 0.6, -0.2);
 		this.scene.pushMatrix();
 		this.scene.scale(0.3, 0.5, 0.3);
-		this.fire.display();
+		if(this.scene.wrapTextures)
+			this.wrap_fire.display();
+		else
+			this.fire.display();
+		
 		this.scene.popMatrix();
 		this.scene.popMatrix();
 
@@ -141,7 +177,11 @@ class MyFirePit extends CGFobject {
 		this.scene.translate(-0.2, 0.8, 0.25);
 		this.scene.pushMatrix();
 		this.scene.scale(0.3, 0.5, 0.3);
-		this.fire.display();
+		if(this.scene.wrapTextures)
+			this.wrap_fire.display();
+		else
+			this.fire.display();
+		
 		this.scene.popMatrix();
 		this.scene.popMatrix();
 
