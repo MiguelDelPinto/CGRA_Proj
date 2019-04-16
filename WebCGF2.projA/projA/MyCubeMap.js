@@ -4,7 +4,7 @@
  * @param scene - Reference to MyScene object
  */
 class MyCubeMap extends CGFobject {
-	constructor(scene) {
+	constructor(scene, night) {
 		super(scene);
 
 		this.invertedCube = new MyUnitCubeInverted(scene);
@@ -14,7 +14,11 @@ class MyCubeMap extends CGFobject {
         this.cubemap_material.setDiffuse(0.5, 0.5, 0.5, 1);
         this.cubemap_material.setSpecular(0, 0, 0, 1);
         this.cubemap_material.setShininess(10.0);
-        this.cubemap_material.setTexture(new CGFtexture(scene, 'images/cube_map_day.png'));
+
+        if(night)
+        	this.cubemap_material.setTexture(new CGFtexture(scene, 'images/cube_map_night.png'));
+        else
+        	this.cubemap_material.setTexture(new CGFtexture(scene, 'images/cube_map_day.png'))
 
 		this.initBuffers();
 	}
