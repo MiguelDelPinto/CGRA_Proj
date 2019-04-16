@@ -10,6 +10,8 @@ class MyFirePit extends CGFobject {
         this.interior_wall = new MyCylinderInverted(scene, 10, 1, true);
          
         this.wood = new MyPrism(scene, 8, 1);
+
+        this.fire = new MyCone(scene, 8, 1);
                 
         this.initMaterials();
         this.initBuffers();
@@ -27,6 +29,7 @@ class MyFirePit extends CGFobject {
     initMaterials(){
         this.wall_texture = new CGFtexture(this.scene, 'images/stoneWall.jpg');
         this.wood_texture = new CGFtexture(this.scene, 'images/wood.jpg');
+        this.fire_texture = new CGFtexture(this.scene, 'images/fire.jpg');
 
     	//Wall Material
         this.wall_material = new CGFappearance(this.scene);
@@ -43,6 +46,14 @@ class MyFirePit extends CGFobject {
         this.wood_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.wood_material.setShininess(10.0);
         this.wood_material.setTexture(this.wood_texture);
+
+        //Fire Material
+        this.fire_material = new CGFappearance(this.scene);
+        this.fire_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.fire_material.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.fire_material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.fire_material.setShininess(10.0);
+        this.fire_material.setTexture(this.fire_texture);
     }
     
     display() {
@@ -96,6 +107,41 @@ class MyFirePit extends CGFobject {
 		this.scene.scale(0.2, 1, 0.2);
 		this.wood.display();
 		this.scene.popMatrix();
+		this.scene.popMatrix();
+		this.scene.popMatrix();
+		
+		//Draw fire
+		this.fire_material.apply();
+		
+		this.scene.pushMatrix();
+		this.scene.translate(0, 0.9, 0);
+		this.scene.pushMatrix();
+		this.scene.scale(0.3, 0.5, 0.3);
+		this.fire.display();
+		this.scene.popMatrix();
+		this.scene.popMatrix();
+
+		this.scene.pushMatrix();
+		this.scene.translate(0.2, 0.7, 0.2);
+		this.scene.pushMatrix();
+		this.scene.scale(0.3, 0.5, 0.3);
+		this.fire.display();
+		this.scene.popMatrix();
+		this.scene.popMatrix();
+
+		this.scene.pushMatrix();
+		this.scene.translate(0.2, 0.6, -0.2);
+		this.scene.pushMatrix();
+		this.scene.scale(0.3, 0.5, 0.3);
+		this.fire.display();
+		this.scene.popMatrix();
+		this.scene.popMatrix();
+
+		this.scene.pushMatrix();
+		this.scene.translate(-0.2, 0.8, 0.25);
+		this.scene.pushMatrix();
+		this.scene.scale(0.3, 0.5, 0.3);
+		this.fire.display();
 		this.scene.popMatrix();
 		this.scene.popMatrix();
 

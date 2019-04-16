@@ -3,11 +3,11 @@
 * @constructor
 */
 class MyPrism extends CGFobject {
-    constructor(scene, slices, stacks) {
+    constructor(scene, slices, stacks, wrapTexture) {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
-        this.wrap = true;
+        this.wrap = wrapTexture;
         
         
         this.initBuffers();

@@ -16,6 +16,9 @@ class MyInterface extends CGFinterface {
         
         var obj = this;
 
+        //Checkbox element in GUI
+        this.gui.add(this.scene, 'wrapTextures').name('Wrap Textures');
+
         return true;
     }
 }

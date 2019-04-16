@@ -38,6 +38,7 @@ class MyScene extends CGFscene {
         this.texture2 = new CGFtexture(this, 'images/trunk.jpg');
 
         //Objects connected to MyInterface
+        this.wrapTextures = false;
 
         this.unitCubeQuad = new MyUnitCubeQuad(this);
         this.tree = new MyTree(this, 1, 0.34, 1, 1, this.texture2, this.texture1);
