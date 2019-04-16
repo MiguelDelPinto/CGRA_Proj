@@ -16,8 +16,11 @@ class MyInterface extends CGFinterface {
         
         var obj = this;
 
-        //Checkbox element in GUI
+        //Checkbox element in GUI for textures
         this.gui.add(this.scene, 'wrapTextures').name('Wrap Textures');
+
+        //Dropdown element in GUI for lighting
+        this.gui.add(this.scene, 'timeOfDay', this.scene.timeIDs).name('Time of Day').onChange(this.scene.updateTimeOfDay.bind(this.scene));
 
         return true;
     }

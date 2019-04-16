@@ -32,6 +32,15 @@ class MyScene extends CGFscene {
         this.grass_material.setShininess(10.0);
         this.grass_material.setTexture(new CGFtexture(this, 'images/grass.jpg'));
         this.grass_material.setTextureWrap('REPEAT', 'REPEAT');
+
+        //CubeMap Material
+        this.cubeMap_material = new CGFappearance(this);
+        this.cubeMap_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.cubeMap_material.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.cubeMap_material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.cubeMap_material.setShininess(10.0);
+        this.cubeMap_material.loadTexture('images/cube_map_day.png');
+        this.cubeMap_material.setTextureWrap('REPEAT', 'REPEAT');
         
         //------ Textures
         this.texture1 = new CGFtexture(this, 'images/leaves.jpg');
@@ -39,6 +48,8 @@ class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.wrapTextures = false;
+        this.timeOfDay = 0;
+        this.timeIDs = { 'Day': 0, 'Night': 1};
 
         this.unitCubeQuad = new MyUnitCubeQuad(this);
         this.tree = new MyTree(this, 1, 0.34, 1, 1, this.texture2, this.texture1);
@@ -54,10 +65,31 @@ class MyScene extends CGFscene {
         this.firePit = new MyFirePit(this);
     }
     initLights() {
-        this.lights[0].setPosition(15, 2, 5, 1);
-        this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+
+        this.setGlobalAmbientLight(0.62, 0.62, 0.62, 1);
+
+        //Sun
+        this.lights[0].setPosition(100, 100, -2, 1);
+        this.lights[0].setDiffuse(0.98, 0.92, 0.65, 1.0);
+        this.lights[0].setSpecular(0.98, 0.92, 0.65, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
+
+        //Moon
+        this.lights[1].setPosition(100, 100, -2, 1);
+        this.lights[1].setDiffuse(0.72, 0.83, 0.87, 1.0);
+        this.lights[1].setSpecular(0.72, 0.83, 0.87, 1.0);
+        this.lights[1].disable();
+        this.lights[1].update();
+
+        //Fireplace
+        this.lights[2].setPosition(0, 1.1, 10, 1);
+        this.lights[2].setDiffuse(0.96, 0.50, 0.25, 1.0);
+        this.lights[2].setSpecular(0.96, 0.50, 0.25, 1.0);;
+        this.lights[2].setLinearAttenuation(0.05);
+        this.lights[2].disable();
+        this.lights[2].update();
+
     }
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
@@ -68,6 +100,38 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+
+    updateTimeOfDay() {
+        
+        if (this.timeOfDay == 0)
+        {            
+            this.cubeMap_material.loadTexture('images/cube_map_day.png');
+           
+            this.lights[0].enable();
+            this.lights[1].disable();
+            this.lights[2].disable();
+            
+            this.lights[0].update();
+            this.lights[1].update();
+            this.lights[2].update();
+        }
+        if (this.timeOfDay == 1)
+        {
+            //this.cubeMap_material.setTexture(this.cubeMapNight_Texture);
+            this.cubeMap_material.loadTexture('images/cube_map_night.png');
+            
+            this.lights[0].disable();
+            this.lights[1].enable();
+            this.lights[2].enable();
+            
+            this.lights[0].update();
+            this.lights[1].update();
+            this.lights[2].update();
+        }
+
+    }
+
+
     display() {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
@@ -82,7 +146,7 @@ class MyScene extends CGFscene {
         // Draw axis
         this.axis.display();
 
-        //Apply default appearance
+        // Apply default appearance
         this.setDefaultAppearance();
        
         //Drawing Final Scene: Exercise 4
@@ -95,6 +159,13 @@ class MyScene extends CGFscene {
         this.popMatrix();
         this.popMatrix();*/
 
+
+        /*
+         *  BEGIN DRAWING
+         */
+
+
+        // Grass plane
         this.pushMatrix();
         this.scale(100, 1, 100);
         this.pushMatrix();
@@ -117,11 +188,14 @@ class MyScene extends CGFscene {
         this.popMatrix();
 
 
+        // House
         this.pushMatrix();
         this.scale(3, 3, 3);
         this.house.display();
         this.popMatrix();
         
+
+        //Voxel Hills
         this.pushMatrix();
         this.translate(-20, 2.5, -20);
         this.pushMatrix();
@@ -138,6 +212,8 @@ class MyScene extends CGFscene {
         this.popMatrix();
         this.popMatrix();
         
+
+        //Tree Groups and Patches
         this.pushMatrix();
         this.translate(-30, 0, 10);
         this.pushMatrix();  
@@ -176,26 +252,31 @@ class MyScene extends CGFscene {
         this.popMatrix();
         this.popMatrix();
 
-        //this.prism.display();
-        //this.cylinder.display();
-        //this.unitCubeQuad.display();
-        //this.tree.display();
-        //this.treeGroupPatch.display();
-        //this.voxelHill.display();
 
+        // Cube Map
         this.pushMatrix();
+        this.cubeMap_material.apply();
+        this.pushMatrix();
+        this.translate(0, 0.3, 0);
         this.scale(100, 100, 100);
         this.cubeMap.display();
         this.popMatrix();
 
+
+        // Fire Pit
         this.pushMatrix();
         this.translate(0, 0, 10);
         this.firePit.display();
         this.popMatrix();
 
-        // ---- END Primitive drawing section
+
+        /*
+         *  END DRAWING
+         */
     }
 
+
+    //Function to aid randomizing the placement and size of objects
     getRandomArbitrary(min, max) {
         return Math.random() * (max - min) + min;
     }

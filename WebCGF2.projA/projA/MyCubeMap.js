@@ -4,41 +4,142 @@
  * @param scene - Reference to MyScene object
  */
 class MyCubeMap extends CGFobject {
-	constructor(scene, night) {
+	constructor(scene) {
 		super(scene);
-
-		this.invertedCube = new MyUnitCubeInverted(scene);
-
-		this.cubemap_material = new CGFappearance(scene);
-		this.cubemap_material.setAmbient(0.5, 0.5, 0.5, 1);
-        this.cubemap_material.setDiffuse(0.5, 0.5, 0.5, 1);
-        this.cubemap_material.setSpecular(0, 0, 0, 1);
-        this.cubemap_material.setShininess(10.0);
-
-        if(night)
-        	this.cubemap_material.setTexture(new CGFtexture(scene, 'images/cube_map_night.png'));
-        else
-        	this.cubemap_material.setTexture(new CGFtexture(scene, 'images/cube_map_day.png'))
-
 		this.initBuffers();
 	}
 	initBuffers() {	
-		this.vertices = [];
+		this.vertices = [
 
-		//Counter-clockwise reference of vertices
-		this.indices = [];
+		    -0.5, -0.5, -0.5, 	//0
+            -0.5, -0.5, -0.5,
+            -0.5, -0.5, -0.5,
+
+            0.5, -0.5, -0.5,  	//3
+            0.5, -0.5, -0.5,
+            0.5, -0.5, -0.5,
+
+            -0.5, 0.5, -0.5,  	//6
+            -0.5, 0.5, -0.5,
+            -0.5, 0.5, -0.5,
+
+            0.5, 0.5, -0.5,  	//9
+            0.5, 0.5, -0.5,
+            0.5, 0.5, -0.5,		
+            
+            -0.5, -0.5, 0.5,	//12
+            -0.5, -0.5, 0.5,	
+            -0.5, -0.5, 0.5,	
+
+            0.5, -0.5, 0.5,		//15
+            0.5, -0.5, 0.5,		
+            0.5, -0.5, 0.5,		
+
+            -0.5, 0.5, 0.5,		//18
+            -0.5, 0.5, 0.5,		
+            -0.5, 0.5, 0.5,
+
+            0.5, 0.5, 0.5,		//21
+            0.5, 0.5, 0.5,
+            0.5, 0.5, 0.5
+		];
+
+		this.normals = [
+
+			0, 0, 1,
+			0, 1, 0,
+			1, 0, 0,
+
+			0, 0, 1,
+			0, 1, 0,
+			-1, 0, 0,
+
+			0, 0, 1,
+			0, -1, 0,
+			1, 0, 0, 
+
+			0, 0, 1,
+			0, -1, 0,
+			-1, 0, 0, 
+
+			0, 0, -1,
+			0, 1, 0,
+			1, 0, 0,
+
+			0, 0, -1,
+			0, 1, 0,
+			-1, 0, 0,
+
+			0, 0, -1,
+			0, -1, 0,
+			1, 0, 0, 
+
+			0, 0, -1,
+			0, -1, 0,
+			-1, 0, 0,
+		];
+
+		//Counter-clockwise reference of vertices	(inverted)
+		this.indices = [
+
+		    3, 6, 0, 
+            3, 9, 6,
+
+            18, 15, 12, 
+            18, 21, 15, 
+            
+            16, 4, 1,
+            12, 16, 1,
+
+            10, 22, 7,
+            22, 19, 7,
+
+            5, 17, 11,
+            23, 11, 17,
+
+            20, 14, 2,
+            20, 2, 8,
+		];
+
+		//Texture coordinates
+		this.texCoords = [
+			
+			0, 2/3,
+			1/4, 1,
+			1, 2/3,
+
+			3/4, 2/3,
+			2/4, 1,
+			3/4, 2/3,
+
+			0, 1/3,
+			1/4, 0,
+			1, 1/3,
+
+			3/4, 1/3,
+			2/4, 0,
+			3/4, 1/3,
+
+			1/4, 2/3,
+			1/4, 2/3,
+			1/4, 2/3,
+
+			2/4, 2/3,
+			2/4, 2/3,
+			2/4, 2/3,
+
+			1/4, 1/3,
+			1/4, 1/3,
+			1/4, 1/3,
+
+			2/4, 1/3,
+			2/4, 1/3,
+			2/4, 1/3,
+		];
+		
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
-	}
 
-	display() {
-
-		this.scene.pushMatrix();
-		this.cubemap_material.apply();
-		this.scene.translate(0, 0, 0);
-		//this.scene.scale(50, 50, 50);
-		this.invertedCube.display();
-		this.scene.popMatrix();
 	}
 
 	updateBuffers() {};
