@@ -57,6 +57,7 @@ class MyScene extends CGFscene {
         this.treeGroupPatch = new MyTreeGroupPatch(this, this.texture2, this.texture1);
         this.house = new MyHouse(this);
         this.voxelHill = new MyVoxelHill(this, 3);
+        this.other_voxelHill = new MyVoxelHill(this, 5);
 
         var texCoords = [ 0, 25, 25, 25, 0, 0, 25, 0];
         this.quad = new MyQuad(this, texCoords);
@@ -154,11 +155,18 @@ class MyScene extends CGFscene {
         /*
          *  BEGIN DRAWING
          */
-
+        
+         // Cube Map
+        this.pushMatrix();
+        this.cubeMap_material.apply();
+        this.translate(0, 0.3, 0);
+        this.scale(250, 250, 250);
+        this.cubeMap.display();
+        this.popMatrix();
 
         // Grass plane
         this.pushMatrix();
-        this.scale(100, 1, 100);
+        this.scale(150, 1, 150);
         this.pushMatrix();
         this.rotate(-Math.PI/2, 1, 0, 0);
         this.grass_material.apply();
@@ -196,10 +204,10 @@ class MyScene extends CGFscene {
         this.popMatrix();
         
         this.pushMatrix();
-        this.translate(20, 2.5, -20);
+        this.translate(30, 2.5, -30);
         this.pushMatrix();
         this.scale(5, 5, 5);
-        this.voxelHill.display();
+        this.other_voxelHill.display();
         this.popMatrix();
         this.popMatrix();
         
@@ -290,16 +298,6 @@ class MyScene extends CGFscene {
         this.treeGroupPatch.display();
         this.popMatrix();
         this.popMatrix();
-
-
-        // Cube Map
-        this.pushMatrix();
-        this.cubeMap_material.apply();
-        this.translate(0, 0.3, 0);
-        this.scale(100, 100, 100);
-        this.cubeMap.display();
-        this.popMatrix();
-
 
         // Fire Pit
         this.pushMatrix();
