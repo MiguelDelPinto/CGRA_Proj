@@ -13,7 +13,7 @@ class MyHouse extends CGFobject {
         this.pillar = new MyPrism(scene, 6, 1);
         this.wrap_pillar = new MyPrism(scene, 6, 1, true);
 
-        this.window = new MyQuad(scene);
+        this.quad = new MyQuad(scene);
                 
         this.initMaterials();
         this.initBuffers();
@@ -32,6 +32,7 @@ class MyHouse extends CGFobject {
         this.roof_texture = new CGFtexture(this.scene, 'images/roof.jpg');
  	    this.pillar_texture = new CGFtexture(this.scene, 'images/pillar.jpg');
 		this.window_texture = new CGFtexture(this.scene, 'images/window.jpg');
+		this.door_texture = new CGFtexture(this.scene, 'images/door.jpg');
 
     	//Roof Material
         this.roof_material = new CGFappearance(this.scene);
@@ -56,6 +57,14 @@ class MyHouse extends CGFobject {
         this.window_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.window_material.setShininess(10.0);
         this.window_material.setTexture(this.window_texture);
+
+        //Door Material
+        this.door_material = new CGFappearance(this.scene);
+        this.door_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.door_material.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.door_material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.door_material.setShininess(10.0);
+        this.door_material.setTexture(this.door_texture);
     }
     
     display() {
@@ -67,14 +76,56 @@ class MyHouse extends CGFobject {
 		this.walls.display();
 		this.scene.popMatrix();
 		this.scene.popMatrix();
+		
+		//Drawing Door
+		this.door_material.apply();
 
-		//Drawing Window
+		this.scene.pushMatrix();
+		this.scene.scale(0.55, 0.75, 1);
+		this.scene.pushMatrix();
+		this.scene.translate(0, 0.5, 0.501);
+		this.quad.display();
+		this.scene.popMatrix();
+		this.scene.popMatrix();
+
+		//Drawing Windows
 		this.window_material.apply();
+
+		this.scene.pushMatrix();
+		this.scene.rotate(Math.PI, 0, 1, 0);
 		this.scene.pushMatrix();
 		this.scene.scale(0.5, 0.5, 1);
 		this.scene.pushMatrix();
-		this.scene.translate(0, 1, 0.501);
-		this.window.display();
+		this.scene.translate(-1.15, 1, 0.501);
+		this.quad.display();
+		this.scene.popMatrix();
+		this.scene.popMatrix();
+		this.scene.popMatrix();
+
+		this.scene.pushMatrix();
+		this.scene.rotate(Math.PI, 0, 1, 0);
+		this.scene.pushMatrix();
+		this.scene.scale(0.5, 0.5, 1);
+		this.scene.pushMatrix();
+		this.scene.translate(1.15, 1, 0.501);
+		this.quad.display();
+		this.scene.popMatrix();
+		this.scene.popMatrix();
+		this.scene.popMatrix();
+
+		this.scene.pushMatrix();
+		this.scene.scale(0.5, 0.5, 1);
+		this.scene.pushMatrix();
+		this.scene.translate(1.5, 1, 0.501);
+		this.quad.display();
+		this.scene.popMatrix();
+		this.scene.popMatrix();
+
+		this.scene.pushMatrix();
+		this.scene.scale(0.5, 0.5, 1);
+		this.scene.pushMatrix();
+		this.scene.translate(-1.5, 1, 0.501);
+		this.quad.display();
 		this.scene.popMatrix();
 		this.scene.popMatrix();
 
