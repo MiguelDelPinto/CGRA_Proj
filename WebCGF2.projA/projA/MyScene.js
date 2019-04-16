@@ -184,6 +184,11 @@ class MyScene extends CGFscene {
         //this.voxelHill.display();
 
         this.pushMatrix();
+        this.scale(100, 100, 100);
+        this.cubeMap.display();
+        this.popMatrix();
+
+        this.pushMatrix();
         this.translate(0, 0, 10);
         this.firePit.display();
         this.popMatrix();

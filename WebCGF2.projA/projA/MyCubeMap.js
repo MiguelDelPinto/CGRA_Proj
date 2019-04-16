@@ -10,11 +10,11 @@ class MyCubeMap extends CGFobject {
 		this.invertedCube = new MyUnitCubeInverted(scene);
 
 		this.cubemap_material = new CGFappearance(scene);
-		this.cubemap_material.setAmbient(1, 1, 1, 1);
-        this.cubemap_material.setDiffuse(0, 0, 0, 1);
-        this.cubemap_material.setSpecular(1, 1, 1, 1);
+		this.cubemap_material.setAmbient(0.5, 0.5, 0.5, 1);
+        this.cubemap_material.setDiffuse(0.5, 0.5, 0.5, 1);
+        this.cubemap_material.setSpecular(0, 0, 0, 1);
         this.cubemap_material.setShininess(10.0);
-        this.cubemap_material.setTexture(new CGFtexture(scene, 'images/cube_map.jpg'));
+        this.cubemap_material.setTexture(new CGFtexture(scene, 'images/cube_map_day.png'));
 
 		this.initBuffers();
 	}
@@ -31,6 +31,7 @@ class MyCubeMap extends CGFobject {
 
 		this.scene.pushMatrix();
 		this.cubemap_material.apply();
+		this.scene.translate(0, 0, 0);
 		//this.scene.scale(50, 50, 50);
 		this.invertedCube.display();
 		this.scene.popMatrix();
