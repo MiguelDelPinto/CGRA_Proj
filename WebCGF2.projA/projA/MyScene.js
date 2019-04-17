@@ -356,7 +356,7 @@ class MyScene extends CGFscene {
 
         // Boat
         this.pushMatrix();
-        this.translate(0, 0, 7);
+        this.translate(50, 0, 13);
         this.boat.display();
         this.popMatrix();
 

@@ -13,16 +13,9 @@ class MyBoat extends CGFobject {
         this.quad = new MyQuad(scene);
         this.triangle = new MyTriangle(scene);
         this.cube = new MyUnitCubeQuad(scene,'images/metal_rusty.jpg','images/metal_rusty.jpg','images/metal_rusty.jpg');
+        this.cube_wood = new MyUnitCubeQuad(scene, 'images/mast.jpg', 'images/mast.jpg', 'images/mast.jpg');
         this.half_cube_body = new MyHalfCube(scene, 'images/metal_rusty.jpg');     
         this.half_cube_sail = new MyHalfCube(scene, 'images/sail.jpg');
-                
-		//Rusty Metal Material
-        this.metal_material = new CGFappearance(this.scene);
-        this.metal_material.setAmbient(0.5, 0.5, 0.5, 1);
-        this.metal_material.setDiffuse(0.5, 0.5, 0.5, 1);
-        this.metal_material.setSpecular(0.1, 0.1, 0.1, 1);
-        this.metal_material.setShininess(10.0);
-        this.metal_material.loadTexture('images/metal_rusty.jpg');
 
         //Mast Material
         this.mast_material = new CGFappearance(this.scene);
@@ -31,6 +24,14 @@ class MyBoat extends CGFobject {
         this.mast_material.setSpecular(0.8, 0.8, 0.8, 1);
         this.mast_material.setShininess(10.0);
         this.mast_material.loadTexture('images/mast.jpg');
+
+        //Floor Material
+        this.floor_material = new CGFappearance(this.scene);
+        this.floor_material.setAmbient(0.8, 0.8, 0.8, 1);
+        this.floor_material.setDiffuse(0.6, 0.6, 0.6, 1);
+        this.floor_material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.floor_material.setShininess(10.0);
+        this.floor_material.loadTexture('images/wood.jpg');
 
         this.initBuffers();
     }
@@ -58,7 +59,7 @@ class MyBoat extends CGFobject {
         this.scene.pushMatrix();
         this.scene.rotate(-Math.PI/2, 0, 0, 1);
         this.scene.pushMatrix();
-        this.scene.scale(1, -1, 2);
+        this.scene.scale(1, -1, -2);
         this.scene.pushMatrix();
         this.scene.translate(0, 3, 0);
         this.half_cube_body.display();
@@ -96,6 +97,61 @@ class MyBoat extends CGFobject {
         this.half_cube_sail.display();
         this.scene.popMatrix();
         this.scene.popMatrix();
+
+        // Drawing the wood perimeter
+        this.mast_material.apply();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0, 1 + 1/8, 0.9);
+        this.scene.pushMatrix();
+        this.scene.scale(7.7, 1/4, 0.07);
+        this.cube_wood.display();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0, 1 + 1/8, -0.9);
+        this.scene.pushMatrix();
+        this.scene.scale(7.7, 1/4, 0.07);
+        this.cube_wood.display();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.rotate(Math.PI/2, 0, 1, 0);
+        this.scene.pushMatrix();
+        this.scene.translate(0, 1 + 1/8, -3.8);
+        this.scene.pushMatrix();
+        this.scene.scale(1.8, 1/4, 0.07);
+        this.cube_wood.display();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.rotate(Math.PI/2, 0, 1, 0);
+        this.scene.pushMatrix();
+        this.scene.translate(0, 1 + 1/8, 3.8);
+        this.scene.pushMatrix();
+        this.scene.scale(1.8, 1/4, 0.07);
+        this.cube_wood.display();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
+
+        // Drawing the floor
+        this.scene.pushMatrix();
+        this.scene.rotate(-Math.PI/2, 1, 0, 0);
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0, 1.01);
+        this.scene.pushMatrix();
+        this.scene.scale(7.7, 1.8, 1);
+        this.floor_material.apply();
+        this.quad.display();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
+
 
         this.scene.popMatrix();
     }
