@@ -364,8 +364,11 @@ class MyScene extends CGFscene {
 
         //Car
         this.pushMatrix();
-        this.translate(-3, 2.5, 25);
+        this.translate(1, 1.25, 25);
+        this.pushMatrix();
+        this.rotate(-Math.PI/2, 0, 1, 0);
         this.car.display();
+        this.popMatrix();
         this.popMatrix();
 
         /*
