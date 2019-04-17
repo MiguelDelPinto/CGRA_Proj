@@ -73,6 +73,7 @@ class MyScene extends CGFscene {
         this.sign = new MySign(this, 'images/sign.jpg');
         this.boat = new MyBoat(this);
         this.car = new MyCar(this);
+
     }
     initLights() {
 
@@ -366,7 +367,6 @@ class MyScene extends CGFscene {
         this.translate(-3, 2.5, 25);
         this.car.display();
         this.popMatrix();
-
 
         /*
          *  END DRAWING
