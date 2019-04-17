@@ -61,14 +61,14 @@ class MyGarage extends CGFobject {
 		if(this.frames_to_change == 0)
 			this.frames_to_change = 30;
 
-		var texCoords = [ 0, 1/10+(10-this.number_of_quads_in_door)/10, 1, 1/10+(10-this.number_of_quads_in_door)/10, 0, 0, 1, 0];
-        this.quad.updateTexCoords(texCoords);
-
-		//Applying Garage Door Material
-		this.garage_door_material.apply();
+		var texCoords = [];
 		
 		//Front Face
 		for(var i = 0; i < this.number_of_quads_in_door; i++){
+			texCoords = [0, 1/10+(10-this.number_of_quads_in_door+i)/10, 1, 1/10+(10-this.number_of_quads_in_door+i)/10, 0,(10-this.number_of_quads_in_door+i)/10, 1, (10-this.number_of_quads_in_door+i)/10];
+        	this.quad.updateTexCoords(texCoords);
+        	this.garage_door_material.apply();
+			
 			this.scene.pushMatrix();
 			this.scene.translate(0, 0.45-i*0.1, 0.5);
 
