@@ -58,6 +58,7 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this);
         this.voxelHill = new MyVoxelHill(this, 3);
         this.other_voxelHill = new MyVoxelHill(this, 5);
+        this.road = new MyRoad(this, 10);
 
         var texCoords = [ 0, 25, 25, 25, 0, 0, 25, 0];
         this.quad = new MyQuad(this, texCoords);
@@ -306,13 +307,21 @@ class MyScene extends CGFscene {
         this.firePit.display();
         this.popMatrix();
 
-        //Lake
+        // Lake
         this.pushMatrix();
         this.translate(50, 0.5, 15);
         this.pushMatrix();
         this.scale(2.5, 1, 2.5);
         this.lake.display();
         this.popMatrix();
+        this.popMatrix();
+
+        // Road
+        this.pushMatrix();
+        this.translate(0, 0, 25);
+        this.pushMatrix();
+        this.scale(5, 5, 5);
+        this.road.display();
         this.popMatrix();
 
 
