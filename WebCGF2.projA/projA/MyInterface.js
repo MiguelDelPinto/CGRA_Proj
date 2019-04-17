@@ -28,9 +28,6 @@ class MyInterface extends CGFinterface {
         //Dropdown element in GUI for garage door
         this.gui.add(this.scene, 'garageDoorPosition', this.scene.garageDoorIDs).name('Garage Door').onChange(this.scene.updateGaragePosition.bind(this.scene));
 
-        //Checkbox element in GUI to enable/disable fire in fire pit
-        this.gui.add(this.scene, 'enableFire').name('Enable Fire').onChange(this.scene.updateFireLight.bind(this.scene));
-        
         return true;
     }
 }

@@ -54,7 +54,7 @@ class MyScene extends CGFscene {
         this.timeIDs = { 'Day': 0, 'Night': 1};
         this.garageDoorPosition = 0;
         this.garageDoorIDs = {'Close': 0, 'Open': 1};
-        this.enableFire = true;
+        this.enableFire = false;
 
         //Objects used to draw the scene
         this.unitCubeQuad = new MyUnitCubeQuad(this);
@@ -64,7 +64,10 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this);
         this.voxelHill = new MyVoxelHill(this, 3);
         this.other_voxelHill = new MyVoxelHill(this, 5);
-        var texCoords = [ 0, 25, 25, 25, 0, 0, 25, 0];  this.quad = new MyQuad(this, texCoords);
+        
+        var texCoords = [ 0, 25, 25, 25, 0, 0, 25, 0];  
+        this.quad = new MyQuad(this, texCoords);
+        
         this.cubeMap = new MyCubeMap(this);
         this.firePit = new MyFirePit(this);
         this.lake = new MyLake(this);
@@ -135,6 +138,8 @@ class MyScene extends CGFscene {
             this.lights[0].update();
             this.lights[1].update();
             this.lights[2].update();
+
+            this.enableFire = false;
         }
 
         else {    
@@ -148,6 +153,8 @@ class MyScene extends CGFscene {
             this.lights[0].update();
             this.lights[1].update();
             this.lights[2].update();
+
+            this.enableFire = true;
         }
 
     }
@@ -156,19 +163,6 @@ class MyScene extends CGFscene {
     updateGaragePosition() {
         this.garage.frames_to_change = 30;
     }
-
-    //Function to update the fire light 
-    updateFireLight(){
-        if(this.enableFire){
-            this.lights[2].enable();
-        }
-        else{
-            this.lights[2].disable();
-        }
-        
-        this.lights[2].update();
-    }
-
 
     display() {
         // ---- BEGIN Background, camera and axis setup
