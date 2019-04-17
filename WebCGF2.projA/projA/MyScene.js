@@ -71,6 +71,7 @@ class MyScene extends CGFscene {
         this.garage = new MyGarage(this);
         this.road = new MyRoad(this, 10);
         this.sign = new MySign(this, 'images/sign.jpg');
+        this.boat = new MyBoat(this);
     }
     initLights() {
 
@@ -338,7 +339,7 @@ class MyScene extends CGFscene {
 
         // Road
         this.pushMatrix();
-        this.translate(0, 0, 25);
+        this.translate(0, 0, 23);
         this.pushMatrix();
         this.scale(5, 5, 5);
         this.road.display();
@@ -350,6 +351,13 @@ class MyScene extends CGFscene {
         this.translate(3.5, 0, 25);
         this.sign.display();
         this.popMatrix();
+
+        // Boat
+        this.pushMatrix();
+        this.translate(0, 0, 15);
+        this.boat.display();
+        this.popMatrix();
+
 
 
         /*
