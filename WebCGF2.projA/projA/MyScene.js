@@ -61,7 +61,6 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this);
         this.voxelHill = new MyVoxelHill(this, 3);
         this.other_voxelHill = new MyVoxelHill(this, 5);
-        this.road = new MyRoad(this, 10);
 
         var texCoords = [ 0, 25, 25, 25, 0, 0, 25, 0];
         this.quad = new MyQuad(this, texCoords);
@@ -70,6 +69,8 @@ class MyScene extends CGFscene {
         this.firePit = new MyFirePit(this);
         this.lake = new MyLake(this);
         this.garage = new MyGarage(this);
+        this.road = new MyRoad(this, 10);
+        this.sign = new MySign(this, 'images/sign.jpg');
     }
     initLights() {
 
@@ -325,6 +326,16 @@ class MyScene extends CGFscene {
         this.popMatrix();
 
 
+        // Garage
+        this.pushMatrix();
+        this.translate(10, 2, 0);
+        this.pushMatrix();
+        this.scale(4, 4, 4);
+        this.garage.display();
+        this.popMatrix();
+        this.popMatrix();
+
+
         // Road
         this.pushMatrix();
         this.translate(0, 0, 25);
@@ -334,14 +345,10 @@ class MyScene extends CGFscene {
         this.popMatrix();
         this.popMatrix();
 
-
-        // Garage
+        // Sign
         this.pushMatrix();
-        this.translate(10, 2, 0);
-        this.pushMatrix();
-        this.scale(4, 4, 4);
-        this.garage.display();
-        this.popMatrix();
+        this.translate(3.5, 0, 25);
+        this.sign.display();
         this.popMatrix();
 
 

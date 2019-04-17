@@ -30,8 +30,8 @@ class MyRoad extends CGFobject {
 
 		this.road_material = new CGFappearance(this.scene);
         this.road_material.setAmbient(0, 0, 0, 1.0);
-        this.road_material.setDiffuse(0.4, 0.4, 0.4, 1.0);
-        this.road_material.setSpecular(0.9, 0.9, 0.9, 1.0);
+        this.road_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
+        this.road_material.setSpecular(0.4, 0.4, 0.4, 1.0);
         this.road_material.setShininess(10.0);
         this.road_material.setTexture(this.road_texture);
         this.road_material.setTextureWrap('REPEAT', 'REPEAT');
