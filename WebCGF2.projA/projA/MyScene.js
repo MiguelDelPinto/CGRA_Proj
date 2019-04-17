@@ -173,9 +173,11 @@ class MyScene extends CGFscene {
         // Cube Map
         this.pushMatrix();
         this.cubeMap_material.apply();
-        this.translate(0, 0.3, 0);
-        this.scale(250, 250, 250);
+        this.translate(0, 0, 0);
+        this.pushMatrix();
+        this.scale(150, 150, 150);
         this.cubeMap.display();
+        this.popMatrix();
         this.popMatrix();
 
         // Grass plane
