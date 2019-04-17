@@ -9,11 +9,12 @@ class MyBoat extends CGFobject {
         this.radius = 0.1;
         this.height = 4;
 
-        this.cylinder = new MyCylinder(scene, 5, 1, true, true);
+        this.cylinder = new MyCylinder(scene, 7, 1, false, true);
         this.quad = new MyQuad(scene);
         this.triangle = new MyTriangle(scene);
         this.cube = new MyUnitCubeQuad(scene,'images/metal_rusty.jpg','images/metal_rusty.jpg','images/metal_rusty.jpg');
-        this.half_cube = new MyHalfCube(scene, 'images/metal_rusty.jpg');     
+        this.half_cube_body = new MyHalfCube(scene, 'images/metal_rusty.jpg');     
+        this.half_cube_sail = new MyHalfCube(scene, 'images/sail.jpg');
                 
 		//Rusty Metal Material
         this.metal_material = new CGFappearance(this.scene);
@@ -31,14 +32,6 @@ class MyBoat extends CGFobject {
         this.mast_material.setShininess(10.0);
         this.mast_material.loadTexture('images/mast.jpg');
 
-        //Sail Material
-        this.mast_material = new CGFappearance(this.scene);
-        this.mast_material.setAmbient(0.5, 0.5, 0.5, 1);
-        this.mast_material.setDiffuse(0.5, 0.5, 0.5, 1);
-        this.mast_material.setSpecular(0.8, 0.8, 0.8, 1);
-        this.mast_material.setShininess(10.0);
-        this.mast_material.loadTexture('images/sail.jpg');
-
         this.initBuffers();
     }
     
@@ -54,22 +47,55 @@ class MyBoat extends CGFobject {
     display() {
 
         // Drawing the body of the boat
-
         this.scene.pushMatrix();
         this.scene.translate(0, 1, 0);
 
         this.scene.pushMatrix();
-        this.scene.scale(2, 2, 1);
+        this.scene.scale(4, 2, 2);
         this.cube.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.scale(1, -1, 1);
+        this.scene.rotate(-Math.PI/2, 0, 0, 1);
         this.scene.pushMatrix();
-        this.scene.translate(-1, 0, 0);
-        this.half_cube.display();
+        this.scene.scale(1, -1, 2);
+        this.scene.pushMatrix();
+        this.scene.translate(0, 3, 0);
+        this.half_cube_body.display();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
         this.scene.popMatrix();
 
+        this.scene.pushMatrix();
+        this.scene.rotate(-Math.PI/2, 0, 0, 1);
+        this.scene.pushMatrix();
+        this.scene.scale(1, 1, 2);
+        this.scene.pushMatrix();
+        this.scene.translate(0, 3, 0);
+        this.half_cube_body.display();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
+
+
+        // Drawing the mast
+        this.scene.pushMatrix();
+        this.scene.translate(0, 1, 0);
+        this.scene.pushMatrix();
+        this.scene.scale(0.3, 8, 0.3);
+        this.mast_material.apply();
+        this.cylinder.display();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
+
+        // Drawing the sail
+        this.scene.pushMatrix();
+        this.scene.translate(2, 5.5, 0);
+        this.scene.pushMatrix();
+        this.scene.scale(2, 3, 0.1);
+        this.half_cube_sail.display();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
 
         this.scene.popMatrix();
     }
