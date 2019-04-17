@@ -120,5 +120,6 @@ class MySign extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.popMatrix();
+        this.scene.popMatrix();
     }
 }

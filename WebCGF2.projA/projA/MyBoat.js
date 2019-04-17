@@ -11,6 +11,9 @@ class MyBoat extends CGFobject {
 
         this.cylinder = new MyCylinder(scene, 5, 1, true, true);
         this.quad = new MyQuad(scene);
+        this.triangle = new MyTriangle(scene);
+        this.cube = new MyUnitCubeQuad(scene,'images/metal_rusty.jpg','images/metal_rusty.jpg','images/metal_rusty.jpg');
+        this.half_cube = new MyHalfCube(scene, 'images/metal_rusty.jpg');     
                 
 		//Rusty Metal Material
         this.metal_material = new CGFappearance(this.scene);
@@ -51,40 +54,22 @@ class MyBoat extends CGFobject {
     display() {
 
         // Drawing the body of the boat
-        
+
         this.scene.pushMatrix();
         this.scene.translate(0, 1, 0);
 
-
-        this.scene.pushMatrix();                //Down face
-        this.scene.rotate(-Math.PI/2, 1, 0, 0);
         this.scene.pushMatrix();
         this.scene.scale(2, 2, 1);
-        this.metal_material.apply();
-        this.quad.display();
-        this.scene.popMatrix();
-        this.scene.popMatrix();
-
-        this.scene.pushMatrix();                //Up face
-        this.scene.translate(0, 1, 0);
-        this.scene.pushMatrix();
-        this.scene.rotate(-Math.PI/2, 1, 0, 0);
-        this.scene.pushMatrix();
-        this.scene.scale(3, 2, 1);
-        this.metal_material.apply();
-        this.quad.display();
-        this.scene.popMatrix();
-        this.scene.popMatrix();
+        this.cube.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0, 0.5, 1);
+        this.scene.scale(1, -1, 1);
         this.scene.pushMatrix();
-        this.scene.scale(2, 1, 1);
-        this.metal_material.apply();
-        this.quad.display();
+        this.scene.translate(-1, 0, 0);
+        this.half_cube.display();
         this.scene.popMatrix();
-        this.scene.popMatrix();
+
 
         this.scene.popMatrix();
     }
