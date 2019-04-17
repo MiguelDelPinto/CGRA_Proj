@@ -56,13 +56,16 @@ class MySign extends CGFobject {
         this.scene.pushMatrix();
         this.scene.scale(1.3, 1.5, 1.3);
         
-        this.scene.pushMatrix();                //Front face
+
+		//Front face
+        this.scene.pushMatrix();                
         this.scene.translate(0, 0, 0.1);
         this.sign_material.apply();
         this.quad.display();
         this.scene.popMatrix();
 
-        this.scene.pushMatrix();                //Back face
+		//Back face
+        this.scene.pushMatrix();                
         this.scene.translate(0, 0, -0.1);
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI, 0, 1, 0);
@@ -70,8 +73,9 @@ class MySign extends CGFobject {
         this.quad.display();
         this.scene.popMatrix();
         this.scene.popMatrix();
-
-        this.scene.pushMatrix();                //Right face
+ 		
+ 		//Right face
+        this.scene.pushMatrix();               
         this.scene.translate(0.5, 0, 0);
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/2, 0, 1, 0)
@@ -83,7 +87,8 @@ class MySign extends CGFobject {
         this.scene.popMatrix();
         this.scene.popMatrix()
             
-        this.scene.pushMatrix();                //Left face
+        //Left face
+        this.scene.pushMatrix();                
         this.scene.translate(-0.5, 0, 0);
         this.scene.pushMatrix();
         this.scene.rotate(-Math.PI/2, 0, 1, 0);
@@ -95,7 +100,8 @@ class MySign extends CGFobject {
         this.scene.popMatrix();
         this.scene.popMatrix();
 
-        this.scene.pushMatrix();                //Down face
+		//Down face
+        this.scene.pushMatrix();                
         this.scene.translate(0, -0.5, 0);
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/2, 1, 0, 0);
@@ -106,8 +112,9 @@ class MySign extends CGFobject {
         this.scene.popMatrix();
         this.scene.popMatrix();
         this.scene.popMatrix();
-
-        this.scene.pushMatrix();                //Up face
+		
+		//Up face
+        this.scene.pushMatrix();               
         this.scene.translate(0, 0.5, 0);
         this.scene.pushMatrix();
         this.scene.rotate(-Math.PI/2, 1, 0, 0);
