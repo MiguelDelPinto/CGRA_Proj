@@ -28,7 +28,7 @@ class MyLake extends CGFobject {
 		this.water_material = new CGFappearance(this.scene);
         this.water_material.setAmbient(0, 0, 0, 1.0);
         this.water_material.setDiffuse(0.4, 0.4, 0.4, 1.0);
-        this.water_material.setSpecular(0.7, 0.7, 0.7, 1.0);
+        this.water_material.setSpecular(0.9, 0.9, 0.9, 1.0);
         this.water_material.setShininess(10.0);
         this.water_material.setTexture(this.water_texture);
         this.water_material.setTextureWrap('REPEAT', 'REPEAT');
