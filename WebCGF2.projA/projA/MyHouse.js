@@ -44,7 +44,7 @@ class MyHouse extends CGFobject {
 
         //Pillar Material
         this.pillar_material = new CGFappearance(this.scene);
-        this.pillar_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.pillar_material.setAmbient(0.7, 0.7, 0.7, 1);
         this.pillar_material.setDiffuse(0.9, 0.9, 0.9, 1);
         this.pillar_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.pillar_material.setShininess(10.0);
@@ -52,7 +52,7 @@ class MyHouse extends CGFobject {
 
         //Window Material
         this.window_material = new CGFappearance(this.scene);
-        this.window_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.window_material.setAmbient(0.7, 0.7, 0.7, 1);
         this.window_material.setDiffuse(0.9, 0.9, 0.9, 1);
         this.window_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.window_material.setShininess(10.0);
@@ -60,7 +60,7 @@ class MyHouse extends CGFobject {
 
         //Door Material
         this.door_material = new CGFappearance(this.scene);
-        this.door_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.door_material.setAmbient(0.7, 0.7, 0.7, 1);
         this.door_material.setDiffuse(0.9, 0.9, 0.9, 1);
         this.door_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.door_material.setShininess(10.0);
