@@ -25,9 +25,12 @@ class MyRoad extends CGFobject {
 	}
 
 	initMaterials(){
+
+		//Textures
 		this.road_texture = new CGFtexture(this.scene, 'images/road.jpg');
  	    this.road_transition_texture = new CGFtexture(this.scene, 'images/road_transition.jpg');
 
+		//Materials
 		this.road_material = new CGFappearance(this.scene);
         this.road_material.setAmbient(0, 0, 0, 1.0);
         this.road_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
@@ -51,7 +54,7 @@ class MyRoad extends CGFobject {
 		this.road_transition_material.apply();
 
 		this.scene.pushMatrix();
-		this.scene.translate(0, 0.1, 0);
+		this.scene.translate(0, 0.001, 0);
 		this.scene.pushMatrix();
 		this.scene.rotate(-Math.PI/2, 1, 0, 0);
 		this.quad.display();
@@ -63,7 +66,7 @@ class MyRoad extends CGFobject {
 		
 		for(let n = 1; n <= this.length; n++) {
 		    this.scene.pushMatrix();
-		    this.scene.translate(0, 0.1, n);
+		    this.scene.translate(0, 0.001, n);
 		    this.scene.pushMatrix();
 		    this.scene.rotate(-Math.PI/2, 1, 0, 0);
 		    this.quad.display();

@@ -25,10 +25,12 @@ class MyGarage extends CGFobject {
 	}
 
 	initMaterials(){
+		//Textures
 		this.garage_door_texture = new CGFtexture(this.scene, 'images/garage_door.jpg');
 		this.walls_texture = new CGFtexture(this.scene, 'images/wall.jpg');
 		this.roof_texture = new CGFtexture(this.scene, 'images/roof.jpg');
  	    
+ 	    //Garage door material
 		this.garage_door_material = new CGFappearance(this.scene);
         this.garage_door_material.setAmbient(0, 0, 0, 1.0);
         this.garage_door_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
@@ -37,6 +39,7 @@ class MyGarage extends CGFobject {
         this.garage_door_material.setTexture(this.garage_door_texture);
        	this.garage_door_material.setTextureWrap('REPEAT', 'REPEAT');      	
 		
+		//Walls material
 		this.walls_material = new CGFappearance(this.scene);
         this.walls_material.setAmbient(0, 0, 0, 1.0);
         this.walls_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
@@ -45,7 +48,7 @@ class MyGarage extends CGFobject {
         this.walls_material.setTexture(this.walls_texture);
        	this.walls_material.setTextureWrap('REPEAT', 'REPEAT');   
 
-       	//Roof Material
+       	//Roof material
         this.roof_material = new CGFappearance(this.scene);
         this.roof_material.setAmbient(0.1, 0.1, 0.1, 1);
         this.roof_material.setDiffuse(0.9, 0.9, 0.9, 1);

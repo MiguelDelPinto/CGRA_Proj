@@ -29,13 +29,14 @@ class MyCar extends CGFobject {
     }
 
     initMaterials(){
+    	//Textures
        	this.wheel_texture = new CGFtexture(this.scene, 'images/tire.jpg');
        	this.glass_texture = new CGFtexture(this.scene, 'images/car_glass.jpg');
        	this.plate_texture = new CGFtexture(this.scene, 'images/car_plate.jpg');
 
     	//Wheel Material
         this.wheel_material = new CGFappearance(this.scene);
-        this.wheel_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.wheel_material.setAmbient(0.7, 0.7, 0.7, 1);
         this.wheel_material.setDiffuse(0.9, 0.9, 0.9, 1);
         this.wheel_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.wheel_material.setShininess(10.0);
@@ -43,7 +44,7 @@ class MyCar extends CGFobject {
 
         //Glass Material
         this.glass_material = new CGFappearance(this.scene);
-        this.glass_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.glass_material.setAmbient(0.7, 0.7, 0.7, 1);
         this.glass_material.setDiffuse(0.4, 0.4, 0.4, 1);
         this.glass_material.setSpecular(0.6, 0.6, 0.6, 1);
         this.glass_material.setShininess(10.0);
@@ -51,7 +52,7 @@ class MyCar extends CGFobject {
 
         //Plate Material
         this.plate_material = new CGFappearance(this.scene);
-        this.plate_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.plate_material.setAmbient(0.7, 0.7, 0.7, 1);
         this.plate_material.setDiffuse(0.4, 0.4, 0.4, 1);
         this.plate_material.setSpecular(0.6, 0.6, 0.6, 1);
         this.plate_material.setShininess(10.0);

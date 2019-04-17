@@ -24,6 +24,7 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
 
         //------ Applied Material
+        
         //Grass Material
         this.grass_material = new CGFappearance(this);
         this.grass_material.setAmbient(0.1, 0.1, 0.1, 1);
@@ -39,7 +40,7 @@ class MyScene extends CGFscene {
         this.cubeMap_material.setDiffuse(0.9, 0.9, 0.9, 1);
         this.cubeMap_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.cubeMap_material.setShininess(10.0);
-        this.cubeMap_material.loadTexture('images/cube_map_day.png');
+        this.cubeMap_material.loadTexture('images/cube_map_day.png');   //daytime is default
         this.cubeMap_material.setTextureWrap('REPEAT', 'REPEAT');
         
         //------ Textures
@@ -47,13 +48,14 @@ class MyScene extends CGFscene {
         this.texture2 = new CGFtexture(this, 'images/trunk.jpg');
 
         //Objects connected to MyInterface
+        this.enableAllTextures = true;
         this.wrapTextures = false;
         this.timeOfDay = 0;
         this.timeIDs = { 'Day': 0, 'Night': 1};
         this.garageDoorPosition = 0;
         this.garageDoorIDs = {'Close': 0, 'Open': 1};
 
-
+        //Objects used to draw the scene
         this.unitCubeQuad = new MyUnitCubeQuad(this);
         this.tree = new MyTree(this, 1, 0.34, 1, 1, this.texture2, this.texture1);
         this.treeRowPatch = new MyTreeRowPatch(this, this.texture2, this.texture1);
@@ -61,10 +63,7 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this);
         this.voxelHill = new MyVoxelHill(this, 3);
         this.other_voxelHill = new MyVoxelHill(this, 5);
-
-        var texCoords = [ 0, 25, 25, 25, 0, 0, 25, 0];
-        this.quad = new MyQuad(this, texCoords);
-
+        var texCoords = [ 0, 25, 25, 25, 0, 0, 25, 0];  this.quad = new MyQuad(this, texCoords);
         this.cubeMap = new MyCubeMap(this);
         this.firePit = new MyFirePit(this);
         this.lake = new MyLake(this);
@@ -73,6 +72,7 @@ class MyScene extends CGFscene {
         this.sign = new MySign(this, 'images/sign.jpg');
         this.boat = new MyBoat(this);
         this.car = new MyCar(this);
+        this.mat = new MyUnitCubeQuad(this, 'images/mat_plain.jpg', 'images/mat_welcome.jpg', 'images/mat_plain.jpg');
 
     }
     initLights() {
@@ -112,10 +112,17 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
 
+
+    //Function that updates the visibility of all textures
+    updateTextures(){
+        this.enableTextures(this.enableAllTextures);
+    }
+
+    //Function that updates the lights and the cube map's texture, according to the time of day chosen
     updateTimeOfDay() {
         
-        if (this.timeOfDay == 0)
-        {            
+        if (this.timeOfDay == 0) {            
+            
             this.cubeMap_material.loadTexture('images/cube_map_day.png');
            
             this.lights[0].enable();
@@ -126,9 +133,9 @@ class MyScene extends CGFscene {
             this.lights[1].update();
             this.lights[2].update();
         }
-        if (this.timeOfDay == 1)
-        {
-            //this.cubeMap_material.setTexture(this.cubeMapNight_Texture);
+
+        else {    
+
             this.cubeMap_material.loadTexture('images/cube_map_night.png');
             
             this.lights[0].disable();
@@ -142,6 +149,7 @@ class MyScene extends CGFscene {
 
     }
 
+    //Function to update the garage's postition
     updateGaragePosition() {
         this.garage.frames_to_change = 30;
     }
@@ -163,12 +171,12 @@ class MyScene extends CGFscene {
 
         // Apply default appearance
         this.setDefaultAppearance();
-       
-        //Drawing Final Scene: Exercise 4
+
 
         /*
          *  BEGIN DRAWING
          */
+   
         
         // Cube Map
         this.pushMatrix();
@@ -179,6 +187,7 @@ class MyScene extends CGFscene {
         this.cubeMap.display();
         this.popMatrix();
         this.popMatrix();
+
 
         // Grass plane
         this.pushMatrix();
@@ -207,6 +216,16 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.scale(3, 3, 3);
         this.house.display();
+        this.popMatrix();
+
+
+        // Welcome mat
+        this.pushMatrix();
+        this.translate(0, 0, 2);
+        this.pushMatrix();
+        this.scale(1.3, 0.07, 1);
+        this.mat.display();
+        this.popMatrix();
         this.popMatrix();
         
 
@@ -315,11 +334,13 @@ class MyScene extends CGFscene {
         this.popMatrix();
         this.popMatrix();
 
+
         // Fire Pit
         this.pushMatrix();
         this.translate(0, 0.005, 10);
         this.firePit.display();
         this.popMatrix();
+
 
         // Lake
         this.pushMatrix();
@@ -345,16 +366,18 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.translate(0, 0, 23);
         this.pushMatrix();
-        this.scale(5, 5, 5);
+        this.scale(8, 5, 5);
         this.road.display();
         this.popMatrix();
         this.popMatrix();
 
+
         // Sign
         this.pushMatrix();
-        this.translate(3.5, 0, 25);
+        this.translate(4.5, 0, 25);
         this.sign.display();
         this.popMatrix();
+
 
         // Boat
         this.pushMatrix();
@@ -363,15 +386,15 @@ class MyScene extends CGFscene {
         this.popMatrix();
 
 
-
         //Car
         this.pushMatrix();
-        this.translate(1, 1.25, 25);
+        this.translate(1.75, 1.25, 25);
         this.pushMatrix();
         this.rotate(-Math.PI/2, 0, 1, 0);
         this.car.display();
         this.popMatrix();
         this.popMatrix();
+
 
         /*
          *  END DRAWING

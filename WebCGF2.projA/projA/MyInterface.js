@@ -16,7 +16,10 @@ class MyInterface extends CGFinterface {
         
         var obj = this;
 
-        //Checkbox element in GUI for textures
+        //Checkbox element in GUI to enable/disable all textures
+        this.gui.add(this.scene, 'enableAllTextures').name('Enable Textures').onChange(this.scene.updateTextures.bind(this.scene)); 
+
+        //Checkbox element in GUI to enable/disable wrap textures
         this.gui.add(this.scene, 'wrapTextures').name('Wrap Textures');
 
         //Dropdown element in GUI for lighting
