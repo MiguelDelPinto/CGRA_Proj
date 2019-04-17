@@ -32,7 +32,7 @@ class MyRoad extends CGFobject {
 
 		//Main road material (tar - diffuse material)
 		this.road_material = new CGFappearance(this.scene);
-        this.road_material.setAmbient(0, 0, 0, 1.0);
+        this.road_material.setAmbient(0.6, 0.6, 0.6, 1.0);
         this.road_material.setDiffuse(0.9, 0.9, 0.9, 1.0);
         this.road_material.setSpecular(0.1, 0.1, 0.1, 1.0);
         this.road_material.setShininess(10.0);
@@ -41,7 +41,7 @@ class MyRoad extends CGFobject {
 		
 		//Transition material between the road and the grass (tar and grass - diffuse material)
         this.road_transition_material = new CGFappearance(this.scene);
-        this.road_transition_material.setAmbient(0, 0, 0, 1.0);
+        this.road_transition_material.setAmbient(0.6, 0.6, 0.6, 1.0);
         this.road_transition_material.setDiffuse(0.9, 0.9, 0.9, 1.0);
         this.road_transition_material.setSpecular(0.1, 0.1, 0.1, 1.0);
         this.road_transition_material.setShininess(10.0);
@@ -55,7 +55,7 @@ class MyRoad extends CGFobject {
 		this.road_transition_material.apply();
 
 		this.scene.pushMatrix();
-		this.scene.translate(0, 0.001, 0);
+		this.scene.translate(0, 0.01, 0);
 		this.scene.pushMatrix();
 		this.scene.rotate(-Math.PI/2, 1, 0, 0);
 		this.quad.display();

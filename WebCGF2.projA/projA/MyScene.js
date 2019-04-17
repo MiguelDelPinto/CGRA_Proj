@@ -27,7 +27,7 @@ class MyScene extends CGFscene {
         
         //Grass Material
         this.grass_material = new CGFappearance(this);
-        this.grass_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.grass_material.setAmbient(0.5, 0.5, 0.5, 1);
         this.grass_material.setDiffuse(0.9, 0.9, 0.9, 1);
         this.grass_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.grass_material.setShininess(10.0);
@@ -36,7 +36,7 @@ class MyScene extends CGFscene {
 
         //CubeMap Material
         this.cubeMap_material = new CGFappearance(this);
-        this.cubeMap_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.cubeMap_material.setAmbient(0.7, 0.7, 0.7, 1);
         this.cubeMap_material.setDiffuse(0.9, 0.9, 0.9, 1);
         this.cubeMap_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.cubeMap_material.setShininess(10.0);
@@ -87,7 +87,7 @@ class MyScene extends CGFscene {
         this.lights[0].setPosition(100, 100, -2, 1);
         this.lights[0].setDiffuse(0.98, 0.92, 0.65, 1.0);
         this.lights[0].setSpecular(0.98, 0.92, 0.65, 1.0);
-        this.lights[0].setLinearAttenuation(0.0001);
+        this.lights[0].setLinearAttenuation(0.0001);        //minimum attenuation
         this.lights[0].enable();
         this.lights[0].update();
 
@@ -95,15 +95,15 @@ class MyScene extends CGFscene {
         this.lights[1].setPosition(100, 100, -2, 1);
         this.lights[1].setDiffuse(0.32, 0.43, 0.47, 1.0);
         this.lights[1].setSpecular(0.32, 0.43, 0.47, 1.0);
-        this.lights[1].setLinearAttenuation(0.01);
+        this.lights[1].setLinearAttenuation(0.01);          //small attenuation
         this.lights[1].disable();
         this.lights[1].update();
 
         //Fireplace
-        this.lights[2].setPosition(0, 1.1, 10, 1);
+        this.lights[2].setPosition(0, 1.2, 10, 1);
         this.lights[2].setDiffuse(0.36, 0.10, 0.05, 1.0);
         this.lights[2].setSpecular(0.36, 0.10, 0.05, 1.0);
-        this.lights[2].setLinearAttenuation(0.1);
+        this.lights[2].setLinearAttenuation(0.05);          //bigger attenuation
         this.lights[2].disable();
         this.lights[2].update();
 
