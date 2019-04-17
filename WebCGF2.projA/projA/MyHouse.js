@@ -34,31 +34,31 @@ class MyHouse extends CGFobject {
 		this.window_texture = new CGFtexture(this.scene, 'images/window.jpg');
 		this.door_texture = new CGFtexture(this.scene, 'images/door.jpg');
 
-    	//Roof Material
+    	//Roof Material (tiles - diffuse material)
         this.roof_material = new CGFappearance(this.scene);
-        this.roof_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.roof_material.setAmbient(0.7, 0.7, 0.7, 1);
         this.roof_material.setDiffuse(0.9, 0.9, 0.9, 1);
         this.roof_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.roof_material.setShininess(10.0);
         this.roof_material.setTexture(this.roof_texture);
 
-        //Pillar Material
+        //Pillar Material (marble - specular material)
         this.pillar_material = new CGFappearance(this.scene);
         this.pillar_material.setAmbient(0.7, 0.7, 0.7, 1);
-        this.pillar_material.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.pillar_material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.pillar_material.setDiffuse(0.6, 0.6, 0.6, 1);
+        this.pillar_material.setSpecular(0.9, 0.9, 0.9, 1);
         this.pillar_material.setShininess(10.0);
         this.pillar_material.setTexture(this.pillar_texture);
 
-        //Window Material
+        //Window Material (glass and wood - mixture of a specular mateiral and a diffuse material)
         this.window_material = new CGFappearance(this.scene);
         this.window_material.setAmbient(0.7, 0.7, 0.7, 1);
         this.window_material.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.window_material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.window_material.setSpecular(0.9, 0.9, 0.9, 1);
         this.window_material.setShininess(10.0);
         this.window_material.setTexture(this.window_texture);
 
-        //Door Material
+        //Door Material (wood - diffuse material)
         this.door_material = new CGFappearance(this.scene);
         this.door_material.setAmbient(0.7, 0.7, 0.7, 1);
         this.door_material.setDiffuse(0.9, 0.9, 0.9, 1);

@@ -7,7 +7,8 @@ class MyTreeRowPatch extends CGFobject {
         super(scene);
               
         this.trees = [];
-               
+
+        //populates the 'trees' array with randomized trees (varying in radius and height)      
         for(var i = 0; i < 6; i++){
           this.trees.push(new MyTree(scene, 
           						1 + this.scene.getRandomArbitrary(-0.2, 0.5), 
@@ -24,6 +25,7 @@ class MyTreeRowPatch extends CGFobject {
 
 		let x = 0;
 
+		//randomizes the x and z coordinates of the trees
 		for(let i = 0; i < 6; i++){
 			this.x_positions.push(x);
 			x += this.scene.getRandomArbitrary(1.75, 2);
@@ -46,11 +48,13 @@ class MyTreeRowPatch extends CGFobject {
     }
     
     display() {
-      for(var i = 0; i < this.trees.length; i++){
-        this.scene.pushMatrix();
-        this.scene.translate(this.x_positions[i], 0, this.z_positions[i]);
-        this.trees[i].display();
-        this.scene.popMatrix();
-      }
+
+        //displays the trees in a row fashion
+        for(var i = 0; i < this.trees.length; i++){
+        	this.scene.pushMatrix();
+          	this.scene.translate(this.x_positions[i], 0, this.z_positions[i]);
+          	this.trees[i].display();
+        	this.scene.popMatrix();
+      	}
     }
 }

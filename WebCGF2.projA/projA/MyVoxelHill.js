@@ -24,7 +24,7 @@ class MyVoxelHill extends CGFobject {
     display() {
         let y = 0;
 
-        for(let n = this.levels; n > 0; n--) {          //Movement in the y axis        
+        for(let n = this.levels; n > 0; n--) {         //Movement in the y axis        
             let limit = 2*n - 1;
             let x = -n + 1;
 

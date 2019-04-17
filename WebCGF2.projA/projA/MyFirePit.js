@@ -36,15 +36,15 @@ class MyFirePit extends CGFobject {
         this.wood_texture = new CGFtexture(this.scene, 'images/wood.jpg');
         this.fire_texture = new CGFtexture(this.scene, 'images/fire.jpg');
 
-    	//Wall Material
+    	//Wall Material (stone - diffuse material)
         this.wall_material = new CGFappearance(this.scene);
         this.wall_material.setAmbient(0.1, 0.1, 0.1, 1);
-        this.wall_material.setDiffuse(0.5, 0.5, 0.5, 1);
+        this.wall_material.setDiffuse(0.9, 0.9, 0.9, 1);
         this.wall_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.wall_material.setShininess(10.0);
         this.wall_material.setTexture(this.wall_texture);
 
-        //Wood Material
+        //Wood Material (wood - diffuse material)
         this.wood_material = new CGFappearance(this.scene);
         this.wood_material.setAmbient(0.1, 0.1, 0.1, 1);
         this.wood_material.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -56,19 +56,19 @@ class MyFirePit extends CGFobject {
         this.fire_material = new CGFappearance(this.scene);
         this.fire_material.setAmbient(0.1, 0.1, 0.1, 1);
         this.fire_material.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.fire_material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.fire_material.setSpecular(0.6, 0.6, 0.6, 1);
         this.fire_material.setShininess(10.0);
         this.fire_material.setTexture(this.fire_texture);
     }
     
     display() {
 
-    	//Draw stones 
+    	//Draws the stones 
     	this.wall_material.apply();
 		this.exterior_wall.display();
       	this.interior_wall.display();
 
-      	//Draw wood 
+      	//Draws the wood 
 		this.wood_material.apply();
 
 		this.scene.pushMatrix();
@@ -134,7 +134,7 @@ class MyFirePit extends CGFobject {
 		this.scene.popMatrix();
 		this.scene.popMatrix();
 		
-		//Draw fire
+		//Draws the fire
 		this.fire_material.apply();
 		
 		this.scene.pushMatrix();

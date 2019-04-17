@@ -30,27 +30,27 @@ class MyGarage extends CGFobject {
 		this.walls_texture = new CGFtexture(this.scene, 'images/wall.jpg');
 		this.roof_texture = new CGFtexture(this.scene, 'images/roof.jpg');
  	    
- 	    //Garage door material
+ 	    //Garage door material (metal - specular material)
 		this.garage_door_material = new CGFappearance(this.scene);
-        this.garage_door_material.setAmbient(0, 0, 0, 1.0);
+        this.garage_door_material.setAmbient(0.7, 0.7, 0.7, 1.0);
         this.garage_door_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
         this.garage_door_material.setSpecular(0.8, 0.8, 0.8, 1.0);
         this.garage_door_material.setShininess(10.0);
         this.garage_door_material.setTexture(this.garage_door_texture);
        	this.garage_door_material.setTextureWrap('REPEAT', 'REPEAT');      	
 		
-		//Walls material
+		//Walls material (stone - diffuse material)
 		this.walls_material = new CGFappearance(this.scene);
-        this.walls_material.setAmbient(0, 0, 0, 1.0);
+        this.walls_material.setAmbient(0.7, 0.7, 0.7, 1.0);
         this.walls_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
-        this.walls_material.setSpecular(0.8, 0.8, 0.8, 1.0);
+        this.walls_material.setSpecular(0.3, 0.3, 0.3, 1.0);
         this.walls_material.setShininess(10.0);
         this.walls_material.setTexture(this.walls_texture);
        	this.walls_material.setTextureWrap('REPEAT', 'REPEAT');   
 
-       	//Roof material
+       	//Roof material (tiles - diffuse material)
         this.roof_material = new CGFappearance(this.scene);
-        this.roof_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.roof_material.setAmbient(0.7, 0.7, 0.7, 1);
         this.roof_material.setDiffuse(0.9, 0.9, 0.9, 1);
         this.roof_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.roof_material.setShininess(10.0);

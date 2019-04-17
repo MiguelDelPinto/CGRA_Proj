@@ -12,7 +12,7 @@ class MySign extends CGFobject {
         this.cylinder = new MyCylinder(scene, 5, 1, true, true);
         this.quad = new MyQuad(scene);
                 
-		//Metal Material (high specularity)
+		//Metal Material (metal - specular material)
         this.metal_material = new CGFappearance(this.scene);
         this.metal_material.setAmbient(0.5, 0.5, 0.5, 1);
         this.metal_material.setDiffuse(0.5, 0.5, 0.5, 1);
@@ -20,7 +20,7 @@ class MySign extends CGFobject {
         this.metal_material.setShininess(10.0);
         this.metal_material.loadTexture('images/metal.jpg');
 
-        //Sign Material (high specularity)
+        //Sign Material (metal - specular material)
         this.sign_material = new CGFappearance(this.scene);
         this.sign_material.setAmbient(0.5, 0.5, 0.5, 1);
         this.sign_material.setDiffuse(0.5, 0.5, 0.5, 1);

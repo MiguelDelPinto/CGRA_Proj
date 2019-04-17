@@ -44,8 +44,8 @@ class MyScene extends CGFscene {
         this.cubeMap_material.setTextureWrap('REPEAT', 'REPEAT');
         
         //------ Textures
-        this.texture1 = new CGFtexture(this, 'images/leaves.jpg');
-        this.texture2 = new CGFtexture(this, 'images/trunk.jpg');
+        this.leaves_texture = new CGFtexture(this, 'images/leaves.jpg');
+        this.trunk_texture = new CGFtexture(this, 'images/trunk.jpg');
 
         //Objects connected to MyInterface
         this.enableAllTextures = true;
@@ -57,9 +57,9 @@ class MyScene extends CGFscene {
 
         //Objects used to draw the scene
         this.unitCubeQuad = new MyUnitCubeQuad(this);
-        this.tree = new MyTree(this, 1, 0.34, 1, 1, this.texture2, this.texture1);
-        this.treeRowPatch = new MyTreeRowPatch(this, this.texture2, this.texture1);
-        this.treeGroupPatch = new MyTreeGroupPatch(this, this.texture2, this.texture1);
+        this.tree = new MyTree(this, 1, 0.34, 1, 1, this.trunk_texture, this.leaves_texture);
+        this.treeRowPatch = new MyTreeRowPatch(this, this.trunk_texture, this.leaves_texture);
+        this.treeGroupPatch = new MyTreeGroupPatch(this, this.trunk_texture, this.leaves_texture);
         this.house = new MyHouse(this);
         this.voxelHill = new MyVoxelHill(this, 3);
         this.other_voxelHill = new MyVoxelHill(this, 5);
@@ -83,6 +83,7 @@ class MyScene extends CGFscene {
         this.lights[0].setPosition(100, 100, -2, 1);
         this.lights[0].setDiffuse(0.98, 0.92, 0.65, 1.0);
         this.lights[0].setSpecular(0.98, 0.92, 0.65, 1.0);
+        this.lights[0].setLinearAttenuation(0.0001);
         this.lights[0].enable();
         this.lights[0].update();
 
@@ -90,6 +91,7 @@ class MyScene extends CGFscene {
         this.lights[1].setPosition(100, 100, -2, 1);
         this.lights[1].setDiffuse(0.72, 0.83, 0.87, 1.0);
         this.lights[1].setSpecular(0.72, 0.83, 0.87, 1.0);
+        this.lights[1].setLinearAttenuation(0.01);
         this.lights[1].disable();
         this.lights[1].update();
 
@@ -97,7 +99,7 @@ class MyScene extends CGFscene {
         this.lights[2].setPosition(0, 1.1, 10, 1);
         this.lights[2].setDiffuse(0.96, 0.50, 0.25, 1.0);
         this.lights[2].setSpecular(0.96, 0.50, 0.25, 1.0);;
-        this.lights[2].setLinearAttenuation(0.05);
+        this.lights[2].setLinearAttenuation(0.1);
         this.lights[2].disable();
         this.lights[2].update();
 

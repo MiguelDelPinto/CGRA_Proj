@@ -34,7 +34,7 @@ class MyCar extends CGFobject {
        	this.glass_texture = new CGFtexture(this.scene, 'images/car_glass.jpg');
        	this.plate_texture = new CGFtexture(this.scene, 'images/car_plate.jpg');
 
-    	//Wheel Material
+    	//Wheel Material (rubber - diffuse material)
         this.wheel_material = new CGFappearance(this.scene);
         this.wheel_material.setAmbient(0.7, 0.7, 0.7, 1);
         this.wheel_material.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -42,7 +42,7 @@ class MyCar extends CGFobject {
         this.wheel_material.setShininess(10.0);
         this.wheel_material.setTexture(this.wheel_texture);
 
-        //Glass Material
+        //Glass Material (glass - semi-specular material)
         this.glass_material = new CGFappearance(this.scene);
         this.glass_material.setAmbient(0.7, 0.7, 0.7, 1);
         this.glass_material.setDiffuse(0.4, 0.4, 0.4, 1);
@@ -50,7 +50,7 @@ class MyCar extends CGFobject {
         this.glass_material.setShininess(10.0);
         this.glass_material.setTexture(this.glass_texture);
 
-        //Plate Material
+        //Plate Material (metal - semi-specular material)
         this.plate_material = new CGFappearance(this.scene);
         this.plate_material.setAmbient(0.7, 0.7, 0.7, 1);
         this.plate_material.setDiffuse(0.4, 0.4, 0.4, 1);
@@ -60,6 +60,8 @@ class MyCar extends CGFobject {
     }
     
     display() {
+
+    	//Displays the body
     	this.scene.pushMatrix();
     	this.scene.scale(4, 1, 3);
     	this.cube.display();
@@ -103,7 +105,8 @@ class MyCar extends CGFobject {
 		this.scene.popMatrix();
 		this.scene.popMatrix();
 
-		//Display Wheels
+
+		//Displays the wheels
 		this.wheel_material.apply();
 
 		this.scene.pushMatrix();
@@ -150,7 +153,8 @@ class MyCar extends CGFobject {
 		this.scene.popMatrix();
 		this.scene.popMatrix();
 
-		//Display Glass
+
+		//Displays the glass
 		this.glass_material.apply();
 
 		this.scene.pushMatrix();
@@ -219,7 +223,8 @@ class MyCar extends CGFobject {
 		this.scene.popMatrix();
 		this.scene.popMatrix();
 
-		//Plate
+
+		//Displays the license plate
 		this.plate_material.apply();
 
 		this.scene.pushMatrix();
