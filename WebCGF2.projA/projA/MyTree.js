@@ -21,20 +21,20 @@ class MyTree extends CGFobject {
         this.wrap_cone = new MyCone(scene, 10, 1, true);
                 
 		//Tree Top Material
-        this.material1 = new CGFappearance(this.scene);
-        this.material1.setAmbient(0.1, 0.1, 0.1, 1);
-        this.material1.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.material1.setSpecular(0.1, 0.1, 0.1, 1);
-        this.material1.setShininess(10.0);
-        this.material1.setTexture(treeTopTexture);
+        this.top_material = new CGFappearance(this.scene);
+        this.top_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.top_material.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.top_material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.top_material.setShininess(10.0);
+        this.top_material.setTexture(treeTopTexture);
 
         //Trunk Material
-        this.material2 = new CGFappearance(this.scene);
-        this.material2.setAmbient(0.1, 0.1, 0.1, 1);
-        this.material2.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.material2.setSpecular(0.1, 0.1, 0.1, 1);
-        this.material2.setShininess(10.0);
-        this.material2.setTexture(trunkTexture);
+        this.trunk_material = new CGFappearance(this.scene);
+        this.trunk_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.trunk_material.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.trunk_material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.trunk_material.setShininess(10.0);
+        this.trunk_material.setTexture(trunkTexture);
 
         this.initBuffers();
     }
@@ -53,7 +53,7 @@ class MyTree extends CGFobject {
         //DRAWING THE CYLINDER
         this.scene.pushMatrix();
         this.scene.scale(this.trunkRadius, this.trunkHeight, this.trunkRadius);
-        this.material2.apply();
+        this.trunk_material.apply();
         if(this.scene.wrapTextures)
         	this.wrap_cylinder.display();
         else
@@ -66,7 +66,7 @@ class MyTree extends CGFobject {
         this.scene.translate(0, this.trunkHeight, 0);
         this.scene.pushMatrix();
         this.scene.scale(this.treeTopRadius, this.treeTopHeight, this.treeTopRadius);
-        this.material1.apply();
+        this.top_material.apply();
         if(this.scene.wrapTextures)
         	this.wrap_cone.display();
         else
