@@ -27,7 +27,8 @@ class MyGarage extends CGFobject {
 	initMaterials(){
 		this.garage_door_texture = new CGFtexture(this.scene, 'images/garage_door.jpg');
 		this.walls_texture = new CGFtexture(this.scene, 'images/wall.jpg');
-
+		this.roof_texture = new CGFtexture(this.scene, 'images/roof.jpg');
+ 	    
 		this.garage_door_material = new CGFappearance(this.scene);
         this.garage_door_material.setAmbient(0, 0, 0, 1.0);
         this.garage_door_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
@@ -42,7 +43,15 @@ class MyGarage extends CGFobject {
         this.walls_material.setSpecular(0.8, 0.8, 0.8, 1.0);
         this.walls_material.setShininess(10.0);
         this.walls_material.setTexture(this.walls_texture);
-       	this.walls_material.setTextureWrap('REPEAT', 'REPEAT');      	
+       	this.walls_material.setTextureWrap('REPEAT', 'REPEAT');   
+
+       	//Roof Material
+        this.roof_material = new CGFappearance(this.scene);
+        this.roof_material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.roof_material.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.roof_material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.roof_material.setShininess(10.0);
+        this.roof_material.setTexture(this.roof_texture);   	
 
 	}
 
@@ -126,13 +135,6 @@ class MyGarage extends CGFobject {
 		this.quad.display();
 		this.scene.popMatrix();
 		
-		//Top Face
-		this.scene.pushMatrix();
-		this.scene.translate(0, 0.5, 0);
-		this.scene.rotate(-Math.PI/2, 1, 0, 0);
-		this.quad.display();
-		this.scene.popMatrix();
-
 		//Top Face Inside
 		this.scene.pushMatrix();
 		this.scene.translate(0, 0.5, 0);
@@ -146,5 +148,14 @@ class MyGarage extends CGFobject {
 		this.scene.rotate(-Math.PI/2, 1, 0, 0);
 		this.quad.display();
 		this.scene.popMatrix();
+
+		//Top Face
+		this.roof_material.apply();
+		this.scene.pushMatrix();
+		this.scene.translate(0, 0.5, 0);
+		this.scene.rotate(-Math.PI/2, 1, 0, 0);
+		this.quad.display();
+		this.scene.popMatrix();
+
 	}
 }
