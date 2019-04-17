@@ -54,6 +54,7 @@ class MyScene extends CGFscene {
         this.timeIDs = { 'Day': 0, 'Night': 1};
         this.garageDoorPosition = 0;
         this.garageDoorIDs = {'Close': 0, 'Open': 1};
+        this.enableFire = true;
 
         //Objects used to draw the scene
         this.unitCubeQuad = new MyUnitCubeQuad(this);
@@ -68,7 +69,7 @@ class MyScene extends CGFscene {
         this.firePit = new MyFirePit(this);
         this.lake = new MyLake(this);
         this.garage = new MyGarage(this);
-        this.road = new MyRoad(this, 10);
+        this.road = new MyRoad(this, 15);
         this.sign = new MySign(this, 'images/sign.jpg');
         this.boat = new MyBoat(this);
         this.car = new MyCar(this);
@@ -88,15 +89,15 @@ class MyScene extends CGFscene {
 
         //Moon
         this.lights[1].setPosition(100, 100, -2, 1);
-        this.lights[1].setDiffuse(0.72, 0.83, 0.87, 1.0);
-        this.lights[1].setSpecular(0.72, 0.83, 0.87, 1.0);
+        this.lights[1].setDiffuse(0.32, 0.43, 0.47, 1.0);
+        this.lights[1].setSpecular(0.32, 0.43, 0.47, 1.0);
         this.lights[1].disable();
         this.lights[1].update();
 
         //Fireplace
         this.lights[2].setPosition(0, 1.1, 10, 1);
-        this.lights[2].setDiffuse(0.96, 0.50, 0.25, 1.0);
-        this.lights[2].setSpecular(0.96, 0.50, 0.25, 1.0);;
+        this.lights[2].setDiffuse(0.36, 0.10, 0.05, 1.0);
+        this.lights[2].setSpecular(0.36, 0.10, 0.05, 1.0);;
         this.lights[2].setLinearAttenuation(0.05);
         this.lights[2].disable();
         this.lights[2].update();
@@ -154,6 +155,18 @@ class MyScene extends CGFscene {
         this.garage.frames_to_change = 30;
     }
 
+    //Function to update the fire light 
+    updateFireLight(){
+        if(this.enableFire){
+            this.lights[2].enable();
+        }
+        else{
+            this.lights[2].disable();
+        }
+        
+        this.lights[2].update();
+    }
+
 
     display() {
         // ---- BEGIN Background, camera and axis setup
@@ -183,7 +196,7 @@ class MyScene extends CGFscene {
         this.cubeMap_material.apply();
         this.translate(0, 0, 0);
         this.pushMatrix();
-        this.scale(150, 150, 150);
+        this.scale(200, 200, 200);
         this.cubeMap.display();
         this.popMatrix();
         this.popMatrix();
@@ -191,7 +204,7 @@ class MyScene extends CGFscene {
 
         // Grass plane
         this.pushMatrix();
-        this.scale(150, 1, 150);
+        this.scale(200, 1, 200);
         this.pushMatrix();
         this.rotate(-Math.PI/2, 1, 0, 0);
         this.grass_material.apply();
@@ -202,7 +215,7 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.translate(0, -0.05, 0);
         this.pushMatrix();
-        this.scale(100, 1, 100);
+        this.scale(200, 1, 200);
         this.pushMatrix();
         this.rotate(-Math.PI/2, 1, 0, 0);
         this.rotate(Math.PI, 1, 0, 0);
@@ -356,7 +369,7 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.translate(10, 2, 0);
         this.pushMatrix();
-        this.scale(4, 4, 4);
+        this.scale(4, 4, 6);
         this.garage.display();
         this.popMatrix();
         this.popMatrix();

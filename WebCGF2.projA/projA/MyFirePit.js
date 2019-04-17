@@ -135,55 +135,57 @@ class MyFirePit extends CGFobject {
 		this.scene.popMatrix();
 		
 		//Draw fire
-		this.fire_material.apply();
-		
-		this.scene.pushMatrix();
-		this.scene.translate(0, 0.9, 0);
-		this.scene.pushMatrix();
-		this.scene.scale(0.3, 0.5, 0.3);
-		if(this.scene.wrapTextures)
-			this.wrap_fire.display();
-		else
-			this.fire.display();
-		
-		this.scene.popMatrix();
-		this.scene.popMatrix();
+		if(this.scene.enableFire){
+			this.fire_material.apply();
 
-		this.scene.pushMatrix();
-		this.scene.translate(0.2, 0.7, 0.2);
-		this.scene.pushMatrix();
-		this.scene.scale(0.3, 0.5, 0.3);
-		if(this.scene.wrapTextures)
-			this.wrap_fire.display()
-		else
-			this.fire.display();
+			this.scene.pushMatrix();
+			this.scene.translate(0, 0.9, 0);
+			this.scene.pushMatrix();
+			this.scene.scale(0.3, 0.5, 0.3);
+			if(this.scene.wrapTextures)
+				this.wrap_fire.display();
+			else
+				this.fire.display();
 
-		this.scene.popMatrix();
-		this.scene.popMatrix();
+			this.scene.popMatrix();
+			this.scene.popMatrix();
 
-		this.scene.pushMatrix();
-		this.scene.translate(0.2, 0.6, -0.2);
-		this.scene.pushMatrix();
-		this.scene.scale(0.3, 0.5, 0.3);
-		if(this.scene.wrapTextures)
-			this.wrap_fire.display();
-		else
-			this.fire.display();
-		
-		this.scene.popMatrix();
-		this.scene.popMatrix();
+			this.scene.pushMatrix();
+			this.scene.translate(0.2, 0.7, 0.2);
+			this.scene.pushMatrix();
+			this.scene.scale(0.3, 0.5, 0.3);
+			if(this.scene.wrapTextures)
+				this.wrap_fire.display()
+			else
+				this.fire.display();
 
-		this.scene.pushMatrix();
-		this.scene.translate(-0.2, 0.8, 0.25);
-		this.scene.pushMatrix();
-		this.scene.scale(0.3, 0.5, 0.3);
-		if(this.scene.wrapTextures)
-			this.wrap_fire.display();
-		else
-			this.fire.display();
-		
-		this.scene.popMatrix();
-		this.scene.popMatrix();
+			this.scene.popMatrix();
+			this.scene.popMatrix();
+
+			this.scene.pushMatrix();
+			this.scene.translate(0.2, 0.6, -0.2);
+			this.scene.pushMatrix();
+			this.scene.scale(0.3, 0.5, 0.3);
+			if(this.scene.wrapTextures)
+				this.wrap_fire.display();
+			else
+				this.fire.display();
+
+			this.scene.popMatrix();
+			this.scene.popMatrix();
+
+			this.scene.pushMatrix();
+			this.scene.translate(-0.2, 0.8, 0.25);
+			this.scene.pushMatrix();
+			this.scene.scale(0.3, 0.5, 0.3);
+			if(this.scene.wrapTextures)
+				this.wrap_fire.display();
+			else
+				this.fire.display();
+
+			this.scene.popMatrix();
+			this.scene.popMatrix();
+		}
 
     }
 }
