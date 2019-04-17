@@ -22,6 +22,7 @@ serialInclude(['../lib/CGF.js',
                 'MyCylinderInverted.js',
                 'MyLake.js',
                 'MyRoad.js',
+                'MyGarage.js',
 
 main=function()
 {

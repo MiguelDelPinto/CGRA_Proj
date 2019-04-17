@@ -50,6 +50,9 @@ class MyScene extends CGFscene {
         this.wrapTextures = false;
         this.timeOfDay = 0;
         this.timeIDs = { 'Day': 0, 'Night': 1};
+        this.garageDoorPosition = 0;
+        this.garageDoorIDs = {'Close': 0, 'Open': 1};
+
 
         this.unitCubeQuad = new MyUnitCubeQuad(this);
         this.tree = new MyTree(this, 1, 0.34, 1, 1, this.texture2, this.texture1);
@@ -66,6 +69,7 @@ class MyScene extends CGFscene {
         this.cubeMap = new MyCubeMap(this);
         this.firePit = new MyFirePit(this);
         this.lake = new MyLake(this);
+        this.garage = new MyGarage(this);
     }
     initLights() {
 
@@ -132,6 +136,10 @@ class MyScene extends CGFscene {
             this.lights[2].update();
         }
 
+    }
+
+    updateGaragePosition() {
+        this.garage.frames_to_change = 30;
     }
 
 
@@ -316,12 +324,24 @@ class MyScene extends CGFscene {
         this.popMatrix();
         this.popMatrix();
 
+
         // Road
         this.pushMatrix();
         this.translate(0, 0, 25);
         this.pushMatrix();
         this.scale(5, 5, 5);
         this.road.display();
+        this.popMatrix();
+        this.popMatrix();
+
+
+        // Garage
+        this.pushMatrix();
+        this.translate(10, 2, 0);
+        this.pushMatrix();
+        this.scale(4, 4, 4);
+        this.garage.display();
+        this.popMatrix();
         this.popMatrix();
 
 
