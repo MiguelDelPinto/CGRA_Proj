@@ -27,7 +27,7 @@ class MyUnitCubeQuad extends CGFobject {
 
 	initMaterials(){
 		this.side_material = new CGFappearance(this.scene);
-        this.side_material.setAmbient(0.7, 0.7, 0.7, 1.0);
+        this.side_material.setAmbient(1, 1, 1, 1.0);
         this.side_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
         this.side_material.setSpecular(0.8, 0.8, 0.8, 1.0);
         this.side_material.setShininess(10.0);
@@ -39,7 +39,7 @@ class MyUnitCubeQuad extends CGFobject {
 
 
         this.top_material = new CGFappearance(this.scene);
-        this.top_material.setAmbient(0.7, 0.7, 0.7, 1.0);
+        this.top_material.setAmbient(1, 1, 1, 1.0);
         this.top_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
         this.top_material.setSpecular(0.8, 0.8, 0.8, 1.0);
         this.top_material.setShininess(10.0);
@@ -50,7 +50,7 @@ class MyUnitCubeQuad extends CGFobject {
         }
 
         this.bottom_material = new CGFappearance(this.scene);
-        this.bottom_material.setAmbient(0.7, 0.7, 0.7, 1.0);
+        this.bottom_material.setAmbient(1, 1, 1, 1.0);
         this.bottom_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
         this.bottom_material.setSpecular(0.8, 0.8, 0.8, 1.0);
         this.bottom_material.setShininess(10.0);
