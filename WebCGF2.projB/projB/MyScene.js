@@ -19,13 +19,31 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
-        this.setUpdatePeriod(50);
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.plane = new Plane(this, 32);
+        //this.plane = new Plane(this, 32);
+        this.terrain = new MyTerrain(this);
+
+		this.initMaterials();
 
         //Objects connected to MyInterface
+        this.scaleFactor = 50.0;
+
+        this.terrain_shader = new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag");
+    	
+		this.terrain_shader.setUniformsValues({ tex: 1 });
+		this.terrain_shader.setUniformsValues({ uSampler: 1 });
+		this.terrain_shader.setUniformsValues({ uSampler2: 1 });
+		this.terrain_shader.setUniformsValues({ scale: this.scaleFactor });
+
+
+		this.shadersDiv = document.getElementById("shaders");
+		this.vShaderDiv = document.getElementById("vshader");
+		this.fShaderDiv = document.getElementById("fshader");
+
+		
+        this.setUpdatePeriod(50);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -33,6 +51,24 @@ class MyScene extends CGFscene {
         this.lights[0].enable();
         this.lights[0].update();
     }
+
+    onScaleFactorChanged(v) {
+		this.terrain_shader.setUniformsValues({ scale: this.scaleFactor });
+	}
+
+    initMaterials(){
+    	this.terrain_material = new CGFappearance(this);
+		this.terrain_material.setAmbient(0.5, 0.5, 0.5, 1);
+		this.terrain_material.setDiffuse(0.7, 0.7, 0.7, 1);
+		this.terrain_material.setSpecular(0.2, 0.2, 0.2, 1);
+		this.terrain_material.setShininess(100);
+
+		this.terrain_texture = new CGFtexture(this, "images/terrain.jpg");
+		this.terrain_material.setTexture(this.terrain_texture);
+
+		this.heightmap_texture = new CGFtexture(this, "images/heightmap.jpg");
+    }
+
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
     }
@@ -64,10 +100,15 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+		this.setActiveShader(this.terrain_shader);
+		this.terrain_material.apply();
+		this.heightmap_texture.bind(1);
+		
         this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
-        this.plane.display();
+        //this.plane.display();
+        this.terrain.display();
         this.popMatrix();
         // ---- END Primitive drawing section
     }
