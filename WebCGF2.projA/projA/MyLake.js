@@ -28,7 +28,7 @@ class MyLake extends CGFobject {
 
 		//Water material (water - specular material)
 		this.water_material = new CGFappearance(this.scene);
-        this.water_material.setAmbient(0, 0, 0, 1.0);
+        this.water_material.setAmbient(0.5, 0.5, 0.5, 1.0);
         this.water_material.setDiffuse(0.4, 0.4, 0.4, 1.0);
         this.water_material.setSpecular(0.9, 0.9, 0.9, 1.0);
         this.water_material.setShininess(10.0);
@@ -37,7 +37,7 @@ class MyLake extends CGFobject {
 		
 		//Mud material (mud and dirt - diffuse materials)
         this.mud_material = new CGFappearance(this.scene);
-        this.mud_material.setAmbient(0, 0, 0, 1.0);
+        this.mud_material.setAmbient(0.5, 0.5, 0.5, 1.0);
         this.mud_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
         this.mud_material.setSpecular(0.4, 0.4, 0.4, 1.0);
         this.mud_material.setShininess(10.0);
