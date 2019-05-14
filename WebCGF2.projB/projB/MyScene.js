@@ -24,6 +24,7 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         //this.plane = new Plane(this, 32);
         this.terrain = new MyTerrain(this);
+        this.bird = new MyBird(this);
 
 		this.initMaterials();
 
@@ -109,6 +110,12 @@ class MyScene extends CGFscene {
         this.scale(60, 60, 1);
         //this.plane.display();
         this.terrain.display();
+        this.popMatrix();
+
+
+        this.pushMatrix();
+        this.translate(0, 2, 0);
+        this.bird.display();
         this.popMatrix();
         // ---- END Primitive drawing section
     }
