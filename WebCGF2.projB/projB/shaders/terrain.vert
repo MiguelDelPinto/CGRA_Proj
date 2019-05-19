@@ -19,3 +19,4 @@ void main() {
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0) + vec4(0.0, height, 0.0, 0.0);
 
 	vTextureCoord = aTextureCoord;
+}
