@@ -62,7 +62,11 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
     update(t){
-
+    	
+		this.lastTime = this.lastTime || 0;
+		this.deltaTime = t - this.lastTime;
+		this.lastTime = t;
+		this.bird.update(t, this.deltaTime);
     }
 
     display() {
@@ -83,17 +87,19 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+
+        var FPS = 20;
+        this.setUpdatePeriod(1000/FPS);
 		
         this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
         //this.plane.display();
-        this.terrain.display();
+        //this.terrain.display();
         this.popMatrix();
 
-
         this.pushMatrix();
-        this.translate(0, 2, 0);
+        this.translate(0, 3, 0);
         this.bird.display();
         this.popMatrix();
         // ---- END Primitive drawing section
