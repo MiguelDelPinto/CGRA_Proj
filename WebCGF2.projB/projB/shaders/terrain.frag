@@ -2,14 +2,16 @@
 precision highp float;
 #endif
 
-varying vec2 vTextureCoord;
+varying float heightValue;
 
-uniform sampler2D uSampler;
-uniform sampler2D uSampler2;
+uniform sampler2D colorTex;
 
 void main() {
-	vec4 color = texture2D(uSampler, vTextureCoord+vec2(0.01, 0.01));
-	vec4 filter = texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord);
+	float height = heightValue;
+	
+	float value = 5.0/height;
+
+	vec4 color = texture2D(colorTex, vec2(0, value));
 	
 	gl_FragColor = color;
 }

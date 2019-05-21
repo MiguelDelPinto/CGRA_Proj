@@ -5,7 +5,7 @@
 class MyTerrain extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.plane = new Plane(scene, 50);
+        this.plane = new Plane(scene, 60);
 
         this.initBuffers();
 
@@ -13,9 +13,8 @@ class MyTerrain extends CGFobject {
         this.terrain_shader = new CGFshader(this.scene.gl, "shaders/terrain.vert", "shaders/terrain.frag");
     	
 		this.terrain_shader.setUniformsValues({ tex: 1 });
-		this.terrain_shader.setUniformsValues({ uSampler: 1 });
-		this.terrain_shader.setUniformsValues({ uSampler2: 1 });
-		this.terrain_shader.setUniformsValues({ scale: this.scene.scaleFactor || 50 });
+		this.terrain_shader.setUniformsValues({ colorTex: 2});
+		this.terrain_shader.setUniformsValues({ scale: this.scene.scaleFactor || 40.0 });
 		
 		this.initMaterials();
     }
@@ -44,17 +43,23 @@ class MyTerrain extends CGFobject {
 		this.terrain_material.setTexture(this.terrain_texture);
 
 		this.heightmap_texture = new CGFtexture(this.scene, "images/heightmap.jpg");
+
+		this.altimetry_texture = new CGFtexture(this.scene, "images/altimetry.png");
     }
 
 
     display() {
-
+		
 		this.scene.setActiveShader(this.terrain_shader);
 
 		this.terrain_material.apply();
 		this.heightmap_texture.bind(1);
-
+		this.altimetry_texture.bind(2);
+		
+		this.scene.pushMatrix();
+		this.scene.scale(60, 60, 1);
 		this.plane.display();
+		this.scene.popMatrix();
 
 		this.scene.setActiveShader(this.scene.defaultShader);
     }
