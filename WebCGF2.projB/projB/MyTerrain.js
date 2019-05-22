@@ -12,6 +12,7 @@ class MyTerrain extends CGFobject {
 
         this.terrain_shader = new CGFshader(this.scene.gl, "shaders/terrain.vert", "shaders/terrain.frag");
     	
+		this.terrain_shader.setUniformsValues({ uSampler: 1 });
 		this.terrain_shader.setUniformsValues({ tex: 1 });
 		this.terrain_shader.setUniformsValues({ colorTex: 2});
 		this.terrain_shader.setUniformsValues({ scale: this.scene.scaleFactor || 40.0 });

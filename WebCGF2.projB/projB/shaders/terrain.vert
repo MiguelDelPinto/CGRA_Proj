@@ -12,6 +12,7 @@ uniform sampler2D colorTex;
 uniform float scale;
 
 varying float heightValue;
+varying vec2 vTextureCoord;
 
 void main() {
 	vec4 textureHeight = texture2D(tex, aTextureCoord);
@@ -25,4 +26,5 @@ void main() {
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0) + vec4(0.0, height, 0.0, 0.0);
 	
 	heightValue = height;
+	vTextureCoord = aTextureCoord;
 }
