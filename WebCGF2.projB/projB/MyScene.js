@@ -29,7 +29,7 @@ class MyScene extends CGFscene {
 		this.initMaterials();
 
         //Objects connected to MyInterface
-        this.scaleFactor = 40.0;
+        this.scaleFactor = 20.0;
 
 		this.shadersDiv = document.getElementById("shaders");
 		this.vShaderDiv = document.getElementById("vshader");
@@ -94,7 +94,7 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         //this.plane.display();
-        //this.terrain.display();
+        this.terrain.display();
         this.popMatrix();
 
         this.pushMatrix();

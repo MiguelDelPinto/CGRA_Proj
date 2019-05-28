@@ -17,14 +17,10 @@ varying vec2 vTextureCoord;
 void main() {
 	vec4 textureHeight = texture2D(tex, aTextureCoord);
 
-	float height = textureHeight.y*scale;
-	
-	if(aTextureCoord.x >= 1.0/3.0 && aTextureCoord.x <= 2.0/3.0 && aTextureCoord.y >= 1.0/3.0 && aTextureCoord.y <= 2.0/3.0){
-		height = 0.0;
-	}
+	vec3 offset = textureHeight.y*aVertexNormal*scale;
 
-	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0) + vec4(0.0, height, 0.0, 0.0);
+	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition+offset, 1.0);
 	
-	heightValue = height;
+	heightValue = offset.z;
 	vTextureCoord = aTextureCoord;
 }

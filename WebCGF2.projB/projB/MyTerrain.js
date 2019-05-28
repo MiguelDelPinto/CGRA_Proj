@@ -15,7 +15,7 @@ class MyTerrain extends CGFobject {
 		this.terrain_shader.setUniformsValues({ uSampler: 1 });
 		this.terrain_shader.setUniformsValues({ tex: 1 });
 		this.terrain_shader.setUniformsValues({ colorTex: 2});
-		this.terrain_shader.setUniformsValues({ scale: this.scene.scaleFactor || 40.0 });
+		this.terrain_shader.setUniformsValues({ scale: this.scene.scaleFactor || 20.0 });
 		
 		this.initMaterials();
     }
@@ -50,8 +50,7 @@ class MyTerrain extends CGFobject {
 
 
     display() {
-		
-		this.scene.setActiveShader(this.terrain_shader);
+    	this.scene.setActiveShader(this.terrain_shader);
 
 		this.terrain_material.apply();
 		this.heightmap_texture.bind(1);
