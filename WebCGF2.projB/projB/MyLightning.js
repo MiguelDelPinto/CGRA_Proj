@@ -11,18 +11,13 @@ class MyLightning extends MyLSystem {
         this.ruleF = "FF";
         this.ruleX = "F[-X][X]F[-X]+FX";   
 
-        /*this.ruleX_1 = "F[-X][X]F[-X]+X";
-        this.ruleX_2 = "F[-X][X]+X";
-        this.ruleX_3 = "F[+X]-X";
-        this.ruleX_4 = "F[/X][X]F[\\\\X]+X";
-        this.ruleX_5 = "F[\\X][X]/X";
-        this.ruleX_6 = "F[/X]\\X";
-        this.ruleX_7 = "F[^X][X]F[&X]^X";
-        this.ruleX_8 = "F[^X]&X";
-        this.ruleX_9 = "F[&X]^X";*/
+        this.ruleX_1 = "F[-X][X]F[-X]F+FXF";
+        this.ruleX_2 = "F[-X][X]-FXF[-X][X]F";
         this.angle = 25.0;
         this.iterations = 3;
         this.scaleFactor = 0.5;
+
+        this.depth = 0;
 
         this.doGenerate();
     }
@@ -51,16 +46,10 @@ class MyLightning extends MyLSystem {
                 this.axiom,
                 {
                     "F": [ this.ruleF ],
-                    "X": [ this.ruleX
-                    	  /*this.ruleX_1, 
-                           this.ruleX_2, 
-                           this.ruleX_3, 
-                           this.ruleX_4,
-                           this.ruleX_5, 
-                           this.ruleX_6, 
-                           this.ruleX_7,
-                           this.ruleX_8,  
-                           this.rukeX_9,*/ ]
+                    "X": [ this.ruleX,
+                    	   this.ruleX_1, 
+                           this.ruleX_2
+                         ]
                 },
                 this.angle,
                 this.iterations,
@@ -68,7 +57,11 @@ class MyLightning extends MyLSystem {
             );
         }
 
-        display(){
+    update(t){
+
+    }
+
+    display(){
         this.scene.pushMatrix();
         this.scene.scale(this.scale, this.scale, this.scale);
 
@@ -116,5 +109,5 @@ class MyLightning extends MyLSystem {
             }
         }
         this.scene.popMatrix();
-        }
+    }
 }
