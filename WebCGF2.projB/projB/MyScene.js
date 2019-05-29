@@ -124,10 +124,7 @@ class MyScene extends CGFscene {
 		this.lastTime = t;
 		this.bird.update(t, this.deltaTime);
 
-		//Start Counting
-		if(this.lightning.isDrawing){
-			this.lightning.update(t);
-		}
+		this.lightning.update(t);
     }
 
     display() {

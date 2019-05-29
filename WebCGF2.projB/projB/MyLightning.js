@@ -63,9 +63,8 @@ class MyLightning extends MyLSystem {
         this.lastTime = t;
         this.deltaTime = 0;
         this.depth = 0;
-        this.iterate();
-        let count = 0;
-        for(let i = 0;  i < this.axiom.length; i++){
+        var count = 0;
+        for(var i = 0;  i < this.axiom.length; i++){
             if(this.axiom[i] == "F" || this.axiom[i] == "X"){
                 count++;
             }
@@ -76,15 +75,16 @@ class MyLightning extends MyLSystem {
     }
 
     update(t){
-		this.deltaTime += t - this.lastTime;
-		if(this.deltaTime > 1000){
-		    this.isDrawing = false;
-		}
-		else{
-            this.lastTime = t;
-		    this.depth = Math.ceil((this.deltaTime*this.max_depth)/1000);
-		}
-
+    	if(this.isDrawing){
+			this.deltaTime += t - this.lastTime;
+			if(this.deltaTime > 1000){
+				this.isDrawing = false;
+			}
+			else{
+				this.lastTime = t;
+				this.depth = Math.ceil((this.deltaTime*this.max_depth)/1000);
+			}
+    	}
     }
 
     display(){
