@@ -14,8 +14,8 @@ void main() {
 	float value = 1.0/height;
 
 
-	vec4 color = texture2D(uSampler, vTextureCoord+vec2(0.01, 0.01));
-	vec4 color1 = texture2D(colorTex, vec2(0, value));
+	vec4 color = texture2D(uSampler, vTextureCoord+vec2(0.01, 0.01))*1.25;
+	vec4 color1 = texture2D(colorTex, vec2(0, value))*1.25;
 	
 	gl_FragColor = color*color1;
 }

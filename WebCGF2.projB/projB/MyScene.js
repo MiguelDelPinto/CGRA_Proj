@@ -26,11 +26,23 @@ class MyScene extends CGFscene {
         //this.plane = new Plane(this, 32);
         this.terrain = new MyTerrain(this);
         this.bird = new MyBird(this);
+        this.nest = new MyNest(this);
+
+        //Initialize tree branches
+        this.treeBranch = new MyTreeBranch(this);
+		const numBranches = Math.random() * (6 - 4) + 4;
+        this.treeBranches = [];
+        for(var i = 0; i < numBranches; i++){
+        	this.treeBranches.push(this.treeBranch);
+        }
+
+        //Lightning 
+        this.lightning = new MyLightning(this);
 
 		this.initMaterials();
 
         //Objects connected to MyInterface
-        this.scaleFactor = 20.0;
+        this.scaleFactor = 10.0;
 
 		this.shadersDiv = document.getElementById("shaders");
 		this.vShaderDiv = document.getElementById("vshader");
@@ -48,7 +60,7 @@ class MyScene extends CGFscene {
     }
 
     onScaleFactorChanged(v) {
-    	this.terrain.onScaleFactorChanged(v);
+    	//this.terrain.onScaleFactorChanged(v);
 	}
 
     initMaterials(){
@@ -129,7 +141,7 @@ class MyScene extends CGFscene {
         var FPS = 20;
         this.setUpdatePeriod(1000/FPS);
 		
-        this.pushMatrix();
+        /*this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         //this.plane.display();
         //this.terrain.display();
@@ -139,6 +151,30 @@ class MyScene extends CGFscene {
         this.translate(0, 3, 0);
         this.bird.display();
         this.popMatrix();
+
+        //DISPLAY BRANCHES
+        this.pushMatrix();
+        this.translate(0, 4.5, 0);
+        this.pushMatrix();
+        const translatePosition = [2.5, 2.5];
+        for(var i = 0; i < this.treeBranches.length; i++){
+        	this.pushMatrix();
+        	this.translate(translatePosition[0]*i-5, 0, translatePosition[1]*i-5);
+        	this.pushMatrix();
+			this.rotate(Math.PI/2, 0, 0, 1);
+        	this.treeBranches[i].display();
+        	this.popMatrix();
+        	this.popMatrix();
+        }
+        this.popMatrix();
+        this.popMatrix();
+		
+		this.pushMatrix();
+		this.translate(5, 4.5, -5);
+		this.nest.display();
+		this.popMatrix();*/
+
+		this.lightning.display();
         // ---- END Primitive drawing section
     }
 }
