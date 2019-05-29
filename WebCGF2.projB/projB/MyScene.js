@@ -74,11 +74,13 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
     update(t){
-    	
 		this.lastTime = this.lastTime || 0;
 		this.deltaTime = t - this.lastTime;
 		this.lastTime = t;
 		this.bird.update(t, this.deltaTime);
+
+		//Start Counting
+		this.lightning.update(t);
     }
 
     display() {

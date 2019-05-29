@@ -18,6 +18,7 @@ class MyLightning extends MyLSystem {
         this.scaleFactor = 0.5;
 
         this.depth = 0;
+        this.max_depth = 5;
 
         this.doGenerate();
     }
@@ -57,8 +58,15 @@ class MyLightning extends MyLSystem {
             );
         }
 
-    update(t){
-
+    update(t, startCounting){
+        if(startCounting){
+            this.lastTime = 0;   
+        }
+        this.lastTime = this.lastTime || 0;
+		this.deltaTime = t - this.lastTime;
+		this.lastTime = t;
+		this.depth = Math.ceil((this.deltaTime*this.max_depth)/100);
+		//TODO Calculate max_depth
     }
 
     display(){
