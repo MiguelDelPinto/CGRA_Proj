@@ -23,14 +23,14 @@ class MyNest extends CGFobject {
     }
 
     initMaterials() {
-        this.trunk_material = new CGFappearance(this.scene);
-		this.trunk_material.setAmbient(0.5, 0.5, 0.5, 1);
-		this.trunk_material.setDiffuse(0.7, 0.7, 0.7, 1);
-		this.trunk_material.setSpecular(0.2, 0.2, 0.2, 1);
-		this.trunk_material.setShininess(100);
+        this.nest_material = new CGFappearance(this.scene);
+		this.nest_material.setAmbient(0.5, 0.5, 0.5, 1);
+		this.nest_material.setDiffuse(0.7, 0.7, 0.7, 1);
+		this.nest_material.setSpecular(0.2, 0.2, 0.2, 1);
+		this.nest_material.setShininess(100);
 
-		this.trunk_texture = new CGFtexture(this.scene, "images/nest.jpg");
-		this.trunk_material.setTexture(this.trunk_texture); 
+		this.nest_texture = new CGFtexture(this.scene, "images/nest.jpg");
+		this.nest_material.setTexture(this.nest_texture); 
 	}
 
     display() {

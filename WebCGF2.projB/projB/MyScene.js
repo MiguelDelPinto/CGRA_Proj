@@ -35,6 +35,9 @@ class MyScene extends CGFscene {
         	this.treeBranches.push(this.treeBranch);
         }
 
+        //Lightning 
+        this.lightning = new MyLightning(this);
+
 		this.initMaterials();
 
         //Objects connected to MyInterface
@@ -100,7 +103,7 @@ class MyScene extends CGFscene {
         var FPS = 20;
         this.setUpdatePeriod(1000/FPS);
 		
-        this.pushMatrix();
+        /*this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         //this.plane.display();
         this.terrain.display();
@@ -131,7 +134,9 @@ class MyScene extends CGFscene {
 		this.pushMatrix();
 		this.translate(5, 4.5, -5);
 		this.nest.display();
-		this.popMatrix();
+		this.popMatrix();*/
+
+		this.lightning.display();
         // ---- END Primitive drawing section
     }
 }
