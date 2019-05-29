@@ -17,14 +17,34 @@ class MyBird extends CGFobject {
 		this.y = 0;
 		this.z = 0;
 
+		this.velocity = 0;
+		this.vMax = 0.1;
+		this.vMin = -0.1;
+
+		this.yy_angle = 0;
+
 		this.counter = 0;
 
 		this.initMaterials();
         this.initBuffers();
     }
 
+    turn(v) {
+		this.yy_angle += v;
+    }
+
+    accelerate(v) {
+    	var new_velocity = this.velocity + v;
+    	
+    	if(new_velocity < this.vMax && new_velocity > this.vMin)
+    		this.velocity = new_velocity;
+    }
+
     update(t, deltatime) {
     	//this.counter += deltatime;
+
+    	this.x += this.velocity*deltatime * Math.sin(this.yy_angle);
+    	this.z += this.velocity*deltatime * Math.cos(this.yy_angle);
     	
     	this.y = 0.5*Math.sin(t*2*Math.PI/1000);
     }
@@ -62,7 +82,10 @@ class MyBird extends CGFobject {
     display() {
 
     	this.scene.pushMatrix();
-			this.scene.translate(0, this.y, 0);
+    		this.scene.pushMatrix();
+				this.scene.rotate(0, 1, 0, this.yy_angle);
+			this.scene.popMatrix();
+			this.scene.translate(this.x, this.y, this.z);
 
 			//Drawing the head
 			this.scene.pushMatrix();				//head	

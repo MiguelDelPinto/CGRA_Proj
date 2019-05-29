@@ -6,6 +6,7 @@ class MyScene extends CGFscene {
     constructor() {
         super();
     }
+
     init(application) {
         super.init(application);
         this.initCameras();
@@ -50,6 +51,7 @@ class MyScene extends CGFscene {
 		
         this.setUpdatePeriod(50);
     }
+
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -67,20 +69,65 @@ class MyScene extends CGFscene {
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
     }
+
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+
+    checkKeys() {
+		var text="Keys pressed: ";
+		var keysPressed=false;
+		
+		// Check for key codes e.g. in https://keycode.info/
+		if (this.gui.isKeyPressed("KeyW")) {
+			this.bird.accelerate(0.001);
+			text+=" W ";
+			keysPressed=true;
+		}
+		
+		if (this.gui.isKeyPressed("KeyS")) {
+			this.bird.accelerate(-0.001);			
+			text+=" S ";
+			keysPressed=true;
+		}
+
+		if (this.gui.isKeyPressed("KeyD")) {
+			this.bird.turn(-Math.PI/20);
+			text+=" D ";
+			keysPressed =true;
+		}
+
+		if (this.gui.isKeyPressed("KeyA")) {
+			this.bird.turn(Math.PI/20);
+			text+=" D ";
+			keysPressed =true;
+		}
+
+		if(this.gui.isKeyPressed("KeyL")){
+			this.lightning.startAnimation();
+			text+=" L ";
+			keysPressed = true;
+		}
+		
+		if (keysPressed)
+		console.log(text);
+	}
+
     update(t){
+    	this.checkKeys();
+
 		this.lastTime = this.lastTime || 0;
 		this.deltaTime = t - this.lastTime;
 		this.lastTime = t;
 		this.bird.update(t, this.deltaTime);
 
 		//Start Counting
-		this.lightning.update(t);
+		if(this.lightning.isDrawing){
+			this.lightning.update(t);
+		}
     }
 
     display() {
@@ -108,7 +155,7 @@ class MyScene extends CGFscene {
         /*this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         //this.plane.display();
-        this.terrain.display();
+        //this.terrain.display();
         this.popMatrix();
 
         this.pushMatrix();
@@ -137,8 +184,9 @@ class MyScene extends CGFscene {
 		this.translate(5, 4.5, -5);
 		this.nest.display();
 		this.popMatrix();*/
-
-		this.lightning.display();
+		if(this.lightning.isDrawing){
+			this.lightning.display();
+		}
         // ---- END Primitive drawing section
     }
 }
