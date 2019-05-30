@@ -27,6 +27,7 @@ class MyScene extends CGFscene {
         this.terrain = new MyTerrain(this);
         this.bird = new MyBird(this);
         this.nest = new MyNest(this);
+        this.sphere = new MySphere(this, 1, 15, 15);
 
         //Initialize tree branches
         this.treeBranch = new MyTreeBranch(this);
@@ -146,12 +147,16 @@ class MyScene extends CGFscene {
         //this.plane.display();
         //this.terrain.display();
         this.popMatrix();
+		*/
 
         this.pushMatrix();
         this.translate(0, 3, 0);
         this.bird.display();
         this.popMatrix();
 
+        this.sphere.display();
+
+		/*
         //DISPLAY BRANCHES
         this.pushMatrix();
         this.translate(0, 4.5, 0);
@@ -174,7 +179,7 @@ class MyScene extends CGFscene {
 		this.nest.display();
 		this.popMatrix();*/
 
-		this.lightning.display();
+		//this.lightning.display();
         // ---- END Primitive drawing section
     }
 }

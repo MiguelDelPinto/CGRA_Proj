@@ -82,10 +82,9 @@ class MyBird extends CGFobject {
     display() {
 
     	this.scene.pushMatrix();
-    		this.scene.pushMatrix();
-				this.scene.rotate(0, 1, 0, this.yy_angle);
-			this.scene.popMatrix();
+    	
 			this.scene.translate(this.x, this.y, this.z);
+			this.scene.rotate(this.yy_angle, 0, 1, 0);
 
 			//Drawing the head
 			this.scene.pushMatrix();				//head	

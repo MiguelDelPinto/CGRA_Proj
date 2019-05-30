@@ -23,6 +23,7 @@ serialInclude(['../lib/CGF.js',
                 'MyCylinderInverted.js',
                 'MyLSystem.js',
                 'MyLightning.js',
+                'MySphere.js',
 
 main=function()
 {
