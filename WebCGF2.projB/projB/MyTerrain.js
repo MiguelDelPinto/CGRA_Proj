@@ -57,8 +57,8 @@ class MyTerrain extends CGFobject {
 		this.altimetry_texture.bind(2);
 		
 		this.scene.pushMatrix();
-		this.scene.scale(60, 60, 1);
-		this.plane.display();
+			this.scene.scale(60, 60, 1);
+			this.plane.display();
 		this.scene.popMatrix();
 
 		this.scene.setActiveShader(this.scene.defaultShader);

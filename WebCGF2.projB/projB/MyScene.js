@@ -113,7 +113,7 @@ class MyScene extends CGFscene {
 
 		if (this.gui.isKeyPressed("KeyA")) {
 			this.bird.turn(Math.PI/20);
-			text+=" D ";
+			text+=" A ";
 			keysPressed =true;
 		}
 
@@ -176,7 +176,7 @@ class MyScene extends CGFscene {
 
         this.pushMatrix();
         this.translate(0, 3, 0);
-        this.bird.display();
+        //this.bird.display();
         this.popMatrix();
 
         this.sphere.display();
@@ -227,33 +227,38 @@ class MyScene extends CGFscene {
 						this.popMatrix();
 					this.popMatrix();
         		this.popMatrix();
-
         	this.popMatrix();
         this.popMatrix();
+
 		
+		//Displays the nest
 		this.pushMatrix();
-		this.translate(5, 4.5, -5);
-		this.nest.display();
+			this.translate(5, 4.5, -5);
+			this.nest.display();
 		this.popMatrix();
 
+
+		//Displays the house
 		this.pushMatrix();
-		this.translate(-5, 4.5, -5);
-		this.pushMatrix();
-		this.scale(1.5, 1.5, 1.5);
-		this.pushMatrix();
-		//this.rotate(Math.PI/2, 0, 1, 0);
-		this.house.display();
-		this.popMatrix();
-		this.popMatrix();
+			this.translate(-5, 4.5, -5);
+			this.pushMatrix();
+				this.scale(1.5, 1.5, 1.5);
+				this.pushMatrix();
+					//this.rotate(Math.PI/2, 0, 1, 0);
+					this.house.display();
+				this.popMatrix();
+			this.popMatrix();
 		this.popMatrix();
 
+
+		//Displays the lightning
 		if(this.lightning.isDrawing){
 			this.pushMatrix();
-			this.translate(this.lightning.lightning_position[0], 30, this.lightning.lightning_position[1]);
-			this.pushMatrix();
-			this.rotate(Math.PI, 1, 0, 0);
-			this.lightning.display();
-			this.popMatrix();
+				this.translate(this.lightning.lightning_position[0], 30, this.lightning.lightning_position[1]);
+				this.pushMatrix();
+					this.rotate(Math.PI, 1, 0, 0);
+					this.lightning.display();
+				this.popMatrix();
 			this.popMatrix();
 		}
 		
