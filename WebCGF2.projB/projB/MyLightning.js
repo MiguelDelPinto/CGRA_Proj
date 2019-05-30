@@ -18,6 +18,8 @@ class MyLightning extends MyLSystem {
         this.scaleFactor = 0.5;
 
         this.depth = 0;
+        this.max_depth = 0;
+        this.isDrawing = false;
 
         this.doGenerate();
     }
@@ -57,15 +59,41 @@ class MyLightning extends MyLSystem {
             );
         }
 
-    update(t){
+    startAnimation(t){
+        this.lastTime = t;
+        this.deltaTime = 0;
+        this.depth = 0;
+        var count = 0;
+        for(var i = 0;  i < this.axiom.length; i++){
+            if(this.axiom[i] == "F" || this.axiom[i] == "X"){
+                count++;
+            }
+        }
+        this.max_depth = count;
+        this.isDrawing = true;
+        
+    }
 
+    update(t){
+    	if(this.isDrawing){
+			this.deltaTime += t - this.lastTime;
+			if(this.deltaTime > 1000){
+				this.isDrawing = false;
+			}
+			else{
+				this.lastTime = t;
+				this.depth = Math.ceil((this.deltaTime*this.max_depth)/1000);
+			}
+    	}
     }
 
     display(){
         this.scene.pushMatrix();
         this.scene.scale(this.scale, this.scale, this.scale);
 
+        var num_quads_drawn = 0;
         var i;
+		var num_pushedMatrix = 1;
 
         // percorre a cadeia de caracteres
         for (i=0; i<this.axiom.length; ++i){
@@ -85,11 +113,13 @@ class MyLightning extends MyLSystem {
                 case "[":
                     // push
                     this.scene.pushMatrix();
+                    num_pushedMatrix++;
                     break;
 
                 case "]":
                     // pop
                     this.scene.popMatrix();
+                    num_pushedMatrix--;
                     break;
 
                 // processa primitiva definida na gramatica, se existir
@@ -102,10 +132,18 @@ class MyLightning extends MyLSystem {
                         this.scene.scale(0.25, 1.5, 1);
                         this.lightning_material.apply();
                         primitive.display();
+                        num_quads_drawn++;
                         this.scene.popMatrix();
                         this.scene.translate(0, 1, 0);
                     }
                     break;
+            }
+            if(num_quads_drawn == this.depth){
+             	while(num_pushedMatrix > 0){
+             		num_pushedMatrix--;
+             		this.scene.popMatrix();
+             	}
+                break;
             }
         }
         this.scene.popMatrix();

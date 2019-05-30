@@ -106,6 +106,12 @@ class MyScene extends CGFscene {
 			text+=" D ";
 			keysPressed =true;
 		}
+
+		if(this.gui.isKeyPressed("KeyL")){
+			this.lightning.startAnimation();
+			text+=" L ";
+			keysPressed = true;
+		}
 		
 		if (keysPressed)
 		console.log(text);
@@ -118,6 +124,8 @@ class MyScene extends CGFscene {
 		this.deltaTime = t - this.lastTime;
 		this.lastTime = t;
 		this.bird.update(t, this.deltaTime);
+
+		this.lightning.update(t);
     }
 
     display() {
@@ -179,7 +187,10 @@ class MyScene extends CGFscene {
 		this.nest.display();
 		this.popMatrix();*/
 
-		//this.lightning.display();
+		if(this.lightning.isDrawing){
+			this.lightning.display();
+		}
+		
         // ---- END Primitive drawing section
     }
 }
