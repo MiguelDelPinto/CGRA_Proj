@@ -20,6 +20,8 @@ class MyLightning extends MyLSystem {
         this.depth = 0;
         this.max_depth = 0;
         this.isDrawing = false;
+        this.deltaTime = 0;
+        this.lastTime = 0;
 
         this.doGenerate();
     }
@@ -76,6 +78,9 @@ class MyLightning extends MyLSystem {
 
     update(t){
     	if(this.isDrawing){
+    		console.log("Delta: "+this.deltaTime);
+    		console.log("T: "+t);
+    		console.log("Last: "+this.lastTime);
 			this.deltaTime += t - this.lastTime;
 			if(this.deltaTime > 1000){
 				this.isDrawing = false;
@@ -93,11 +98,12 @@ class MyLightning extends MyLSystem {
 
         var num_quads_drawn = 0;
         var i;
-		var num_pushedMatrix = 1;
 
         // percorre a cadeia de caracteres
         for (i=0; i<this.axiom.length; ++i){
-
+            if(num_quads_drawn == this.depth){
+                break;
+            }
             // verifica se sao caracteres especiais
             switch(this.axiom[i]){
                 case "+":
@@ -113,14 +119,32 @@ class MyLightning extends MyLSystem {
                 case "[":
                     // push
                     this.scene.pushMatrix();
-                    num_pushedMatrix++;
                     break;
 
                 case "]":
                     // pop
                     this.scene.popMatrix();
-                    num_pushedMatrix--;
                     break;
+
+                case "\\":
+                    // roda no sentido positivo sobre o eixo dos XX
+                    this.scene.rotate(this.angle, 1, 0, 0);
+					break;
+
+                case "/":
+                    // roda no sentido negativo sobre o eixo dos XX
+                    this.scene.rotate(-this.angle, 1, 0, 0);
+					break;
+
+                case "^":
+                    // roda no sentido positivo sobre o eixo dos YY
+                    this.scene.rotate(this.angle, 0, 1, 0);
+					break;
+
+                case "&":
+                    // roda no sentido negativo sobre o eixo dos YY
+                    this.scene.rotate(-this.angle, 0, 1, 0);
+					break;
 
                 // processa primitiva definida na gramatica, se existir
                 default:
@@ -137,13 +161,6 @@ class MyLightning extends MyLSystem {
                         this.scene.translate(0, 1, 0);
                     }
                     break;
-            }
-            if(num_quads_drawn == this.depth){
-             	while(num_pushedMatrix > 0){
-             		num_pushedMatrix--;
-             		this.scene.popMatrix();
-             	}
-                break;
             }
         }
         this.scene.popMatrix();

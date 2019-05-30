@@ -78,7 +78,7 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
 
-    checkKeys() {
+    checkKeys(t) {
 		var text="Keys pressed: ";
 		var keysPressed=false;
 		
@@ -108,7 +108,7 @@ class MyScene extends CGFscene {
 		}
 
 		if(this.gui.isKeyPressed("KeyL")){
-			this.lightning.startAnimation();
+			this.lightning.startAnimation(t);
 			text+=" L ";
 			keysPressed = true;
 		}
@@ -118,7 +118,7 @@ class MyScene extends CGFscene {
 	}
 
     update(t){
-    	this.checkKeys();
+    	this.checkKeys(t);
 
 		this.lastTime = this.lastTime || 0;
 		this.deltaTime = t - this.lastTime;
@@ -150,12 +150,12 @@ class MyScene extends CGFscene {
         var FPS = 20;
         this.setUpdatePeriod(1000/FPS);
 		
-        /*this.pushMatrix();
+        this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         //this.plane.display();
-        //this.terrain.display();
+        this.terrain.display();
         this.popMatrix();
-		*/
+		
 
         this.pushMatrix();
         this.translate(0, 3, 0);
@@ -164,7 +164,7 @@ class MyScene extends CGFscene {
 
         this.sphere.display();
 
-		/*
+		
         //DISPLAY BRANCHES
         this.pushMatrix();
         this.translate(0, 4.5, 0);
@@ -185,7 +185,7 @@ class MyScene extends CGFscene {
 		this.pushMatrix();
 		this.translate(5, 4.5, -5);
 		this.nest.display();
-		this.popMatrix();*/
+		this.popMatrix();
 
 		if(this.lightning.isDrawing){
 			this.lightning.display();

@@ -36,7 +36,7 @@ class MyNest extends CGFobject {
     display() {
         this.scene.pushMatrix();
         this.scene.scale(1, 0.25, 1);
-        this.trunk_material.apply();
+        this.nest_material.apply();
         this.cylinder.display();
         this.cylinder_inverted.display();
         this.scene.popMatrix();
