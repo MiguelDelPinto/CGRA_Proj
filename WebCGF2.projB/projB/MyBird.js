@@ -40,6 +40,14 @@ class MyBird extends CGFobject {
     		this.velocity = new_velocity;
     }
 
+    reset() {
+    	this.x = 0;
+    	this.y = 0;
+    	this.z = 0;
+    	this.velocity = 0;
+    	this.yy_angle = 0;
+    }
+
     update(t, deltatime) {
     	//this.counter += deltatime;
 
@@ -82,7 +90,7 @@ class MyBird extends CGFobject {
     display() {
 
     	this.scene.pushMatrix();
-    	
+
 			this.scene.translate(this.x, this.y, this.z);
 			this.scene.rotate(this.yy_angle, 0, 1, 0);
 
