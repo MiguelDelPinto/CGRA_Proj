@@ -27,11 +27,13 @@ class MyScene extends CGFscene {
         this.terrain = new MyTerrain(this);
         this.bird = new MyBird(this);
         this.nest = new MyNest(this);
+        this.house = new MyHouse(this);
+        this.cube_map = new MyCubeMap(this);
         this.sphere = new MySphere(this, 1, 15, 15);
 
         //Initialize tree branches
         this.treeBranch = new MyTreeBranch(this);
-		const numBranches = Math.random() * (6 - 4) + 4;
+		const numBranches = 4;
         this.treeBranches = [];
         for(var i = 0; i < numBranches; i++){
         	this.treeBranches.push(this.treeBranch);
@@ -60,15 +62,23 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
 
-    onScaleFactorChanged(v) {
+   	/*onScaleFactorChanged(v) {
     	//this.terrain.onScaleFactorChanged(v);
-	}
+	}*/
 
     initMaterials(){
+    	//CubeMap Material
+        this.cubeMap_material = new CGFappearance(this);
+        this.cubeMap_material.setAmbient(0.7, 0.7, 0.7, 1);
+        this.cubeMap_material.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.cubeMap_material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.cubeMap_material.setShininess(10.0);
+        this.cubeMap_material.loadTexture('images/cube_map_day.jpg');   //daytime is default
+        this.cubeMap_material.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(-75, 50, 60), vec3.fromValues(0, 0, 0));
     }
 
     setDefaultAppearance() {
@@ -149,7 +159,13 @@ class MyScene extends CGFscene {
 
         var FPS = 20;
         this.setUpdatePeriod(1000/FPS);
-		
+
+		this.pushMatrix();
+		this.scale(60, 60, 60);
+		this.cubeMap_material.apply();
+		this.cube_map.display();
+		this.popMatrix();
+
         this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         //this.plane.display();
@@ -167,24 +183,67 @@ class MyScene extends CGFscene {
 		
         //DISPLAY BRANCHES
         this.pushMatrix();
-        this.translate(0, 4.5, 0);
-        this.pushMatrix();
-        const translatePosition = [2.5, 2.5];
-        for(var i = 0; i < this.treeBranches.length; i++){
+        	this.translate(0, 4.5, 0);
         	this.pushMatrix();
-        	this.translate(translatePosition[0]*i-5, 0, translatePosition[1]*i-5);
-        	this.pushMatrix();
-			this.rotate(Math.PI/2, 0, 0, 1);
-        	this.treeBranches[i].display();
+        //First Branch
+        		this.pushMatrix();
+					this.translate(-5, 0, 3);
+					this.pushMatrix();
+						this.rotate(Math.PI/2, 0, 0, 1);
+						this.treeBranches[0].display();
+					this.popMatrix();
+				this.popMatrix();
+
+		//Second Branch
+				this.pushMatrix();
+					this.translate(-1, 0, 3);
+					this.pushMatrix();
+						this.rotate(Math.PI/2, 0, 0, 1);
+						this.pushMatrix();
+							this.rotate(Math.PI/2, 1, 0, 0);
+							this.treeBranches[1].display();
+						this.popMatrix();
+					this.popMatrix();
+        		this.popMatrix();
+        
+        //Third Branch
+        		this.pushMatrix();
+					this.translate(5, 0, 3);
+					this.pushMatrix();
+						this.rotate(Math.PI/2, 0, 0, 1);
+						this.treeBranches[2].display();
+					this.popMatrix();
+        		this.popMatrix();
+
+        //Fourth Branch
+        		this.pushMatrix();
+					this.translate(1, 0, -3);
+					this.pushMatrix();
+						this.rotate(Math.PI/2, 0, 0, 1);
+						this.pushMatrix();
+							this.rotate(Math.PI/2, 1, 0, 0);
+							this.treeBranches[3].display();
+						this.popMatrix();
+					this.popMatrix();
+        		this.popMatrix();
+
         	this.popMatrix();
-        	this.popMatrix();
-        }
-        this.popMatrix();
         this.popMatrix();
 		
 		this.pushMatrix();
 		this.translate(5, 4.5, -5);
 		this.nest.display();
+		this.popMatrix();
+
+		this.pushMatrix();
+		this.translate(-5, 4.5, -5);
+		this.pushMatrix();
+		this.scale(1.5, 1.5, 1.5);
+		this.pushMatrix();
+		//this.rotate(Math.PI/2, 0, 1, 0);
+		this.house.display();
+		this.popMatrix();
+		this.popMatrix();
 		this.popMatrix();
 
 		if(this.lightning.isDrawing){
