@@ -162,21 +162,21 @@ class MyScene extends CGFscene {
         this.setUpdatePeriod(1000/FPS);
 
 		this.pushMatrix();
-		this.scale(60, 60, 60);
-		this.cubeMap_material.apply();
-		this.cube_map.display();
+			this.scale(60, 60, 60);
+			this.cubeMap_material.apply();
+			this.cube_map.display();
 		this.popMatrix();
 
         this.pushMatrix();
-        this.rotate(-0.5*Math.PI, 1, 0, 0);
-        //this.plane.display();
-        this.terrain.display();
+        	this.rotate(-0.5*Math.PI, 1, 0, 0);
+        	//this.plane.display();
+        	this.terrain.display();
         this.popMatrix();
 		
 
         this.pushMatrix();
-        this.translate(0, 3, 0);
-        //this.bird.display();
+        	this.translate(0, 3, 0);
+        	this.bird.display();
         this.popMatrix();
 
         this.sphere.display();
