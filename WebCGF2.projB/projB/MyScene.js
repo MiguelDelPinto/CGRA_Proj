@@ -69,7 +69,7 @@ class MyScene extends CGFscene {
     initMaterials(){
     	//CubeMap Material
         this.cubeMap_material = new CGFappearance(this);
-        this.cubeMap_material.setAmbient(0.7, 0.7, 0.7, 1);
+        this.cubeMap_material.setAmbient(0.9, 0.9, 0.9, 1);
         this.cubeMap_material.setDiffuse(0.9, 0.9, 0.9, 1);
         this.cubeMap_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.cubeMap_material.setShininess(10.0);
@@ -118,7 +118,8 @@ class MyScene extends CGFscene {
 		}
 
 		if(this.gui.isKeyPressed("KeyL")){
-			this.lightning.startAnimation(t);
+			this.lightning.startAnimation(t);			
+        	
 			text+=" L ";
 			keysPressed = true;
 		}
@@ -247,7 +248,13 @@ class MyScene extends CGFscene {
 		this.popMatrix();
 
 		if(this.lightning.isDrawing){
+			this.pushMatrix();
+			this.translate(this.lightning.lightning_position[0], 30, this.lightning.lightning_position[1]);
+			this.pushMatrix();
+			this.rotate(Math.PI, 1, 0, 0);
 			this.lightning.display();
+			this.popMatrix();
+			this.popMatrix();
 		}
 		
         // ---- END Primitive drawing section

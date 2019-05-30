@@ -22,6 +22,8 @@ class MyLightning extends MyLSystem {
         this.isDrawing = false;
         this.deltaTime = 0;
         this.lastTime = 0;
+        this.scale_y = 0;
+        this.lightning_position = [];
 
         this.doGenerate();
     }
@@ -29,8 +31,8 @@ class MyLightning extends MyLSystem {
     initMaterials(){
         this.lightning_material = new CGFappearance(this.scene);
 		this.lightning_material.setAmbient(1.0, 1.0, 1.0, 1);
-		this.lightning_material.setDiffuse(0.9, 0.9, 0.9, 1);
-		this.lightning_material.setSpecular(0.1, 0.1, 0.1, 1);
+		this.lightning_material.setDiffuse(1.0, 1.0, 1.0, 1);
+		this.lightning_material.setSpecular(0.0, 0.0, 0.0, 1);
 		this.lightning_material.setShininess(100);
 
 		this.lightning_texture = new CGFtexture(this.scene, "images/lightning.jpg");
@@ -62,6 +64,9 @@ class MyLightning extends MyLSystem {
         }
 
     startAnimation(t){
+    	if(this.isDrawing)
+    		return;
+
         this.lastTime = t;
         this.deltaTime = 0;
         this.depth = 0;
@@ -73,6 +78,8 @@ class MyLightning extends MyLSystem {
         }
         this.max_depth = count;
         this.isDrawing = true;
+        this.lightning_position = [this.getRandomArbitrary(-30, 30), this.getRandomArbitrary(-30, 30)];
+        this.scale_y = this.getRandomArbitrary(1.5, 3);
         
     }
 
@@ -90,6 +97,11 @@ class MyLightning extends MyLSystem {
 				this.depth = Math.ceil((this.deltaTime*this.max_depth)/1000);
 			}
     	}
+    }
+
+    //Function to aid randomizing the  size of primitives
+    getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
     }
 
     display(){
@@ -153,7 +165,7 @@ class MyLightning extends MyLSystem {
                     if ( primitive )
                     {
                         this.scene.pushMatrix();
-                        this.scene.scale(0.25, 1.5, 1);
+                        this.scene.scale(0.25, this.scale_y, 1);
                         this.lightning_material.apply();
                         primitive.display();
                         num_quads_drawn++;
