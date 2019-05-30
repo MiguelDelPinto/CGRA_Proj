@@ -162,21 +162,21 @@ class MyScene extends CGFscene {
         this.setUpdatePeriod(1000/FPS);
 
 		this.pushMatrix();
-		this.scale(60, 60, 60);
-		this.cubeMap_material.apply();
-		this.cube_map.display();
+			this.scale(60, 60, 60);
+			this.cubeMap_material.apply();
+			this.cube_map.display();
 		this.popMatrix();
 
         this.pushMatrix();
-        this.rotate(-0.5*Math.PI, 1, 0, 0);
-        //this.plane.display();
-        this.terrain.display();
+        	this.rotate(-0.5*Math.PI, 1, 0, 0);
+        	//this.plane.display();
+        	this.terrain.display();
         this.popMatrix();
 		
 
         this.pushMatrix();
-        this.translate(0, 3, 0);
-        this.bird.display();
+        	this.translate(0, 3, 0);
+        	this.bird.display();
         this.popMatrix();
 
         this.sphere.display();
@@ -232,28 +232,28 @@ class MyScene extends CGFscene {
         this.popMatrix();
 		
 		this.pushMatrix();
-		this.translate(5, 4.5, -5);
-		this.nest.display();
+			this.translate(5, 4.5, -5);
+			this.nest.display();
 		this.popMatrix();
 
 		this.pushMatrix();
-		this.translate(-5, 4.5, -5);
-		this.pushMatrix();
-		this.scale(1.5, 1.5, 1.5);
-		this.pushMatrix();
-		//this.rotate(Math.PI/2, 0, 1, 0);
-		this.house.display();
-		this.popMatrix();
-		this.popMatrix();
+			this.translate(-5, 4.5, -5);
+			this.pushMatrix();
+				this.scale(1.5, 1.5, 1.5);
+				this.pushMatrix();
+					//this.rotate(Math.PI/2, 0, 1, 0);
+				this.house.display();
+				this.popMatrix();
+			this.popMatrix();
 		this.popMatrix();
 
 		if(this.lightning.isDrawing){
 			this.pushMatrix();
-			this.translate(this.lightning.lightning_position[0], 30, this.lightning.lightning_position[1]);
-			this.pushMatrix();
-			this.rotate(Math.PI, 1, 0, 0);
-			this.lightning.display();
-			this.popMatrix();
+				this.translate(this.lightning.lightning_position[0], 30, this.lightning.lightning_position[1]);
+				this.pushMatrix();
+					this.rotate(Math.PI, 1, 0, 0);
+					this.lightning.display();
+				this.popMatrix();
 			this.popMatrix();
 		}
 		

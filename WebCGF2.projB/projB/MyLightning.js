@@ -165,10 +165,10 @@ class MyLightning extends MyLSystem {
                     if ( primitive )
                     {
                         this.scene.pushMatrix();
-                        this.scene.scale(0.25, this.scale_y, 1);
-                        this.lightning_material.apply();
-                        primitive.display();
-                        num_quads_drawn++;
+                        	this.scene.scale(0.25, this.scale_y, 1);
+                       		this.lightning_material.apply();
+                       		primitive.display();
+                        	num_quads_drawn++;
                         this.scene.popMatrix();
                         this.scene.translate(0, 1, 0);
                     }
