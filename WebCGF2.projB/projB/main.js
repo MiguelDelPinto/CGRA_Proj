@@ -24,6 +24,9 @@ serialInclude(['../lib/CGF.js',
                 'MyLSystem.js',
                 'MyLightning.js',
                 'MySphere.js',
+                'MyLSPlant.js',
+                'MyBranch.js',
+                'MyLeaf.js',
 
 main=function()
 {

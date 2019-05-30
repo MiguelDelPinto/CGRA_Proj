@@ -30,6 +30,7 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this);
         this.cube_map = new MyCubeMap(this);
         this.sphere = new MySphere(this, 1, 15, 15);
+        this.tree = new MyLSPlant(this);
 
         //Initialize tree branches
         this.treeBranch = new MyTreeBranch(this);
@@ -261,6 +262,14 @@ class MyScene extends CGFscene {
 				this.popMatrix();
 			this.popMatrix();
 		}
+
+
+		//Displays the trees
+		this.pushMatrix();
+			this.translate(0, 4, 0);
+			this.scale(3, 3, 3);
+			this.tree.display();
+		this.popMatrix();
 		
         // ---- END Primitive drawing section
     }
