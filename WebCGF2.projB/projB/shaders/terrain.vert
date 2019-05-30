@@ -11,16 +11,17 @@ uniform sampler2D colorTex;
 
 uniform float scale;
 
-varying float heightValue;
+varying vec4 position;
 varying vec2 vTextureCoord;
 
 void main() {
 	vec4 textureHeight = texture2D(tex, aTextureCoord);
 
 	vec3 offset = textureHeight.y*aVertexNormal*scale;
-
-	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition+offset, 1.0);
 	
-	heightValue = offset.z;
+	position = vec4(aVertexPosition+offset, 1.0);
+	
+	gl_Position = uPMatrix * uMVMatrix * position;
+	
 	vTextureCoord = aTextureCoord;
 }
