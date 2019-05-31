@@ -70,6 +70,8 @@ class MyLightning extends MyLSystem {
         this.lastTime = t;
         this.deltaTime = 0;
         this.depth = 0;
+        this.axiom = "X";
+        this.iterate();
         var count = 0;
         for(var i = 0;  i < this.axiom.length; i++){
             if(this.axiom[i] == "F" || this.axiom[i] == "X"){
@@ -105,11 +107,16 @@ class MyLightning extends MyLSystem {
         this.scene.scale(this.scale, this.scale, this.scale);
 
         var num_quads_drawn = 0;
+        var num_push = 0;
         var i;
 
         // percorre a cadeia de caracteres
         for (i=0; i<this.axiom.length; ++i){
             if(num_quads_drawn == this.depth){
+            	while(num_push > 0){
+					this.scene.popMatrix();
+            		num_push--;
+            	}
                 break;
             }
             // verifica se sao caracteres especiais
@@ -127,11 +134,13 @@ class MyLightning extends MyLSystem {
                 case "[":
                     // push
                     this.scene.pushMatrix();
+                    num_push++;
                     break;
 
                 case "]":
                     // pop
                     this.scene.popMatrix();
+                    num_push--;
                     break;
 
                 case "\\":

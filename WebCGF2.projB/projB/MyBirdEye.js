@@ -23,7 +23,7 @@ class MyBirdEye extends CGFobject {
         this.white_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
         this.white_material.setSpecular(0.8, 0.8, 0.8, 1.0);
         this.white_material.setShininess(10.0);   
-		this.white_material.loadTexture('images()white.pgn');
+		this.white_material.loadTexture('images/white.png');
 		this.white_material.setTextureWrap('REPEAT', 'REPEAT');
     }
 
