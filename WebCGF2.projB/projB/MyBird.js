@@ -22,6 +22,9 @@ class MyBird extends CGFobject {
 
 		this.yy_angle = 0;
 
+		this.wingAngle = 0;
+		this.wingVariation = 0.05;
+
 		this.counter = 0;
 
 		this.initMaterials();
@@ -55,10 +58,16 @@ class MyBird extends CGFobject {
     update(t, deltatime) {
     	//this.counter += deltatime;
 
+		//Updates the position of the bird
     	this.x += this.velocity*deltatime * Math.sin(this.yy_angle);
-    	this.z += this.velocity*deltatime * Math.cos(this.yy_angle);
-    	
+    	this.z += this.velocity*deltatime * Math.cos(this.yy_angle);	
     	this.y = 0.5*Math.sin(t*2*Math.PI/1000);
+
+    	//Updates the angle of the wing
+    	if(this.wingAngle > Math.PI/6 || this.wingAngle < -Math.PI/9)
+    		this.wingVariation *= -1;
+    	
+    	this.wingAngle += (this.velocity*400 || 1) * this.wingVariation;
     }
     
     initBuffers() {
@@ -162,6 +171,7 @@ class MyBird extends CGFobject {
 				this.scene.translate(4/5, -5/7, -2/3);
 				this.scene.rotate(Math.PI/6, 0, 1, 0);
 				this.scene.scale(1, 3/4, 1);
+				this.scene.rotate(this.wingAngle, 0, 0, 1);
 				this.wing_material.apply();
 				this.wing.display();
 			this.scene.popMatrix();
@@ -171,6 +181,7 @@ class MyBird extends CGFobject {
 				this.scene.translate(4/5, -5/7, -2/3);
 				this.scene.rotate(Math.PI/6, 0, 1, 0);
 				this.scene.scale(1, 3/4, -1);
+				this.scene.rotate(this.wingAngle, 0, 0, 1);
 				this.wing_material.apply();
 				this.wing.display();
 			this.scene.popMatrix();
