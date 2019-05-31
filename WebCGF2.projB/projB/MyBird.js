@@ -67,7 +67,10 @@ class MyBird extends CGFobject {
     	if(this.wingAngle > Math.PI/6 || this.wingAngle < -Math.PI/9)
     		this.wingVariation *= -1;
     	
-    	this.wingAngle += (this.velocity*400 || 1) * this.wingVariation;
+    	if(this.velocity < 0.002 && this.velocity > -0.002)
+    		this.wingAngle += this.wingVariation;
+    	else
+    		this.wingAngle += this.velocity*400 * this.wingVariation;
     }
     
     initBuffers() {
