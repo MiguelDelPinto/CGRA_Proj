@@ -21,7 +21,7 @@ class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
 
-        //Initialize scene objects
+        //Initializes some scene objects
         this.axis = new CGFaxis(this);
         //this.plane = new Plane(this, 32);
         this.terrain = new MyTerrain(this);
@@ -30,8 +30,9 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this);
         this.cube_map = new MyCubeMap(this);
         this.sphere = new MySphere(this, 1, 15, 15);
+        this.tree = new MyLSPlant(this);
 
-        //Initialize tree branches
+        //Initializes the tree branches
         this.treeBranch = new MyTreeBranch(this);
 		const numBranches = 4;
         this.treeBranches = [];
@@ -39,9 +40,10 @@ class MyScene extends CGFscene {
         	this.treeBranches.push(this.treeBranch);
         }
 
-        //Lightning 
+        //Initializes the lightning 
         this.lightning = new MyLightning(this);
 
+		//Initializes the materials
 		this.initMaterials();
 
         //Objects connected to MyInterface
@@ -92,31 +94,42 @@ class MyScene extends CGFscene {
 		var text="Keys pressed: ";
 		var keysPressed=false;
 		
-		// Check for key codes e.g. in https://keycode.info/
+		//Accelerates the bird
 		if (this.gui.isKeyPressed("KeyW")) {
 			this.bird.accelerate(0.001);
 			text+=" W ";
 			keysPressed=true;
 		}
 		
+		//Decelerates the bird
 		if (this.gui.isKeyPressed("KeyS")) {
 			this.bird.accelerate(-0.001);			
 			text+=" S ";
 			keysPressed=true;
 		}
 
+		//Turns the bird to the right
 		if (this.gui.isKeyPressed("KeyD")) {
 			this.bird.turn(-Math.PI/20);
 			text+=" D ";
 			keysPressed =true;
 		}
 
+		//Turns the bird to the left
 		if (this.gui.isKeyPressed("KeyA")) {
 			this.bird.turn(Math.PI/20);
-			text+=" D ";
+			text+=" A ";
 			keysPressed =true;
 		}
 
+		//Resets the position and movement of the bird
+		if (this.gui.isKeyPressed("KeyR")) {
+			this.bird.reset();
+			text+=" R ";
+			keysPressed =true;
+		}
+
+		//Displays a lightning strike
 		if(this.gui.isKeyPressed("KeyL")){
 			this.lightning.startAnimation(t);			
         	
@@ -156,17 +169,22 @@ class MyScene extends CGFscene {
         //Apply default appearance
         this.setDefaultAppearance();
 
+        //Some display variables
+        var FPS = 40;
+        this.setUpdatePeriod(1000/FPS);
+        
+
         // ---- BEGIN Primitive drawing section
 
-        var FPS = 20;
-        this.setUpdatePeriod(1000/FPS);
-
+		//Drawing the cube map
 		this.pushMatrix();
 			this.scale(60, 60, 60);
 			this.cubeMap_material.apply();
 			this.cube_map.display();
 		this.popMatrix();
 
+
+		//Drawing the terrain
         this.pushMatrix();
         	this.rotate(-0.5*Math.PI, 1, 0, 0);
         	//this.plane.display();
@@ -174,19 +192,19 @@ class MyScene extends CGFscene {
         this.popMatrix();
 		
 
+		//Drawing the bird
         this.pushMatrix();
-        	this.translate(0, 3, 0);
+        	this.translate(0, 14, 0);
         	this.bird.display();
         this.popMatrix();
 
-        this.sphere.display();
-
 		
-        //DISPLAY BRANCHES
+        //Drawing the branches
         this.pushMatrix();
         	this.translate(0, 4.5, 0);
         	this.pushMatrix();
-        //First Branch
+        		
+        		//First Branch
         		this.pushMatrix();
 					this.translate(-5, 0, 3);
 					this.pushMatrix();
@@ -195,7 +213,7 @@ class MyScene extends CGFscene {
 					this.popMatrix();
 				this.popMatrix();
 
-		//Second Branch
+				//Second Branch
 				this.pushMatrix();
 					this.translate(-1, 0, 3);
 					this.pushMatrix();
@@ -207,7 +225,7 @@ class MyScene extends CGFscene {
 					this.popMatrix();
         		this.popMatrix();
         
-        //Third Branch
+        		//Third Branch
         		this.pushMatrix();
 					this.translate(5, 0, 3);
 					this.pushMatrix();
@@ -216,7 +234,7 @@ class MyScene extends CGFscene {
 					this.popMatrix();
         		this.popMatrix();
 
-        //Fourth Branch
+        		//Fourth Branch
         		this.pushMatrix();
 					this.translate(1, 0, -3);
 					this.pushMatrix();
@@ -227,26 +245,31 @@ class MyScene extends CGFscene {
 						this.popMatrix();
 					this.popMatrix();
         		this.popMatrix();
-
         	this.popMatrix();
         this.popMatrix();
+
 		
+		//Drawing the nest
 		this.pushMatrix();
 			this.translate(5, 4.5, -5);
 			this.nest.display();
 		this.popMatrix();
 
+
+		//Drawing the house
 		this.pushMatrix();
 			this.translate(-5, 4.5, -5);
 			this.pushMatrix();
 				this.scale(1.5, 1.5, 1.5);
 				this.pushMatrix();
 					//this.rotate(Math.PI/2, 0, 1, 0);
-				this.house.display();
+					this.house.display();
 				this.popMatrix();
 			this.popMatrix();
 		this.popMatrix();
 
+
+		//Drawing the lightning
 		if(this.lightning.isDrawing){
 			this.pushMatrix();
 				this.translate(this.lightning.lightning_position[0], 30, this.lightning.lightning_position[1]);
@@ -256,6 +279,14 @@ class MyScene extends CGFscene {
 				this.popMatrix();
 			this.popMatrix();
 		}
+
+
+		//Drawing the trees
+		this.pushMatrix();
+			this.translate(0, 4, 0);
+			this.scale(3, 3, 3);
+			this.tree.display();
+		this.popMatrix();
 		
         // ---- END Primitive drawing section
     }
