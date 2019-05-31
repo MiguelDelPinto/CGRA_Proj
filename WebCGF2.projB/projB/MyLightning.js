@@ -80,16 +80,12 @@ class MyLightning extends MyLSystem {
         this.isDrawing = true;
         this.lightning_position = [this.getRandomArbitrary(-30, 30), this.getRandomArbitrary(-30, 30)];
         this.scale_y = this.getRandomArbitrary(1.5, 3);
-        
     }
 
     update(t){
     	if(this.isDrawing){
-    		console.log("Delta: "+this.deltaTime);
-    		console.log("T: "+t);
-    		console.log("Last: "+this.lastTime);
 			this.deltaTime += t - this.lastTime;
-			if(this.deltaTime > 1000){
+			if(this.depth >= this.max_depth){
 				this.isDrawing = false;
 			}
 			else{
