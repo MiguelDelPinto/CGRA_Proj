@@ -169,13 +169,12 @@ class MyScene extends CGFscene {
         //Apply default appearance
         this.setDefaultAppearance();
 
-        // ---- BEGIN Primitive drawing section
-		
-
-		//Some display variables
-        var FPS = 20;
+        //Some display variables
+        var FPS = 40;
         this.setUpdatePeriod(1000/FPS);
+        
 
+        // ---- BEGIN Primitive drawing section
 
 		//Drawing the cube map
 		this.pushMatrix();
@@ -289,7 +288,6 @@ class MyScene extends CGFscene {
 			this.tree.display();
 		this.popMatrix();
 		
-
         // ---- END Primitive drawing section
     }
 }
