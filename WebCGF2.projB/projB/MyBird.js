@@ -15,7 +15,7 @@ class MyBird extends CGFobject {
         
         //Position variables
         this.x = 0;        
-		this.y = 0;
+		this.y = 8.5;
 		this.z = 0;
 
 		//Velocity variables
@@ -32,7 +32,7 @@ class MyBird extends CGFobject {
 		//Branch catching variables
 		this.ascending = false;
 		this.descending = false;
-		this.catchedBranch = false;
+		this.caughtBranch = false;
 		this.treeBranch = undefined;
 
 		this.counter = 0;
@@ -59,7 +59,7 @@ class MyBird extends CGFobject {
 
     reset() {
     	this.x = 0;
-    	this.y = 0;
+    	this.y = 8.5;
     	this.z = 0;
     	
     	this.velocity = 0;
@@ -96,14 +96,12 @@ class MyBird extends CGFobject {
 
     	//Updates the y variable (depending on ascent, descent or neither)
 		if(!this.descending && !this.ascending){
-    		this.y = 0.5 * Math.sin(t * 2 * Math.PI / 1000);
+    		this.y = 8.5 + 0.5 * Math.sin(t * 2 * Math.PI / 1000);
 		}
     	else if (!this.ascending){
-    		//this.descend();
     		this.descend(deltatime);
     	}
     	else{
-    		//this.ascend(t);
     		this.ascend(deltatime);
     	}
 
@@ -111,16 +109,15 @@ class MyBird extends CGFobject {
     		this.dive_angle += Math.PI/25;
     }
 
-    descend(t) {
+    descend(deltatime) {
     	
-    	if(this.y > -8.5)
+    	if(this.y > 0)
     	{
     		//Smooth transition to descent
     		if(this.dive_angle < Math.PI/5)
     			this.dive_angle += Math.PI/25;
 
-    		//this.y -= 0.2;
-    		this.y -= 8.5*t/1000;
+    		this.y -= 8.5*deltatime/1000;
     	}
     	
     	else 
@@ -130,14 +127,13 @@ class MyBird extends CGFobject {
     	}
     }
 
-    ascend(t) {				
-    	if(this.y < 0)
+    ascend(deltatime) {				
+    	if(this.y < 8.5)
     	{
     	    if(this.dive_angle > -Math.PI/5)
     	    	this.dive_angle -= Math.PI/25;
 
-    		//this.y += 0.2 + 0.2 * Math.sin(t * 3 * Math.PI / 1000);
-    		this.y += 8.5*t/1000;
+    		this.y += 8.5*deltatime/1000;
     	}
     	    		
     	else
@@ -184,7 +180,7 @@ class MyBird extends CGFobject {
     }
 
 	checkCollisionsWithBranches(treeBranches, branchesTranslates, branchesRotates, catchingError){
-		if(this.catchedBranch)
+		if(this.caughtBranch)
 			return;
 
 		if(branchesTranslates.length === 0)
@@ -208,7 +204,7 @@ class MyBird extends CGFobject {
 			delete branchesTranslates[i];
 			delete treeBranches[i];
 			delete branchesRotates[i];
-			this.catchedBranch = true;
+			this.caughtBranch = true;
 			break;
 			/*branchesTranslates.splice(i, 1);
 			treeBranches.splice(i, 1);
@@ -217,7 +213,7 @@ class MyBird extends CGFobject {
 	}
 
 	checkCollisionsWithNest(nest, nestPosition, catchingError){
-		if(!this.catchedBranch)
+		if(!this.caughtBranch)
 			return;
 
 		if(catchingError == undefined)
@@ -231,9 +227,12 @@ class MyBird extends CGFobject {
 			return;
 
 		//Colliding with nest 
-		nest.addBranch(this.branch);
-		delete this.branch;
-		this.catchedBranch();
+		//nest.addBranch(this.branch);
+		//delete this.branch;
+		
+		nest.addBranch(this.treeBranch);
+		delete this.treeBranch;
+		this.caughtBranch = false;
 	}
 
     display() {
@@ -329,6 +328,18 @@ class MyBird extends CGFobject {
 					this.foot.display();
 				this.scene.popMatrix();
 			this.scene.popMatrix();
+
+			//Displays the branch, if the bird has caught it
+			if(this.caughtBranch) {
+				this.scene.pushMatrix();
+					this.scene.rotate(this.feet_angle, 1, 0, 0);	//moves the same way as the feet
+					this.scene.pushMatrix();
+						this.scene.translate(1, -2.15, -0.3);
+						this.scene.rotate(Math.PI/2, 0, 0, 1);
+						this.treeBranch.display();
+					this.scene.popMatrix();
+				this.scene.popMatrix();
+			}
 
 
 		this.scene.popMatrix();

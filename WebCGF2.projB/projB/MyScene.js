@@ -58,11 +58,13 @@ class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.scaleFactor = 10.0;
         this.catchingError = 1.0;
+        this.retro = false;
 
 		this.shadersDiv = document.getElementById("shaders");
 		this.vShaderDiv = document.getElementById("vshader");
 		this.fShaderDiv = document.getElementById("fshader");
 
+		this.retroCamera = new CGFcamera(0.7, 0.1, 500, vec3.fromValues(this.bird.x, this.bird.y + 40, this.bird.z), vec3.fromValues(this.bird.x + Math.sin(this.bird.yy_angle), this.bird.y, this.bird.z + Math.cos(this.bird.yy_angle)));
 		
         this.setUpdatePeriod(50);
     }
@@ -90,7 +92,9 @@ class MyScene extends CGFscene {
     }
 
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(-75, 50, 60), vec3.fromValues(0, 0, 0));
+        this.defaultCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(-75, 50, 60), vec3.fromValues(0, 0, 0));
+
+        this.camera = this.defaultCamera;
     }
 
     setDefaultAppearance() {
@@ -171,6 +175,8 @@ class MyScene extends CGFscene {
 		this.bird.checkCollisionsWithBranches(this.treeBranches, this.branchesTranslates, this.branchesRotates, this.catchingError);
 		this.bird.checkCollisionsWithNest(this.nest, this.nestPosition, this.catchingError);
     }
+    	
+
 
     display() {
         // ---- BEGIN Background, camera and axis setup
@@ -182,6 +188,18 @@ class MyScene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
+
+        if(this.retro) {
+        	this.camera = this.retroCamera;
+
+        	this.retroCamera.setPosition(vec3.fromValues(this.bird.x, 40, this.bird.z));
+        	this.retroCamera.setTarget(vec3.fromValues(this.bird.x + Math.sin(this.bird.yy_angle), this.bird.y, this.bird.z + Math.cos(this.bird.yy_angle)));
+
+        	//this.retroCamera.setTarget(vec3.fromValues(this.bird.x, this.bird.y, this.bird.z));
+        	//this.retroCamera.rotate(vec3.fromValues(0, 1, 0), this.bird.yy_angle);
+        }
+    	else
+    		this.camera = this.defaultCamera;
 
         // Draw axis
         this.axis.display();
@@ -214,7 +232,7 @@ class MyScene extends CGFscene {
 
 		//Drawing the bird
         this.pushMatrix();
-        	this.translate(0, 14, 0);
+        	this.translate(0, 5.5, 0);
         	this.bird.display();
         this.popMatrix();
 

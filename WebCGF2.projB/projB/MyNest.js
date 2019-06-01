@@ -36,15 +36,27 @@ class MyNest extends CGFobject {
 	}
 
 	addBranch(branch){
+		console.log("ADDED");
 		this.branches.push(branch);
 	}
 
     display() {
+    	//Displays the main nest
         this.scene.pushMatrix();
-        this.scene.scale(1, 0.25, 1);
-        this.nest_material.apply();
-        this.cylinder.display();
-        this.cylinder_inverted.display();
+			this.scene.scale(1, 0.25, 1);
+			this.nest_material.apply();
+			this.cylinder.display();
+			this.cylinder_inverted.display();
         this.scene.popMatrix();
+
+		//Displays the added branches
+		for(let i = 0; i < this.branches.length; i++) {
+			this.scene.pushMatrix();
+				this.scene.rotate(Math.PI/3, 1, 0, 0);
+				this.branches[i].display();
+			this.scene.popMatrix();
+			this.scene.rotate(2*Math.PI/this.branches.length, 0, 1, 0);
+		}
+		
     }
 }
