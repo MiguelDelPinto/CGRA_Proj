@@ -9,7 +9,6 @@ class MyScene extends CGFscene {
 
     init(application) {
         super.init(application);
-        this.initCameras();
         this.initLights();
 
         //Background color
@@ -59,13 +58,15 @@ class MyScene extends CGFscene {
         this.scaleFactor = 10.0;
         this.catchingError = 1.0;
         this.retro = false;
+        this.birdCameraActive = false;
+        this.thirdPerson = false;
+        this.selectedCamera = "DEFAULT";
 
 		this.shadersDiv = document.getElementById("shaders");
 		this.vShaderDiv = document.getElementById("vshader");
 		this.fShaderDiv = document.getElementById("fshader");
-
-		this.retroCamera = new CGFcamera(0.7, 0.1, 500, vec3.fromValues(this.bird.x, this.bird.y + 40, this.bird.z), vec3.fromValues(this.bird.x + Math.sin(this.bird.yy_angle), this.bird.y, this.bird.z + Math.cos(this.bird.yy_angle)));
-		
+        
+        this.initCameras();
         this.setUpdatePeriod(50);
     }
 
@@ -92,9 +93,37 @@ class MyScene extends CGFscene {
     }
 
     initCameras() {
+    	this.cameraNames = ["DEFAULT", "TOP-DOWN", "BIRD CAMERA", "THIRD PERSON"];
+
         this.defaultCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(-75, 50, 60), vec3.fromValues(0, 0, 0));
+		this.retroCamera = new CGFcamera(0.7, 0.1, 500, vec3.fromValues(this.bird.x, this.bird.y + 40, this.bird.z), vec3.fromValues(this.bird.x + Math.sin(this.bird.yy_angle), this.bird.y, this.bird.z + Math.cos(this.bird.yy_angle)));
+		this.birdCamera = new CGFcamera(0.5, 0.1, 500, vec3.fromValues(-50, 50, 50), vec3.fromValues(this.bird.x, this.bird.y, this.bird.z));
+		this.thirdPersonCamera = new CGFcamera(0.7, 0.1, 500, vec3.fromValues(this.bird.x - 5*Math.sin(this.bird.yy_angle), this.bird.y+9, this.bird.z - 5*Math.cos(this.bird.yy_angle)), vec3.fromValues(this.bird.x, this.bird.y+5, this.bird.z));
 
         this.camera = this.defaultCamera;
+    }
+
+    updateCamera(){
+    	if(this.selectedCamera === "TOP-DOWN"){
+    		this.retro = true;
+    		this.thirdPerson = false;
+    		this.birdCameraActive = false;
+    	}
+    	else if(this.selectedCamera === "THIRD PERSON"){
+    		this.thirdPerson = true;
+    		this.retro = false;
+    		this.birdCameraActive = false;
+    	}
+    	else if(this.selectedCamera === "BIRD CAMERA"){
+    		this.birdCameraActive = true;
+    		this.retro = false;
+    		this.thirdPerson = false;
+    	}
+    	else{
+    		this.retro = false;
+    		this.thirdPerson = false;
+    		this.birdCameraActive = false;
+    	}
     }
 
     setDefaultAppearance() {
@@ -198,6 +227,19 @@ class MyScene extends CGFscene {
         	//this.retroCamera.setTarget(vec3.fromValues(this.bird.x, this.bird.y, this.bird.z));
         	//this.retroCamera.rotate(vec3.fromValues(0, 1, 0), this.bird.yy_angle);
         }
+    	else if(this.thirdPerson){
+        	this.camera = this.thirdPersonCamera;
+
+        	this.thirdPersonCamera.setPosition(vec3.fromValues(this.bird.x - 5*Math.sin(this.bird.yy_angle), this.bird.y+9, this.bird.z - 5*Math.cos(this.bird.yy_angle)));
+        	this.thirdPersonCamera.setTarget(vec3.fromValues(this.bird.x, this.bird.y+5, this.bird.z)); 
+    	}
+    	else if(this.birdCameraActive){
+    		this.camera = this.birdCamera;
+			
+			this.birdCamera.setPosition(vec3.fromValues(-50, 50, 50));
+			this.birdCamera.setTarget(vec3.fromValues(this.bird.x, this.bird.y, this.bird.z));
+		
+    	}
     	else
     		this.camera = this.defaultCamera;
 
