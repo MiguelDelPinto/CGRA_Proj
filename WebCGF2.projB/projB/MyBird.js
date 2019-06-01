@@ -6,26 +6,32 @@ class MyBird extends CGFobject {
     constructor(scene) {
         super(scene);
 
+		//Objets that compose the bird
         this.sphere = new MySphere(scene, 0.5, 15, 15);
         this.eye = new MyBirdEye(scene);
         this.beak = new MyPyramid(scene, 4, 1);
         this.wing = new MyBirdWing(scene);     
 		this.foot = new MyBirdFoot(scene);
         
+        //Position variables
         this.x = 0;        
 		this.y = 0;
 		this.z = 0;
 
+		//Velocity variables
 		this.velocity = 0;
-		this.vMax = 0.01;
-		this.vMin = -0.01;
+		this.velocity_max = 0.01;
+		this.velocity_min = 0;
 
+		//Angular variables
 		this.yy_angle = 0;
-
-		this.wingAngle = 0;
-		this.wingVariation = 1;
-
+		this.wing_angle = 0;
 		this.feet_angle = 0;
+		this.dive_angle = 0;
+
+		//Branch catching variables
+		this.ascending = false;
+		this.descending = false;
 
 		this.counter = 0;
 
@@ -40,11 +46,11 @@ class MyBird extends CGFobject {
     accelerate(v) {
     	var new_velocity = this.velocity + v;
 
-    	if(new_velocity > this.vMax)
-    		new_velocity = this.vMax;
+    	if(new_velocity > this.velocity_max)
+    		new_velocity = this.velocity_max;
     		
-    	else if(new_velocity < this.vMin)
-    		new_velocity = this.vMin;
+    	else if(new_velocity < this.velocity_min)
+    		new_velocity = this.velocity_min;
 
     	this.velocity = new_velocity;
     }
@@ -55,25 +61,64 @@ class MyBird extends CGFobject {
     	this.z = 0;
     	this.velocity = 0;
     	this.yy_angle = 0;
+    	this.descending = false;
+    	this.ascending = false;
     }
 
     update(t, deltatime) {
-    	//this.counter += deltatime;
 
 		//Updates the position of the bird
-    	this.x += this.velocity*deltatime * Math.sin(this.yy_angle);
-    	this.z += this.velocity*deltatime * Math.cos(this.yy_angle);	
-    	this.y = 0.5*Math.sin(t*2*Math.PI/1000);
-
+    	this.updatePosition(t, deltatime);
 		
-    	//Updates the angle of the wing    	
-    	if(this.velocity > 0.0025 || this.velocity < -0.0025)
-    		this.wingAngle = 0.55*Math.sin(250*this.velocity*t*2*Math.PI/1000) + 0.2;
-    	else
-    		this.wingAngle = 0.55*Math.sin(t*2*Math.PI/1000) + 0.2; 
+    	//Updates the angle of the wing
+    	var wing_variation = 1 + 250 * this.velocity;
+    	this.wing_angle = Math.PI / 6 * Math.sin(wing_variation * t * 2 * Math.PI / 1000) + 0.2;
 
     	//Updates the angle of the feet
-    	this.feet_angle = 0.05*Math.sin(t*2*Math.PI/1000) + 0.1;  	
+    	this.feet_angle = 0.05 * Math.sin(t * 2 * Math.PI / 1000) + 0.1;  	
+    }
+
+    updatePosition(t, deltatime) {
+    	//Updates the x and y variables
+		this.x += this.velocity * deltatime * Math.sin(this.yy_angle);
+    	this.z += this.velocity * deltatime * Math.cos(this.yy_angle);	
+    	
+    	//Updates the y variable (depending on ascent, descent or neither)
+		if(!this.descending && !this.ascending)
+    		this.y = 0.5 * Math.sin(t * 2 * Math.PI / 1000);
+    	
+    	else if (!this.ascending)
+    		this.descend();
+    	
+    	else
+    		this.ascend(t);
+    }
+
+    descend() {
+    	if(this.y > -10)
+    	{
+    		this.y -= 0.2;
+    		this.dive_angle = Math.PI/5;
+    	}
+    	else 
+    	{
+
+    		this.descending = false;
+    		this.ascending = true;
+    	}
+    }
+
+    ascend(t) {				
+    	if(this.y < 0)
+    	{
+    	    this.dive_angle = -Math.PI/5;
+    		this.y += 0.2 + 0.2 * Math.sin(t * 3 * Math.PI / 1000);
+    	}    		
+    	else
+    	{
+    		this.dive_angle = 0;
+    		this.ascending = false;
+    	}
     }
     
     initBuffers() {
@@ -122,6 +167,7 @@ class MyBird extends CGFobject {
 			//Moves the bird
 			this.scene.translate(this.x, this.y, this.z);
 			this.scene.rotate(this.yy_angle, 0, 1, 0);
+			this.scene.rotate(this.dive_angle, 1, 0, 0);
 
 
 			//Drawing the head
@@ -177,7 +223,7 @@ class MyBird extends CGFobject {
 				this.scene.translate(4/5, -5/7, -2/3);
 				this.scene.rotate(Math.PI/6, 0, 1, 0);
 				this.scene.scale(1, 3/4, 1);
-				this.scene.rotate(this.wingAngle, 0, 0, 1);
+				this.scene.rotate(this.wing_angle, 0, 0, 1);
 				this.wing_material.apply();
 				this.wing.display();
 			this.scene.popMatrix();
@@ -187,7 +233,7 @@ class MyBird extends CGFobject {
 				this.scene.translate(4/5, -5/7, -2/3);
 				this.scene.rotate(Math.PI/6, 0, 1, 0);
 				this.scene.scale(1, 3/4, -1);
-				this.scene.rotate(this.wingAngle, 0, 0, 1);
+				this.scene.rotate(this.wing_angle, 0, 0, 1);
 				this.wing_material.apply();
 				this.wing.display();
 			this.scene.popMatrix();
