@@ -52,6 +52,9 @@ class MyScene extends CGFscene {
         //Initializes the lightning 
         this.lightning = new MyLightning(this);
 
+        //TESTING
+        this.test_branch = new MyTreeBranch(this);
+
 		//Initializes the materials
 		this.initMaterials();
 
@@ -232,7 +235,7 @@ class MyScene extends CGFscene {
 
 		//Drawing the bird
         this.pushMatrix();
-        	this.translate(0, 5.5, 0);
+        	this.translate(0, 4.5 + 1.0, 0);
         	this.bird.display();
         this.popMatrix();
 
@@ -299,6 +302,11 @@ class MyScene extends CGFscene {
 			this.translate(0, 4, 0);
 			this.scale(3, 3, 3);
 			this.tree.display();
+		this.popMatrix();
+
+		//TESTING
+		this.pushMatrix();
+			this.test_branch.display();
 		this.popMatrix();
 		
         // ---- END Primitive drawing section

@@ -36,11 +36,11 @@ class MyNest extends CGFobject {
 	}
 
 	addBranch(branch){
-		console.log("ADDED");
 		this.branches.push(branch);
 	}
 
     display() {
+    	
     	//Displays the main nest
         this.scene.pushMatrix();
 			this.scene.scale(1, 0.25, 1);
@@ -57,6 +57,6 @@ class MyNest extends CGFobject {
 			this.scene.popMatrix();
 			this.scene.rotate(2*Math.PI/this.branches.length, 0, 1, 0);
 		}
-		
+
     }
 }

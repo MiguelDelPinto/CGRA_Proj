@@ -33,10 +33,29 @@ class MyTreeBranch extends CGFobject {
 	}
 
     display() {
+
+    	//Displays the main branch
         this.scene.pushMatrix();
-        this.scene.scale(0.25, 2, 0.25);
-        this.trunk_material.apply();
-        this.cylinder.display();
+			this.scene.scale(0.2, 2, 0.2);
+			this.trunk_material.apply();
+			this.cylinder.display();
         this.scene.popMatrix();
+		
+		//Displays the first secondary branch
+		this.scene.pushMatrix();
+			this.scene.rotate(Math.PI/6, 0, 0, 1);
+			this.scene.scale(0.1, 0.75, 0.1);
+			this.scene.translate(5, 0, 0);
+			this.cylinder.display();
+		this.scene.popMatrix();
+
+		//Displays the second secondary branch
+		this.scene.pushMatrix();
+			this.scene.rotate(-Math.PI/7, 0, 0, 1);
+			this.scene.scale(0.08, 0.9, 0.08);
+			this.scene.translate(-8, 0.5, 0);
+			this.cylinder.display();
+		this.scene.popMatrix();
+
     }
 }
