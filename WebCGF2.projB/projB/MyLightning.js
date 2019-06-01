@@ -13,6 +13,13 @@ class MyLightning extends MyLSystem {
 
         this.ruleX_1 = "F[-X][X]F[-X]F+FXF";
         this.ruleX_2 = "F[-X][X]-FXF[-X][X]F";
+        this.ruleX_3 = "F[+X]-X";
+        this.ruleX_4 = "F[/X][X]F[\\\\X]+X";
+        this.ruleX_5 = "F[\\X][X]/X";
+        this.ruleX_6 = "F[/X]\\X";
+        this.ruleX_7 = "F[^X][X]F[&X]^X";
+        this.ruleX_8 = "F[^X]&X";
+        this.ruleX_9 = "F[&X]^X";
         this.angle = 25.0;
         this.iterations = 3;
         this.scaleFactor = 0.5;

@@ -136,6 +136,14 @@ class MyScene extends CGFscene {
 			text+=" L ";
 			keysPressed = true;
 		}
+
+		//Pick TreeBranch
+		if(this.gui.isKeyPressed("KeyP")){
+			
+
+			text+=" P ";
+			keysPressed = true;
+		}
 		
 		if (keysPressed)
 		console.log(text);
@@ -227,7 +235,7 @@ class MyScene extends CGFscene {
         
         		//Third Branch
         		this.pushMatrix();
-					this.translate(5, 0, 3);
+					this.translate(-5, 0, -4);
 					this.pushMatrix();
 						this.rotate(Math.PI/2, 0, 0, 1);
 						this.treeBranches[2].display();
@@ -251,18 +259,18 @@ class MyScene extends CGFscene {
 		
 		//Drawing the nest
 		this.pushMatrix();
-			this.translate(5, 4.5, -5);
+			this.translate(-5, 4.5, 8);
 			this.nest.display();
 		this.popMatrix();
 
 
 		//Drawing the house
 		this.pushMatrix();
-			this.translate(-5, 4.5, -5);
+			this.translate(6, 4.5, 4);
 			this.pushMatrix();
 				this.scale(1.5, 1.5, 1.5);
 				this.pushMatrix();
-					//this.rotate(Math.PI/2, 0, 1, 0);
+					this.rotate(-Math.PI/2, 0, 1, 0);
 					this.house.display();
 				this.popMatrix();
 			this.popMatrix();
