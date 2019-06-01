@@ -129,6 +129,13 @@ class MyScene extends CGFscene {
 			keysPressed =true;
 		}
 
+		//Dives down
+		if (this.gui.isKeyPressed("KeyP")) {
+			this.bird.descending = true;
+			text+=" P ";
+			keysPressed =true;
+		}
+
 		//Displays a lightning strike
 		if(this.gui.isKeyPressed("KeyL")){
 			this.lightning.startAnimation(t);			
