@@ -32,6 +32,8 @@ class MyBird extends CGFobject {
 		//Branch catching variables
 		this.ascending = false;
 		this.descending = false;
+		this.catchedBranch = false;
+		this.treeBranch = undefined;
 
 		this.counter = 0;
 
@@ -93,29 +95,32 @@ class MyBird extends CGFobject {
     	
 
     	//Updates the y variable (depending on ascent, descent or neither)
-		if(!this.descending && !this.ascending)
+		if(!this.descending && !this.ascending){
     		this.y = 0.5 * Math.sin(t * 2 * Math.PI / 1000);
-    	
-    	else if (!this.ascending)
-    		this.descend();
-    	
-    	else
-    		this.ascend(t);
-
+		}
+    	else if (!this.ascending){
+    		//this.descend();
+    		this.descend(deltatime);
+    	}
+    	else{
+    		//this.ascend(t);
+    		this.ascend(deltatime);
+    	}
 
     	if(!this.ascending && this.dive_angle < 0)
     		this.dive_angle += Math.PI/25;
     }
 
-    descend() {
+    descend(t) {
     	
-    	if(this.y > -10)
+    	if(this.y > -8.5)
     	{
     		//Smooth transition to descent
     		if(this.dive_angle < Math.PI/5)
     			this.dive_angle += Math.PI/25;
 
-    		this.y -= 0.2;
+    		//this.y -= 0.2;
+    		this.y -= 8.5*t/1000;
     	}
     	
     	else 
@@ -131,7 +136,8 @@ class MyBird extends CGFobject {
     	    if(this.dive_angle > -Math.PI/5)
     	    	this.dive_angle -= Math.PI/25;
 
-    		this.y += 0.2 + 0.2 * Math.sin(t * 3 * Math.PI / 1000);
+    		//this.y += 0.2 + 0.2 * Math.sin(t * 3 * Math.PI / 1000);
+    		this.y += 8.5*t/1000;
     	}
     	    		
     	else
@@ -176,6 +182,59 @@ class MyBird extends CGFobject {
 		this.wing_material.loadTexture('images/yellow_feathers.png');
 		this.wing_material.setTextureWrap('REPEAT', 'REPEAT');   	
     }
+
+	checkCollisionsWithBranches(treeBranches, branchesTranslates, branchesRotates, catchingError){
+		if(this.catchedBranch)
+			return;
+
+		if(branchesTranslates.length === 0)
+			return;
+
+		if(catchingError == undefined)
+			catchingError = 0;
+		
+		for(var i = 0; i < branchesTranslates.length; i++){
+			if(branchesTranslates[i] == undefined)
+				continue;
+			if(Math.abs(branchesTranslates[i][0]-this.x) >  Math.abs(catchingError)) //Check x range
+				continue;
+			if(Math.abs(branchesTranslates[i][1]-this.y) >  Math.abs(catchingError)) //Check y range
+				continue;
+			if(Math.abs(branchesTranslates[i][2]-this.z) >  Math.abs(catchingError)) //Check z range
+				continue;
+
+			//Colliding with branch  
+			this.treeBranch = treeBranches[i];
+			delete branchesTranslates[i];
+			delete treeBranches[i];
+			delete branchesRotates[i];
+			this.catchedBranch = true;
+			break;
+			/*branchesTranslates.splice(i, 1);
+			treeBranches.splice(i, 1);
+			branchesRotates.splice(i, 1);*/
+		}
+	}
+
+	checkCollisionsWithNest(nest, nestPosition, catchingError){
+		if(!this.catchedBranch)
+			return;
+
+		if(catchingError == undefined)
+			catchingError = 0;
+
+		if(Math.abs(nestPosition[0]-this.x) >  Math.abs(catchingError))
+			return;
+		if(Math.abs(nestPosition[1]-this.y) >  Math.abs(catchingError))
+			return;
+		if(Math.abs(nestPosition[2]-this.z) >  Math.abs(catchingError))
+			return;
+
+		//Colliding with nest 
+		nest.addBranch(this.branch);
+		delete this.branch;
+		this.catchedBranch();
+	}
 
     display() {
 

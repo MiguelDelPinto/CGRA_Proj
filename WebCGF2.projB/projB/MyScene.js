@@ -26,7 +26,10 @@ class MyScene extends CGFscene {
         //this.plane = new Plane(this, 32);
         this.terrain = new MyTerrain(this);
         this.bird = new MyBird(this);
+        
         this.nest = new MyNest(this);
+		this.nestPosition = [-5, 4.5, 8];
+
         this.house = new MyHouse(this);
         this.cube_map = new MyCubeMap(this);
         this.sphere = new MySphere(this, 1, 15, 15);
@@ -39,6 +42,12 @@ class MyScene extends CGFscene {
         for(var i = 0; i < numBranches; i++){
         	this.treeBranches.push(this.treeBranch);
         }
+        this.branchesTranslates = [];
+		this.branchesTranslates.push([-5, 0, 3]);
+		this.branchesTranslates.push([-1, 0, 3]);
+		this.branchesTranslates.push([-5, 0, -4]);
+		this.branchesTranslates.push([1, 0, -3]);
+		this.branchesRotates = [false, true, false, true];
 
         //Initializes the lightning 
         this.lightning = new MyLightning(this);
@@ -48,6 +57,7 @@ class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.scaleFactor = 10.0;
+        this.catchingError = 1.0;
 
 		this.shadersDiv = document.getElementById("shaders");
 		this.vShaderDiv = document.getElementById("vshader");
@@ -143,14 +153,6 @@ class MyScene extends CGFscene {
 			text+=" L ";
 			keysPressed = true;
 		}
-
-		//Pick TreeBranch
-		if(this.gui.isKeyPressed("KeyP")){
-			
-
-			text+=" P ";
-			keysPressed = true;
-		}
 		
 		if (keysPressed)
 		console.log(text);
@@ -163,8 +165,11 @@ class MyScene extends CGFscene {
 		this.deltaTime = t - this.lastTime;
 		this.lastTime = t;
 		this.bird.update(t, this.deltaTime);
-
+		
 		this.lightning.update(t);
+
+		this.bird.checkCollisionsWithBranches(this.treeBranches, this.branchesTranslates, this.branchesRotates, this.catchingError);
+		this.bird.checkCollisionsWithNest(this.nest, this.nestPosition, this.catchingError);
     }
 
     display() {
@@ -218,55 +223,27 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         	this.translate(0, 4.5, 0);
         	this.pushMatrix();
-        		
-        		//First Branch
-        		this.pushMatrix();
-					this.translate(-5, 0, 3);
-					this.pushMatrix();
-						this.rotate(Math.PI/2, 0, 0, 1);
-						this.treeBranches[0].display();
-					this.popMatrix();
-				this.popMatrix();
-
-				//Second Branch
-				this.pushMatrix();
-					this.translate(-1, 0, 3);
-					this.pushMatrix();
-						this.rotate(Math.PI/2, 0, 0, 1);
+        		for(var i = 0; i < this.treeBranches.length; i++){
+        			if(this.treeBranches[i] == undefined)
+        				continue;
+        			this.pushMatrix();
+						this.translate(this.branchesTranslates[i][0], this.branchesTranslates[i][1], this.branchesTranslates[i][2]);
 						this.pushMatrix();
-							this.rotate(Math.PI/2, 1, 0, 0);
-							this.treeBranches[1].display();
+							this.rotate(Math.PI/2, 0, 0, 1);
+							if(this.branchesRotates[i]){
+								this.rotate(Math.PI/2, 1, 0, 0);
+							}
+							this.treeBranches[i].display();
 						this.popMatrix();
-					this.popMatrix();
-        		this.popMatrix();
-        
-        		//Third Branch
-        		this.pushMatrix();
-					this.translate(-5, 0, -4);
-					this.pushMatrix();
-						this.rotate(Math.PI/2, 0, 0, 1);
-						this.treeBranches[2].display();
-					this.popMatrix();
-        		this.popMatrix();
-
-        		//Fourth Branch
-        		this.pushMatrix();
-					this.translate(1, 0, -3);
-					this.pushMatrix();
-						this.rotate(Math.PI/2, 0, 0, 1);
-						this.pushMatrix();
-							this.rotate(Math.PI/2, 1, 0, 0);
-							this.treeBranches[3].display();
-						this.popMatrix();
-					this.popMatrix();
-        		this.popMatrix();
+        			this.popMatrix();
+        		}
         	this.popMatrix();
         this.popMatrix();
 
 		
 		//Drawing the nest
 		this.pushMatrix();
-			this.translate(-5, 4.5, 8);
+			this.translate(this.nestPosition[0], this.nestPosition[1], this.nestPosition[2]);
 			this.nest.display();
 		this.popMatrix();
 

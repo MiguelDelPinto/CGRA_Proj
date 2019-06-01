@@ -9,6 +9,8 @@ class MyNest extends CGFobject {
         this.cylinder = new MyCylinder(scene, 10, 0, true);
         this.cylinder_inverted = new MyCylinderInverted(scene, 10, 0, true); 
 
+        this.branches = [];
+
 		this.initMaterials();
         this.initBuffers();
     }
@@ -31,6 +33,10 @@ class MyNest extends CGFobject {
 
 		this.nest_texture = new CGFtexture(this.scene, "images/nest.jpg");
 		this.nest_material.setTexture(this.nest_texture); 
+	}
+
+	addBranch(branch){
+		this.branches.push(branch);
 	}
 
     display() {
