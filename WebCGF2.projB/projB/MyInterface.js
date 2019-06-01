@@ -44,9 +44,11 @@ class MyInterface extends CGFinterface {
         var obj = this;
 
         //this.gui.add(this.scene, 'scaleFactor', 15.0, 25.0).onChange(this.scene.onScaleFactorChanged.bind(this.scene));
-        this.gui.add(this.scene, 'catchingError', 0.5, 1.5);
+        this.gui.add(this.scene, 'catchingError', 0.5, 1.5).name("Catching Error");
 
         this.gui.add(this.scene, 'retro').name("Retro");
+        this.gui.add(this.scene, 'selectedCamera', this.scene.cameraNames).name('CAMERA').onChange(this.scene.updateCamera.bind(this.scene));
+
         
         this.initKeys();
         
