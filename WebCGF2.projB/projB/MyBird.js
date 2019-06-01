@@ -206,9 +206,6 @@ class MyBird extends CGFobject {
 			delete branchesRotates[i];
 			this.caughtBranch = true;
 			break;
-			/*branchesTranslates.splice(i, 1);
-			treeBranches.splice(i, 1);
-			branchesRotates.splice(i, 1);*/
 		}
 	}
 
@@ -219,6 +216,11 @@ class MyBird extends CGFobject {
 		if(catchingError == undefined)
 			catchingError = 0;
 
+/*
+		if((Math.pow(nestPosition[0]-this.x, 2) + Math.pow(nestPosition[1]-this.y, 2) + Math.pow(nestPosition[2]-this.z, 2)) > Math.pow(catchingError, 2))
+			return;
+*/
+
 		if(Math.abs(nestPosition[0]-this.x) >  Math.abs(catchingError))
 			return;
 		if(Math.abs(nestPosition[1]-this.y) >  Math.abs(catchingError))
@@ -227,9 +229,6 @@ class MyBird extends CGFobject {
 			return;
 
 		//Colliding with nest 
-		//nest.addBranch(this.branch);
-		//delete this.branch;
-		
 		nest.addBranch(this.treeBranch);
 		delete this.treeBranch;
 		this.caughtBranch = false;
