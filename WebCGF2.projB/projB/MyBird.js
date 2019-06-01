@@ -59,10 +59,15 @@ class MyBird extends CGFobject {
     	this.x = 0;
     	this.y = 0;
     	this.z = 0;
+    	
     	this.velocity = 0;
+    	
     	this.yy_angle = 0;
+    	this.diving_angle = 0;
+    	
     	this.descending = false;
     	this.ascending = false;
+
     }
 
     update(t, deltatime) {
@@ -70,19 +75,23 @@ class MyBird extends CGFobject {
 		//Updates the position of the bird
     	this.updatePosition(t, deltatime);
 		
+
     	//Updates the angle of the wing
     	var wing_variation = 1 + 250 * this.velocity;
     	this.wing_angle = Math.PI / 6 * Math.sin(wing_variation * t * 2 * Math.PI / 1000) + 0.2;
+
 
     	//Updates the angle of the feet
     	this.feet_angle = 0.05 * Math.sin(t * 2 * Math.PI / 1000) + 0.1;  	
     }
 
     updatePosition(t, deltatime) {
+    	
     	//Updates the x and y variables
 		this.x += this.velocity * deltatime * Math.sin(this.yy_angle);
     	this.z += this.velocity * deltatime * Math.cos(this.yy_angle);	
     	
+
     	//Updates the y variable (depending on ascent, descent or neither)
 		if(!this.descending && !this.ascending)
     		this.y = 0.5 * Math.sin(t * 2 * Math.PI / 1000);
@@ -92,17 +101,25 @@ class MyBird extends CGFobject {
     	
     	else
     		this.ascend(t);
+
+
+    	if(!this.ascending && this.dive_angle < 0)
+    		this.dive_angle += Math.PI/25;
     }
 
     descend() {
+    	
     	if(this.y > -10)
     	{
+    		//Smooth transition to descent
+    		if(this.dive_angle < Math.PI/5)
+    			this.dive_angle += Math.PI/25;
+
     		this.y -= 0.2;
-    		this.dive_angle = Math.PI/5;
     	}
+    	
     	else 
     	{
-
     		this.descending = false;
     		this.ascending = true;
     	}
@@ -111,14 +128,14 @@ class MyBird extends CGFobject {
     ascend(t) {				
     	if(this.y < 0)
     	{
-    	    this.dive_angle = -Math.PI/5;
+    	    if(this.dive_angle > -Math.PI/5)
+    	    	this.dive_angle -= Math.PI/25;
+
     		this.y += 0.2 + 0.2 * Math.sin(t * 3 * Math.PI / 1000);
-    	}    		
-    	else
-    	{
-    		this.dive_angle = 0;
-    		this.ascending = false;
     	}
+    	    		
+    	else
+    		this.ascending = false;
     }
     
     initBuffers() {
