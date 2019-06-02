@@ -15,7 +15,7 @@ class MyBird extends CGFobject {
         
         //Position variables
         this.x = 0;        
-		this.y = 8.5;
+		this.y = 4.0;
 		this.z = 0;
 
 		//Velocity variables
@@ -63,7 +63,7 @@ class MyBird extends CGFobject {
 
     reset() {
     	this.x = 0;
-    	this.y = 8.5;
+    	this.y = 4.0;
     	this.z = 0;
     	
     	this.velocity = 0;
@@ -102,7 +102,7 @@ class MyBird extends CGFobject {
 
     	//Updates the y variable (depending on ascent, descent or neither)
 		if(!this.descending && !this.ascending){
-    		this.y = 8.5 + 0.5 * Math.sin(t * 2 * Math.PI / 1000);
+    		//this.y = 4.0 + 0.5 * Math.sin(t * 2 * Math.PI / 1000);
 		}
     	else if (!this.ascending){
     		this.descend(deltatime);
@@ -123,7 +123,7 @@ class MyBird extends CGFobject {
     		if(this.dive_angle < Math.PI/5)
     			this.dive_angle += Math.PI/25;
 
-    		this.y -= 8.5*deltatime/1000;
+    		this.y -= 4.0*deltatime/1000;
     	}
     	
     	else 
@@ -134,12 +134,12 @@ class MyBird extends CGFobject {
     }
 
     ascend(deltatime) {				
-    	if(this.y < 8.5)
+    	if(this.y < 4.0)
     	{
     	    if(this.dive_angle > -Math.PI/5)
     	    	this.dive_angle -= Math.PI/25;
 
-    		this.y += 8.5*deltatime/1000;
+    		this.y += 4.0*deltatime/1000;
     	}
     	    		
     	else
@@ -256,7 +256,7 @@ class MyBird extends CGFobject {
 			this.scene.pushMatrix();
 
 				//Adjusting the bird's size
-				this.scene.scale(0.7*this.scaleFactor, 0.7*this.scaleFactor, 0.7*this.scaleFactor);
+				this.scene.scale(0.5*this.scaleFactor, 0.5*this.scaleFactor, 0.5*this.scaleFactor);
 
 				//Drawing the head
 				this.scene.pushMatrix();
@@ -349,7 +349,7 @@ class MyBird extends CGFobject {
 				this.scene.pushMatrix();
 					this.scene.rotate(this.feet_angle, 1, 0, 0);	//moves the same way as the feet
 					this.scene.pushMatrix();
-						this.scene.translate(0.5, -1.46, -0.15);
+						this.scene.translate(0.5, -1.045, -0.15);
 						this.scene.rotate(Math.PI/2, 0, 0, 1);
 						this.scene.rotate(-Math.PI/2, 0, 1, 0);
 						this.treeBranch.display();

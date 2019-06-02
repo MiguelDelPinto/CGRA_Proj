@@ -37,7 +37,7 @@ class MyTreeBranch extends CGFobject {
     display() {
 
 		this.scene.pushMatrix();
-			this.scene.scale(0.7, 0.7, 0.7);
+			this.scene.scale(0.5, 0.5, 0.5);
 
 			//Displays the main branch
 			this.scene.pushMatrix();

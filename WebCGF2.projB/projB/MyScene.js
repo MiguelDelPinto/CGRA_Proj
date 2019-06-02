@@ -38,11 +38,11 @@ class MyScene extends CGFscene {
         	this.treeBranches.push(this.treeBranch);
         }
         this.branchesTranslates = [];
-		this.branchesTranslates.push([-5, 0, 3]);
+		this.branchesTranslates.push([-7.5, 0, 3]);
 		this.branchesTranslates.push([-1, 0, 3]);
 		this.branchesTranslates.push([-4, 0, -4]);
 		this.branchesTranslates.push([1, 0, -3]);
-		this.branchesRotates = [false, true, false, true];
+		this.branchesAngles = [-Math.PI, Math.PI/3, -Math.PI/4, Math.PI/6];
 
         //Initializes the nest
         this.nest = new MyNest(this);
@@ -61,7 +61,7 @@ class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.scaleFactor = 1.0;
         this.speedFactor = 1.0;
-        this.catchingError = 1.0;
+        this.catchingError = 0.75;
         this.retro = false;
         this.birdCameraActive = false;
         this.thirdPerson = false;
@@ -99,7 +99,7 @@ class MyScene extends CGFscene {
     initCameras() {
     	this.cameraNames = ["Default", "Top-down", "Bird fixed", "Third person"];
 
-        this.defaultCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(-60, 63, 55), vec3.fromValues(0, 0, 0));
+        this.defaultCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(-55, 58, 50), vec3.fromValues(0, 0, 0));
 		this.retroCamera = new CGFcamera(0.7, 0.1, 500, vec3.fromValues(this.bird.x, this.bird.y + 40, this.bird.z), vec3.fromValues(this.bird.x + Math.sin(this.bird.yy_angle), this.bird.y, this.bird.z + Math.cos(this.bird.yy_angle)));
 		this.birdCamera = new CGFcamera(0.5, 0.1, 500, vec3.fromValues(-50, 50, 50), vec3.fromValues(this.bird.x, this.bird.y, this.bird.z));
 		this.thirdPersonCamera = new CGFcamera(0.7, 0.1, 500, vec3.fromValues(this.bird.x - 5*Math.sin(this.bird.yy_angle), this.bird.y+9, this.bird.z - 5*Math.cos(this.bird.yy_angle)), vec3.fromValues(this.bird.x, this.bird.y+5, this.bird.z));
@@ -224,9 +224,9 @@ class MyScene extends CGFscene {
     onZoomChange(){
 		if(!this.thirdPerson && !this.retro && !this.birdCameraActive){
 			if(this.zoom)
-				this.defaultCamera.setPosition(vec3.fromValues(-40, 46, 18 + 1/3));
+				this.defaultCamera.setPosition(vec3.fromValues(-40, 45, 19));
 			else
-				this.defaultCamera.setPosition(vec3.fromValues(-60, 63, 55));
+				this.defaultCamera.setPosition(vec3.fromValues(-55, 58, 50));
 		}
     }	
 
@@ -332,9 +332,7 @@ class MyScene extends CGFscene {
 						this.pushMatrix();
 							this.rotate(Math.PI/2, 1, 0, 0);
 							this.rotate(Math.PI/2, 0, 0, 1);
-							if(this.branchesRotates[i]){
-								this.rotate(Math.PI/2, 0, 0, 1);
-							}
+							this.rotate(this.branchesAngles[i], 0, 0, 1);
 							this.treeBranches[i].display();
 						this.popMatrix();
         			this.popMatrix();
