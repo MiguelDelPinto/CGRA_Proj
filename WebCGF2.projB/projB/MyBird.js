@@ -163,7 +163,7 @@ class MyBird extends CGFobject {
         this.feathers_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
         this.feathers_material.setSpecular(0.8, 0.8, 0.8, 1.0);
         this.feathers_material.setShininess(10.0);   
-		this.feathers_material.loadTexture('images/yellow_feathers.png');
+		this.feathers_material.loadTexture('images/yellow_feathers.jpg');
 		this.feathers_material.setTextureWrap('REPEAT', 'REPEAT');
 
     	//Beak material - a diffuse material
@@ -181,7 +181,7 @@ class MyBird extends CGFobject {
         this.wing_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
         this.wing_material.setSpecular(0.8, 0.8, 0.8, 1.0);
         this.wing_material.setShininess(10.0);   
-		this.wing_material.loadTexture('images/yellow_feathers.png');
+		this.wing_material.loadTexture('images/yellow_feathers.jpg');
 		this.wing_material.setTextureWrap('REPEAT', 'REPEAT');   	
     }
 

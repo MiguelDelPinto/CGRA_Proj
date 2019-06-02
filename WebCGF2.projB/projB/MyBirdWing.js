@@ -6,8 +6,8 @@ class MyBirdWing extends CGFobject {
     constructor(scene) 
     {
         super(scene);
-        this.inner = new MyUnitCubeQuad(this.scene, 'images/yellow_feathers.png', 'images/yellow_feathers.png', 'images/yellow_feathers.png');
-        this.outer = new MyUnitCubeQuad(this.scene, 'images/yellow_feathers.png', 'images/yellow_feathers.png', 'images/yellow_feathers.png');
+        this.inner = new MyUnitCubeQuad(this.scene, 'images/yellow_feathers.jpg', 'images/yellow_feathers.jpg', 'images/yellow_feathers.jpg');
+        this.outer = new MyUnitCubeQuad(this.scene, 'images/yellow_feathers.jpg', 'images/yellow_feathers.jpg', 'images/yellow_feathers.jpg');
     }
 
     display(){
