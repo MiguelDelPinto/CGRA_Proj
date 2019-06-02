@@ -40,17 +40,17 @@ class MyScene extends CGFscene {
         this.branchesTranslates = [];
 		this.branchesTranslates.push([-5, 0, 3]);
 		this.branchesTranslates.push([-1, 0, 3]);
-		this.branchesTranslates.push([-5, 0, -4]);
+		this.branchesTranslates.push([-4, 0, -4]);
 		this.branchesTranslates.push([1, 0, -3]);
 		this.branchesRotates = [false, true, false, true];
 
         //Initializes the nest
         this.nest = new MyNest(this);
-		this.nestPosition = [-4, 0, 7.5];
+		this.nestPosition = [-6, 0, 7.5];
 
         //Initializes the trees
         this.trees = [];
-        const numTrees = 6;
+        const numTrees = 9;
         for(var i = 0; i < numTrees; i++){
         	this.trees.push(new MyLSPlant(this));
         }
@@ -97,9 +97,9 @@ class MyScene extends CGFscene {
     }
 
     initCameras() {
-    	this.cameraNames = ["Default", "Top-down", "Bird fixed", "Third person"];	//(-75, 50, 60)
+    	this.cameraNames = ["Default", "Top-down", "Bird fixed", "Third person"];
 
-        this.defaultCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(-10, 60, -70), vec3.fromValues(0, 0, 0));
+        this.defaultCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(-60, 63, 55), vec3.fromValues(0, 0, 0));
 		this.retroCamera = new CGFcamera(0.7, 0.1, 500, vec3.fromValues(this.bird.x, this.bird.y + 40, this.bird.z), vec3.fromValues(this.bird.x + Math.sin(this.bird.yy_angle), this.bird.y, this.bird.z + Math.cos(this.bird.yy_angle)));
 		this.birdCamera = new CGFcamera(0.5, 0.1, 500, vec3.fromValues(-50, 50, 50), vec3.fromValues(this.bird.x, this.bird.y, this.bird.z));
 		this.thirdPersonCamera = new CGFcamera(0.7, 0.1, 500, vec3.fromValues(this.bird.x - 5*Math.sin(this.bird.yy_angle), this.bird.y+9, this.bird.z - 5*Math.cos(this.bird.yy_angle)), vec3.fromValues(this.bird.x, this.bird.y+5, this.bird.z));
@@ -224,9 +224,9 @@ class MyScene extends CGFscene {
     onZoomChange(){
 		if(!this.thirdPerson && !this.retro && !this.birdCameraActive){
 			if(this.zoom)
-				this.defaultCamera.setPosition(vec3.fromValues(-55, 45, 30));
+				this.defaultCamera.setPosition(vec3.fromValues(-40, 46, 18 + 1/3));
 			else
-				this.defaultCamera.setPosition(vec3.fromValues(-75, 50, 60));
+				this.defaultCamera.setPosition(vec3.fromValues(-60, 63, 55));
 		}
     }	
 
@@ -357,7 +357,7 @@ class MyScene extends CGFscene {
 			this.pushMatrix();
 				this.scale(1.5, 1.5, 1.5);
 				this.pushMatrix();
-					this.rotate(Math.PI, 0, 1, 0);
+					this.rotate(-Math.PI/2, 0, 1, 0);
 					this.house.display();
 				this.popMatrix();
 			this.popMatrix();
@@ -396,20 +396,20 @@ class MyScene extends CGFscene {
 			this.popMatrix();
 
 			this.pushMatrix();
-				this.translate(-15, 6.2, 2);
+				this.translate(-19, 6, 4);
 				this.scale(4, 2, 4);
 				this.trees[2].display();
 			this.popMatrix();
 
 			this.pushMatrix();
-				this.translate(-9, 4, 6);
+				this.translate(0, 5.5, -12);
 				this.scale(4, 2, 4);
-				this.rotate(Math.PI/3, 0, 1, 0);
-				this.trees[1].display();
+				this.rotate(Math.PI, 0, 1, 0);
+				this.trees[3].display();
 			this.popMatrix();
 
 			this.pushMatrix();
-				this.translate(-11, 4.9, -4);
+				this.translate(-13, 5, -3);
 				this.scale(4, 2, 4);
 				this.rotate(Math.PI, 0, 1, 0);
 				this.trees[4].display();
@@ -419,28 +419,28 @@ class MyScene extends CGFscene {
 				this.translate(12, 6, -4);
 				this.scale(4, 2, 4);
 				this.rotate(Math.PI/7, 0, 1, 0);
-				this.trees[2].display();
+				this.trees[5].display();
 			this.popMatrix();
 
 			this.pushMatrix();
 				this.translate(14, 5, 8);
 				this.scale(4, 2, 4);
 				this.rotate(Math.PI/3.5, 0, 1, 0);
-				this.trees[3].display();
+				this.trees[6].display();
 			this.popMatrix();
 
 			this.pushMatrix();
-				this.translate(-5.5, 5, 12);
+				this.translate(-5.5, 6, 15);
 				this.scale(4, 2, 4);
 				this.rotate(Math.PI/6, 0, 1, 0);
-				this.trees[4].display();
+				this.trees[7].display();
 			this.popMatrix();
 
 			this.pushMatrix();
-				this.translate(-10, 5, 13);
+				this.translate(-6, 4.2, -8);
 				this.scale(4, 2, 4);
-				this.rotate(Math.PI/4.7, 0, 1, 0);
-				this.trees[5].display();
+				this.rotate(Math.PI/7, 0, 1, 0);
+				this.trees[8].display();
 			this.popMatrix();
 		this.popMatrix();
 
