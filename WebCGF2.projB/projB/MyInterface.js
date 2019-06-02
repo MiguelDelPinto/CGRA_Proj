@@ -55,6 +55,10 @@ class MyInterface extends CGFinterface {
         
         this.gui.add(this.scene, 'quacking').name('Quacking');
 
+        this.gui.add(this.scene, 'thunder').name('Thunder');
+
+        this.gui.add(this.scene, 'branchSound').name('Drop Branch Sound');
+
         this.initKeys();
         
         return true;

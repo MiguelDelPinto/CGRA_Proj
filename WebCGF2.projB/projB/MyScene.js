@@ -68,6 +68,8 @@ class MyScene extends CGFscene {
         this.selectedCamera = "Default";
         this.zoom = false;
         this.quacking = false;
+        this.thunder = false;
+		this.branchSound = false;
 
 		//Shader variables
 		this.shadersDiv = document.getElementById("shaders");
@@ -187,7 +189,7 @@ class MyScene extends CGFscene {
 
 		//Displays a lightning strike
 		if(this.gui.isKeyPressed("KeyL")){
-			this.lightning.startAnimation(t);	
+			this.lightning.startAnimation(t, this.thunder);	
 			text+=" L ";
 			keysPressed = true;
 		}
@@ -214,11 +216,11 @@ class MyScene extends CGFscene {
 		this.bird.update(t, this.deltaTime, this.quacking);
 		
 		//Updates the lightning
-		this.lightning.update(t);
+		this.lightning.update(t);		
 
 		//Checks the collisions for branch catching
 		this.bird.checkCollisionsWithBranches(this.treeBranches, this.branchesTranslates, this.branchesRotates, this.catchingError);
-		this.bird.checkCollisionsWithNest(this.nest, this.nestPosition, this.catchingError);
+		this.bird.checkCollisionsWithNest(this.nest, this.nestPosition, this.branchSound, this.catchingError);
     }
     
     onZoomChange(){

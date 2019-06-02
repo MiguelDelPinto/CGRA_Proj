@@ -74,7 +74,7 @@ class MyLightning extends MyLSystem {
             );
         }
 
-    startAnimation(t){
+    startAnimation(t, thunder){
     	if(this.isDrawing)
     		return;
 
@@ -93,8 +93,10 @@ class MyLightning extends MyLSystem {
         this.isDrawing = true;
         this.lightning_position = [this.getRandomArbitrary(-30, 30), this.getRandomArbitrary(-30, 30)];
         this.scale_y = this.getRandomArbitrary(1.5, 3);
-        		
-      	this.thunder.play();
+        	
+        if(thunder){	
+      		this.thunder.play();
+        }
     }
 
     update(t){
