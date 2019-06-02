@@ -51,6 +51,13 @@ class MyScene extends CGFscene {
         //Initializes the lightning 
         this.lightning = new MyLightning(this);
 
+        //Initializes the trees
+        this.trees = [];
+        const numTrees = 9;
+        for(var i = 0; i < numTrees; i++){
+        	this.trees.push(new MyLSPlant(this));
+        }
+
         //TESTING
         this.test_branch = new MyTreeBranch(this);
         this.test_nest = new MyNest(this);
@@ -254,7 +261,7 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         //Some display variables
-        var FPS = 40;
+        var FPS = 60;
         this.setUpdatePeriod(1000/FPS);
         
 
@@ -343,9 +350,67 @@ class MyScene extends CGFscene {
 
 		//Drawing the trees
 		this.pushMatrix();
-			this.translate(0, 4, 0);
-			this.scale(3, 3, 3);
-			this.tree.display();
+			this.pushMatrix();
+				this.translate(12, 4.8, 4);
+				this.scale(4, 2, 4);
+				this.rotate(Math.PI/4, 0, 1, 0);
+				this.trees[0].display();
+			this.popMatrix();
+
+			this.pushMatrix();
+				this.translate(7.5, 4, -1);
+				this.scale(4, 2, 4);
+				this.rotate(2*Math.PI/5, 0, 1, 0);
+				this.trees[1].display();
+			this.popMatrix();
+
+			this.pushMatrix();
+				this.translate(-15, 6.2, 2);
+				this.scale(4, 2, 4);
+				this.trees[2].display();
+			this.popMatrix();
+
+			this.pushMatrix();
+				this.translate(-9, 4, 6);
+				this.scale(4, 2, 4);
+				this.rotate(Math.PI/3, 0, 1, 0);
+				this.trees[3].display();
+			this.popMatrix();
+
+			this.pushMatrix();
+				this.translate(-11, 4.9, -4);
+				this.scale(4, 2, 4);
+				this.rotate(Math.PI, 0, 1, 0);
+				this.trees[4].display();
+			this.popMatrix();
+
+			this.pushMatrix();
+				this.translate(12, 6, -4);
+				this.scale(4, 2, 4);
+				this.rotate(Math.PI/7, 0, 1, 0);
+				this.trees[5].display();
+			this.popMatrix();
+
+			this.pushMatrix();
+				this.translate(14, 5, 8);
+				this.scale(4, 2, 4);
+				this.rotate(Math.PI/3.5, 0, 1, 0);
+				this.trees[6].display();
+			this.popMatrix();
+
+			this.pushMatrix();
+				this.translate(-5.5, 5, 12);
+				this.scale(4, 2, 4);
+				this.rotate(Math.PI/6, 0, 1, 0);
+				this.trees[7].display();
+			this.popMatrix();
+
+			this.pushMatrix();
+				this.translate(-10, 5, 13);
+				this.scale(4, 2, 4);
+				this.rotate(Math.PI/4.7, 0, 1, 0);
+				this.trees[8].display();
+			this.popMatrix();
 		this.popMatrix();
 
 		//TESTING

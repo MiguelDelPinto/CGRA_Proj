@@ -243,6 +243,8 @@ class MyBird extends CGFobject {
 			this.scene.rotate(this.yy_angle, 0, 1, 0);
 			this.scene.rotate(this.dive_angle, 1, 0, 0);
 
+			//Making the bird a little smaller
+    		this.scene.scale(0.6, 0.6, 0.6);
 
 			//Drawing the head
 			this.scene.pushMatrix();

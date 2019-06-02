@@ -32,7 +32,7 @@ class MyBranch extends CGFobject {
         this.branch_material.apply();
 
         this.scene.pushMatrix();
-		this.scene.scale(0.4, 1, 0.4);
+		this.scene.scale(0.25, 1, 0.25);
         this.cylinder.display();
         this.scene.popMatrix();
     }
