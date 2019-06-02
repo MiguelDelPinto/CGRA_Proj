@@ -22,10 +22,12 @@ class MyTreeBranch extends CGFobject {
     }
 
     initMaterials() {
+
+    	//Trunk material - a diffuse material
         this.trunk_material = new CGFappearance(this.scene);
-		this.trunk_material.setAmbient(0.5, 0.5, 0.5, 1);
-		this.trunk_material.setDiffuse(0.7, 0.7, 0.7, 1);
-		this.trunk_material.setSpecular(0.2, 0.2, 0.2, 1);
+		this.trunk_material.setAmbient(1, 1, 1, 1);
+		this.trunk_material.setDiffuse(0.9, 0.9, 0.9, 1);
+		this.trunk_material.setSpecular(0.1, 0.1, 0.1, 1);
 		this.trunk_material.setShininess(100);
 
 		this.trunk_texture = new CGFtexture(this.scene, "images/trunk.jpg");

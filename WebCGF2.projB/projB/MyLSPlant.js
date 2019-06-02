@@ -31,12 +31,9 @@ class MyLSPlant extends MyLSystem {
                     "F": [ "FF" ],
                     "X": [ "F[-X][X]F[-X]+X", 
                            "F[-X][X]+X",
-                           //"F[+X]-X",
                            "F[/X][X]F[\\X]+X",
                            "F[\X][X]/X", 
-                           //"F[/X]\X", 
                            "F[^X][X]F[&X]^X",
-                           //"F[^X]&X",  
                            "F[&X]^X" ]
                 },
                 this.angle,

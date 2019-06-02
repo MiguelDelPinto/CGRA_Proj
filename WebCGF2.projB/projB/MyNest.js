@@ -26,10 +26,12 @@ class MyNest extends CGFobject {
     }
 
     initMaterials() {
+
+    	//Nest material - small twigs, a diffuse material
         this.nest_material = new CGFappearance(this.scene);
-		this.nest_material.setAmbient(0.5, 0.5, 0.5, 1);
-		this.nest_material.setDiffuse(0.7, 0.7, 0.7, 1);
-		this.nest_material.setSpecular(0.2, 0.2, 0.2, 1);
+		this.nest_material.setAmbient(1, 1, 1, 1);
+		this.nest_material.setDiffuse(0.9, 0.9, 0.9, 1);
+		this.nest_material.setSpecular(0.1, 0.1, 0.1, 1);
 		this.nest_material.setShininess(100);
 
 		this.nest_texture = new CGFtexture(this.scene, "images/nest.jpg");

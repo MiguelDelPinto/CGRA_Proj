@@ -157,7 +157,7 @@ class MyBird extends CGFobject {
 
     initMaterials() {
 
-    	//Feathers material - diffuse material
+    	//Feathers material - a mix between diffuse and specular
     	this.feathers_material = new CGFappearance(this.scene);
         this.feathers_material.setAmbient(1, 1, 1, 1.0);
         this.feathers_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
@@ -166,16 +166,16 @@ class MyBird extends CGFobject {
 		this.feathers_material.loadTexture('images/yellow_feathers.png');
 		this.feathers_material.setTextureWrap('REPEAT', 'REPEAT');
 
-    	//Beak material
+    	//Beak material - a diffuse material
     	this.beak_material = new CGFappearance(this.scene);
         this.beak_material.setAmbient(1, 1, 1, 1.0);
         this.beak_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
-        this.beak_material.setSpecular(0.8, 0.8, 0.8, 1.0);
+        this.beak_material.setSpecular(0.2, 0.2, 0.2, 1.0);
         this.beak_material.setShininess(10.0);   
 		this.beak_material.loadTexture('images/orange.jpg');
 		this.beak_material.setTextureWrap('REPEAT', 'REPEAT');
 
-		//Wing material   
+		//Wing material - feathers, a mix between diffuse and specular
 		this.wing_material = new CGFappearance(this.scene);
         this.wing_material.setAmbient(1, 1, 1, 1.0);
         this.wing_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
@@ -195,6 +195,7 @@ class MyBird extends CGFobject {
 		if(catchingError == undefined)
 			catchingError = 0;
 		
+		//Checks if any of the branches if in range
 		for(var i = 0; i < branchesTranslates.length; i++){
 			if(branchesTranslates[i] == undefined)
 				continue;
@@ -204,12 +205,14 @@ class MyBird extends CGFobject {
 				continue;
 			if(Math.abs(branchesTranslates[i][2]-this.z) >  Math.abs(catchingError)) //Check z range
 				continue;
-
-			//Colliding with branch  
+			
+			//Colliding with the branch  
 			this.treeBranch = treeBranches[i];
+			
 			delete branchesTranslates[i];
 			delete treeBranches[i];
 			delete branchesRotates[i];
+			
 			this.caughtBranch = true;
 			break;
 		}
@@ -222,11 +225,7 @@ class MyBird extends CGFobject {
 		if(catchingError == undefined)
 			catchingError = 0;
 
-/*
-		if((Math.pow(nestPosition[0]-this.x, 2) + Math.pow(nestPosition[1]-this.y, 2) + Math.pow(nestPosition[2]-this.z, 2)) > Math.pow(catchingError, 2))
-			return;
-*/
-
+		//Checks if the nest is between range
 		if(Math.abs(nestPosition[0]-this.x) >  Math.abs(catchingError))
 			return;
 		if(Math.abs(nestPosition[1]-this.y) >  Math.abs(catchingError))
@@ -234,12 +233,13 @@ class MyBird extends CGFobject {
 		if(Math.abs(nestPosition[2]-this.z) >  Math.abs(catchingError))
 			return;
 
-		//Colliding with nest 
+		//Colliding with the nest 
 		nest.addBranch(this.treeBranch);
 		delete this.treeBranch;
 		this.caughtBranch = false;
 	}
 
+	//Changes the size of the bird
 	onScaleFactorChange(scaleFactor){
 		this.scaleFactor = scaleFactor;
 	}
@@ -255,7 +255,7 @@ class MyBird extends CGFobject {
 
 			this.scene.pushMatrix();
 
-				//Making the bird a little smaller
+				//Adjusting the bird's size
 				this.scene.scale(0.7*this.scaleFactor, 0.7*this.scaleFactor, 0.7*this.scaleFactor);
 
 				//Drawing the head
@@ -294,7 +294,7 @@ class MyBird extends CGFobject {
 					this.scene.translate(0, -0.95, -0.7);
 					this.scene.scale(1.7, 1.4, 2.3);
 					this.feathers_material.apply();
-					this.sphere.display();
+					this.sphere.display();	//torso
 				this.scene.popMatrix();
 
 				this.scene.pushMatrix();
@@ -302,7 +302,7 @@ class MyBird extends CGFobject {
 					this.scene.rotate(Math.PI/5, 1, 0, 0);
 					this.scene.scale(0.8, 0.3, 1.2);
 					this.feathers_material.apply();
-					this.sphere.display();
+					this.sphere.display();	//tail
 				this.scene.popMatrix();
 
 
@@ -313,7 +313,7 @@ class MyBird extends CGFobject {
 					this.scene.scale(1, 3/4, 1);
 					this.scene.rotate(this.wing_angle, 0, 0, 1);
 					this.wing_material.apply();
-					this.wing.display();
+					this.wing.display();	//left wing
 				this.scene.popMatrix();
 
 				this.scene.pushMatrix();
@@ -323,7 +323,7 @@ class MyBird extends CGFobject {
 					this.scene.scale(1, 3/4, -1);
 					this.scene.rotate(this.wing_angle, 0, 0, 1);
 					this.wing_material.apply();
-					this.wing.display();
+					this.wing.display();	//right wing
 				this.scene.popMatrix();
 
 
@@ -332,13 +332,13 @@ class MyBird extends CGFobject {
 					this.scene.rotate(this.feet_angle, 1, 0, 0);
 					this.scene.pushMatrix();
 						this.scene.translate(0.4, -1.7, -1/2);
-						this.foot.display();
+						this.foot.display();	//left foot
 					this.scene.popMatrix();
 
 					this.scene.pushMatrix();
 						this.scene.rotate(-Math.PI/12, 0, 1, 0);
 						this.scene.translate(-0.4, -1.7, -1/2 + 0.1);
-						this.foot.display();
+						this.foot.display();	//right foot
 					this.scene.popMatrix();
 				this.scene.popMatrix();
 

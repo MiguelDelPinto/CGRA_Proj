@@ -30,9 +30,11 @@ class MyTerrain extends CGFobject {
     }
 
 	initMaterials(){
+		
+		//Terrian material - the whole terrain, mainly a diffuse material
     	this.terrain_material = new CGFappearance(this.scene);
-		this.terrain_material.setAmbient(0.5, 0.5, 0.5, 1);
-		this.terrain_material.setDiffuse(0.7, 0.7, 0.7, 1);
+		this.terrain_material.setAmbient(0.1, 0.1, 0.1, 1);
+		this.terrain_material.setDiffuse(0.9, 0.9, 0.9, 1);
 		this.terrain_material.setSpecular(0.2, 0.2, 0.2, 1);
 		this.terrain_material.setShininess(100);
 

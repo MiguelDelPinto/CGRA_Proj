@@ -9,11 +9,11 @@ class MyBirdFoot extends CGFobject {
         this.leg = new MyUnitCubeQuad(this.scene, 'images/orange.jpg', 'images/orange.jpg', 'images/orange.jpg');
         this.fingers = new MyPrism(this.scene, 3, 3);
 
-        //Orange material
+        //Orange material - bird's foot, a diffuse material
     	this.orange_material = new CGFappearance(this.scene);
         this.orange_material.setAmbient(1, 1, 1, 1.0);
         this.orange_material.setDiffuse(0.8, 0.8, 0.8, 1.0);
-        this.orange_material.setSpecular(0.8, 0.8, 0.8, 1.0);
+        this.orange_material.setSpecular(0.2, 0.2, 0.2, 1.0);
         this.orange_material.setShininess(10.0);   
 		this.orange_material.loadTexture('images/orange.jpg');
 		this.orange_material.setTextureWrap('REPEAT', 'REPEAT');

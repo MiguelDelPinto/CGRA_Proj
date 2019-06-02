@@ -6,16 +6,16 @@ class MyLeaf extends CGFobject {
     constructor(scene) {
         super(scene);
         
-        this.triangle = new MyTriangle(scene);
         this.sphere = new MySphere(scene, 1, 7, 7);
 
-        //Leaf material (leaf - a mainly diffuse material)
+        //Leaf material - leaf, a mainly diffuse material
         this.leaf_material = new CGFappearance(scene);
         this.leaf_material.setAmbient(1, 1, 1, 1);
         this.leaf_material.setDiffuse(0.9, 0.9, 0.9, 1);
         this.leaf_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.leaf_material.setShininess(10.0);
 
+		//Picks a random kind of leaves between cherry tree leaves, autumn leaves and normal green leaves
 		const picker = Math.random();
         if(picker < 1/3)
         	this.leaf_material.loadTexture('images/leaf.jpg');
