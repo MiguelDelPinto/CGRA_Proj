@@ -9,7 +9,7 @@ class MyLeaf extends CGFobject {
         this.triangle = new MyTriangle(scene);
         this.sphere = new MySphere(scene, 1, 7, 7);
 
-        //Branch material (wood - diffuse material)
+        //Leaf material (leaf - a mainly diffuse material)
         this.leaf_material = new CGFappearance(scene);
         this.leaf_material.setAmbient(1, 1, 1, 1);
         this.leaf_material.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -36,15 +36,8 @@ class MyLeaf extends CGFobject {
     }
    
     display() {
-
-/*
-        this.scene.pushMatrix();
-			this.scene.scale(1, 1, 1);
-			 this.leaf_material.apply();
-			this.triangle.display();
-        this.scene.popMatrix();
-*/
-
+		
+		//Drawing the leaves
         this.scene.pushMatrix();
 			this.scene.scale(1.2, 0.4, 0.5);
 			this.leaf_material.apply();

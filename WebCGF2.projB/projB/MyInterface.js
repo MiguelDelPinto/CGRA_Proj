@@ -53,6 +53,8 @@ class MyInterface extends CGFinterface {
         
         this.gui.add(this.scene, 'zoom').name('Zoom').onChange(this.scene.onZoomChange.bind(this.scene));
         
+        this.gui.add(this.scene, 'quacking').name('Quacking');
+
         this.initKeys();
         
         return true;

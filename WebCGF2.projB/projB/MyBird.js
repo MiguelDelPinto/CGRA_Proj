@@ -35,12 +35,11 @@ class MyBird extends CGFobject {
 		this.caughtBranch = false;
 		this.treeBranch = undefined;
 
-		//Sound variables
+		//Sound variable
 		this.quack = new Audio('audio/quack.wav');
 
+		//Scaling variable
 		this.scaleFactor = 1.0;
-
-		this.counter = 0;
 
 		this.initMaterials();
         this.initBuffers();
@@ -77,12 +76,13 @@ class MyBird extends CGFobject {
 
     }
 
-    update(t, deltatime) {
+    update(t, deltatime, quacking) {
 
 		//Updates the position of the bird
     	this.updatePosition(t, deltatime);
 		
-		this.quack.play();
+		if(quacking)
+			this.quack.play();
 
     	//Updates the angle of the wing
     	var wing_variation = 1 + 250 * this.velocity;
@@ -157,7 +157,7 @@ class MyBird extends CGFobject {
 
     initMaterials() {
 
-    	//Feathers material
+    	//Feathers material - diffuse material
     	this.feathers_material = new CGFappearance(this.scene);
         this.feathers_material.setAmbient(1, 1, 1, 1.0);
         this.feathers_material.setDiffuse(0.8, 0.8, 0.8, 1.0);

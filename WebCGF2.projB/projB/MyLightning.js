@@ -39,6 +39,7 @@ class MyLightning extends MyLSystem {
     }
 
     initMaterials(){
+    	//Lighting material - just light
         this.lightning_material = new CGFappearance(this.scene);
 		this.lightning_material.setAmbient(1.0, 1.0, 1.0, 1);
 		this.lightning_material.setDiffuse(1.0, 1.0, 1.0, 1);
