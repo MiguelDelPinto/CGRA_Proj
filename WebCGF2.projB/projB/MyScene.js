@@ -66,7 +66,8 @@ class MyScene extends CGFscene {
 		this.initMaterials();
 
         //Objects connected to MyInterface
-        this.scaleFactor = 10.0;
+        this.scaleFactor = 1.0;
+        this.speedFactor = 1.0;
         this.catchingError = 1.0;
         this.retro = false;
         this.birdCameraActive = false;
@@ -88,10 +89,6 @@ class MyScene extends CGFscene {
         this.lights[0].enable();
         this.lights[0].update();
     }
-
-   	/*onScaleFactorChanged(v) {
-    	//this.terrain.onScaleFactorChanged(v);
-	}*/
 
     initMaterials(){
     	//CubeMap Material
@@ -202,6 +199,10 @@ class MyScene extends CGFscene {
 		console.log(text);
 	}
 
+	onScaleFactorChange(){
+		this.bird.onScaleFactorChange(this.scaleFactor);
+	}
+
     update(t){
     	this.checkKeys(t);
 
@@ -233,12 +234,12 @@ class MyScene extends CGFscene {
         	this.camera = this.retroCamera;
 
 			if(this.zoom){
-				this.retroCamera.setPosition(vec3.fromValues(this.bird.x, this.bird.y+15, this.bird.z));
+				this.retroCamera.setPosition(vec3.fromValues(this.bird.x, this.bird.y*this.scaleFactor+15, this.bird.z));
 			}
 			else{
         		this.retroCamera.setPosition(vec3.fromValues(this.bird.x, 40, this.bird.z));
 			}
-			
+
         	this.retroCamera.setTarget(vec3.fromValues(this.bird.x + Math.sin(this.bird.yy_angle), this.bird.y, this.bird.z + Math.cos(this.bird.yy_angle)));
 
         	//this.retroCamera.setTarget(vec3.fromValues(this.bird.x, this.bird.y, this.bird.z));
@@ -247,7 +248,7 @@ class MyScene extends CGFscene {
     	else if(this.thirdPerson){
         	this.camera = this.thirdPersonCamera;
 			if(this.zoom){
-        		this.thirdPersonCamera.setPosition(vec3.fromValues(this.bird.x - 5*Math.sin(this.bird.yy_angle), this.bird.y+9, this.bird.z - 5*Math.cos(this.bird.yy_angle)));
+        		this.thirdPersonCamera.setPosition(vec3.fromValues(this.bird.x - this.scaleFactor*5*Math.sin(this.bird.yy_angle), this.bird.y+9, this.bird.z - this.scaleFactor*5*Math.cos(this.bird.yy_angle)));
 			}
 			else{
 				this.thirdPersonCamera.setPosition(vec3.fromValues(this.bird.x - 10*Math.sin(this.bird.yy_angle), this.bird.y + 12, this.bird.z - 10*Math.cos(this.bird.yy_angle)));

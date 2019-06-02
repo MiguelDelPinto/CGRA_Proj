@@ -38,6 +38,8 @@ class MyBird extends CGFobject {
 		//Sound variables
 		this.quack = new Audio('audio/quack.wav');
 
+		this.scaleFactor = 1.0;
+
 		this.counter = 0;
 
 		this.initMaterials();
@@ -238,6 +240,10 @@ class MyBird extends CGFobject {
 		this.caughtBranch = false;
 	}
 
+	onScaleFactorChange(scaleFactor){
+		this.scaleFactor = scaleFactor;
+	}
+
     display() {
 
     	this.scene.pushMatrix();
@@ -250,7 +256,7 @@ class MyBird extends CGFobject {
 			this.scene.pushMatrix();
 
 				//Making the bird a little smaller
-				this.scene.scale(0.7, 0.7, 0.7);
+				this.scene.scale(0.7*this.scaleFactor, 0.7*this.scaleFactor, 0.7*this.scaleFactor);
 
 				//Drawing the head
 				this.scene.pushMatrix();

@@ -15,7 +15,7 @@ class MyTerrain extends CGFobject {
 		this.terrain_shader.setUniformsValues({ uSampler: 0 });
 		this.terrain_shader.setUniformsValues({ tex: 1 });
 		this.terrain_shader.setUniformsValues({ colorTex: 2});
-		this.terrain_shader.setUniformsValues({ scale: this.scene.scaleFactor || 15.0 });
+		this.terrain_shader.setUniformsValues({ scale: 15.0 });
 		
 		this.initMaterials();
     }
@@ -28,10 +28,6 @@ class MyTerrain extends CGFobject {
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
     }
-
-    onScaleFactorChanged(v) {
-		this.terrain_shader.setUniformsValues({ scale: this.scene.scaleFactor });
-	}
 
 	initMaterials(){
     	this.terrain_material = new CGFappearance(this.scene);
