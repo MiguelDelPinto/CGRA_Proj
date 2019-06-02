@@ -11,6 +11,7 @@ class MyNest extends CGFobject {
         this.branch = new MyTreeBranch(scene); 
 
         this.branches = [];
+        this.branchSound = new Audio("audio/branch.mp3");
 
 		this.initMaterials();
         this.initBuffers();
@@ -38,7 +39,10 @@ class MyNest extends CGFobject {
 		this.nest_material.setTexture(this.nest_texture); 
 	}
 
-	addBranch(branch){
+	addBranch(branch, branchSound){
+		if(branchSound)
+			this.branchSound.play();
+		
 		this.branches.push(branch);
 	}
 

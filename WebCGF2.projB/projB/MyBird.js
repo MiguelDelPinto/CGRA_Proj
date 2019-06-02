@@ -218,7 +218,7 @@ class MyBird extends CGFobject {
 		}
 	}
 
-	checkCollisionsWithNest(nest, nestPosition, catchingError){
+	checkCollisionsWithNest(nest, nestPosition, branchSound, catchingError){
 		if(!this.caughtBranch)
 			return;
 
@@ -234,7 +234,7 @@ class MyBird extends CGFobject {
 			return;
 
 		//Colliding with the nest 
-		nest.addBranch(this.treeBranch);
+		nest.addBranch(this.treeBranch, branchSound);
 		delete this.treeBranch;
 		this.caughtBranch = false;
 	}
