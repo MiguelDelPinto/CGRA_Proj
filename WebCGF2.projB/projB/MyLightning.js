@@ -32,6 +32,9 @@ class MyLightning extends MyLSystem {
         this.scale_y = 0;
         this.lightning_position = [];
 
+		this.thunder = new Audio('audio/thunder.mp3');
+		this.activeSound = false;
+        
         this.doGenerate();
     }
 
@@ -89,6 +92,8 @@ class MyLightning extends MyLSystem {
         this.isDrawing = true;
         this.lightning_position = [this.getRandomArbitrary(-30, 30), this.getRandomArbitrary(-30, 30)];
         this.scale_y = this.getRandomArbitrary(1.5, 3);
+        		
+      	this.thunder.play();
     }
 
     update(t){

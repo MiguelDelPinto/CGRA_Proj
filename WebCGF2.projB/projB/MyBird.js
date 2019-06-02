@@ -35,6 +35,9 @@ class MyBird extends CGFobject {
 		this.caughtBranch = false;
 		this.treeBranch = undefined;
 
+		//Sound variables
+		this.quack = new Audio('audio/quack.wav');
+
 		this.counter = 0;
 
 		this.initMaterials();
@@ -77,6 +80,7 @@ class MyBird extends CGFobject {
 		//Updates the position of the bird
     	this.updatePosition(t, deltatime);
 		
+		this.quack.play();
 
     	//Updates the angle of the wing
     	var wing_variation = 1 + 250 * this.velocity;

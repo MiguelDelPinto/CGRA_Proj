@@ -72,6 +72,7 @@ class MyScene extends CGFscene {
         this.birdCameraActive = false;
         this.thirdPerson = false;
         this.selectedCamera = "Default";
+        this.zoom = false;
 
 		this.shadersDiv = document.getElementById("shaders");
 		this.vShaderDiv = document.getElementById("vshader");
@@ -192,8 +193,7 @@ class MyScene extends CGFscene {
 
 		//Displays a lightning strike
 		if(this.gui.isKeyPressed("KeyL")){
-			this.lightning.startAnimation(t);			
-        	
+			this.lightning.startAnimation(t);	
 			text+=" L ";
 			keysPressed = true;
 		}
@@ -232,7 +232,13 @@ class MyScene extends CGFscene {
         if(this.retro) {
         	this.camera = this.retroCamera;
 
-        	this.retroCamera.setPosition(vec3.fromValues(this.bird.x, 40, this.bird.z));
+			if(this.zoom){
+				this.retroCamera.setPosition(vec3.fromValues(this.bird.x, this.bird.y+15, this.bird.z));
+			}
+			else{
+        		this.retroCamera.setPosition(vec3.fromValues(this.bird.x, 40, this.bird.z));
+			}
+			
         	this.retroCamera.setTarget(vec3.fromValues(this.bird.x + Math.sin(this.bird.yy_angle), this.bird.y, this.bird.z + Math.cos(this.bird.yy_angle)));
 
         	//this.retroCamera.setTarget(vec3.fromValues(this.bird.x, this.bird.y, this.bird.z));
@@ -240,19 +246,35 @@ class MyScene extends CGFscene {
         }
     	else if(this.thirdPerson){
         	this.camera = this.thirdPersonCamera;
-
-        	this.thirdPersonCamera.setPosition(vec3.fromValues(this.bird.x - 5*Math.sin(this.bird.yy_angle), this.bird.y+9, this.bird.z - 5*Math.cos(this.bird.yy_angle)));
+			if(this.zoom){
+        		this.thirdPersonCamera.setPosition(vec3.fromValues(this.bird.x - 5*Math.sin(this.bird.yy_angle), this.bird.y+9, this.bird.z - 5*Math.cos(this.bird.yy_angle)));
+			}
+			else{
+				this.thirdPersonCamera.setPosition(vec3.fromValues(this.bird.x - 10*Math.sin(this.bird.yy_angle), this.bird.y + 12, this.bird.z - 10*Math.cos(this.bird.yy_angle)));
+			}
         	this.thirdPersonCamera.setTarget(vec3.fromValues(this.bird.x, this.bird.y+5, this.bird.z)); 
     	}
     	else if(this.birdCameraActive){
     		this.camera = this.birdCamera;
 			
-			this.birdCamera.setPosition(vec3.fromValues(-50, 50, 50));
+			if(this.zoom){
+				this.birdCamera.setPosition(vec3.fromValues(-25, 25, 25));
+			}
+			else{
+				this.birdCamera.setPosition(vec3.fromValues(-50, 50, 50));
+			}
 			this.birdCamera.setTarget(vec3.fromValues(this.bird.x, this.bird.y, this.bird.z));
 		
     	}
-    	else
+    	else{
+    		if(this.zoom){
+    			this.defaultCamera.setPosition(vec3.fromValues(-55, 45, 30));
+    		}
+    		else{
+    			this.defaultCamera.setPosition(vec3.fromValues(-75, 50, 60));
+    		}
     		this.camera = this.defaultCamera;
+    	}
 
         // Draw axis
         this.axis.display();

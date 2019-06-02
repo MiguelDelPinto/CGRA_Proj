@@ -47,7 +47,8 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'catchingError', 0.5, 1.5).name("Catching Error");
 
         this.gui.add(this.scene, 'selectedCamera', this.scene.cameraNames).name('Camera').onChange(this.scene.updateCamera.bind(this.scene));
-
+        
+        this.gui.add(this.scene, 'zoom').name('Zoom');
         
         this.initKeys();
         
