@@ -34,28 +34,71 @@ class MyTreeBranch extends CGFobject {
 
     display() {
 
-    	//Displays the main branch
-        this.scene.pushMatrix();
-			this.scene.scale(0.2, 2, 0.2);
-			this.trunk_material.apply();
-			this.cylinder.display();
-        this.scene.popMatrix();
-		
-		//Displays the first secondary branch
 		this.scene.pushMatrix();
-			this.scene.rotate(Math.PI/6, 0, 0, 1);
-			this.scene.scale(0.1, 0.75, 0.1);
-			this.scene.translate(5, 0, 0);
-			this.cylinder.display();
-		this.scene.popMatrix();
+			this.scene.scale(0.7, 0.7, 0.7);
 
-		//Displays the second secondary branch
-		this.scene.pushMatrix();
-			this.scene.rotate(-Math.PI/7, 0, 0, 1);
-			this.scene.scale(0.08, 0.9, 0.08);
-			this.scene.translate(-8, 0.5, 0);
-			this.cylinder.display();
-		this.scene.popMatrix();
+			//Displays the main branch
+			this.scene.pushMatrix();
+				this.scene.scale(0.2, 1.5, 0.2);
+				this.trunk_material.apply();
+				this.cylinder.display();
+			this.scene.popMatrix();
+
+			this.scene.pushMatrix();
+				this.scene.scale(0.2, 1.5, 0.2);
+				this.scene.translate(0, -0.7, 0);
+				this.trunk_material.apply();
+				this.cylinder.display();
+			this.scene.popMatrix();
+
+			this.scene.pushMatrix();
+				this.scene.rotate(Math.PI/6, 0, 0, 1);
+				this.scene.scale(0.2, 1.5, 0.2);
+				this.scene.translate(3.6, 0.8, 0);
+				this.trunk_material.apply();
+				this.cylinder.display();
+			this.scene.popMatrix();
+
+
+			//Displays the first secondary branch
+			this.scene.pushMatrix();
+				this.scene.rotate(-Math.PI/3, 0, 0, 1);
+				this.scene.scale(0.1, 1.2, 0.1);
+				this.scene.translate(-2, 0, 0);
+				this.trunk_material.apply();
+				this.cylinder.display();
+			this.scene.popMatrix();
+
+			this.scene.pushMatrix();
+				this.scene.rotate(-Math.PI/9, 0, 0, 1);
+				this.scene.scale(0.05, 0.5, 0.05);
+				this.scene.translate(4, 1.2, 0);
+				this.trunk_material.apply();
+				this.cylinder.display();
+			this.scene.popMatrix();
+
+
+			//Displays the second secondary branch
+			this.scene.pushMatrix();
+				this.scene.rotate(-Math.PI/4, 0, 0, 1);
+				this.scene.scale(0.1, 1.2, 0.1);
+				this.scene.translate(-14, 1, 0);
+				this.trunk_material.apply();
+				this.cylinder.display();
+			this.scene.popMatrix();
+
+
+			//Displays the third secondary branch
+			this.scene.pushMatrix();
+				this.scene.rotate(-Math.PI/2, 0, 1, 0);
+				this.scene.rotate(-Math.PI/4, 0, 0, 1);
+				this.scene.scale(0.1, 1.2, 0.1);
+				this.scene.translate(3, -0.4, 0);
+				this.trunk_material.apply();
+				this.cylinder.display();
+			this.scene.popMatrix();
+
+        this.scene.popMatrix();
 
     }
 }

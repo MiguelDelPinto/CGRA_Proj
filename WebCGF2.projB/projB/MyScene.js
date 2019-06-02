@@ -27,7 +27,7 @@ class MyScene extends CGFscene {
         this.bird = new MyBird(this);
         
         this.nest = new MyNest(this);
-		this.nestPosition = [-5, 0, 8];
+		this.nestPosition = [-4, 0, 7.5];
 
         this.house = new MyHouse(this);
         this.cube_map = new MyCubeMap(this);
@@ -300,9 +300,10 @@ class MyScene extends CGFscene {
         			this.pushMatrix();
 						this.translate(this.branchesTranslates[i][0], this.branchesTranslates[i][1], this.branchesTranslates[i][2]);
 						this.pushMatrix();
+							this.rotate(Math.PI/2, 1, 0, 0);
 							this.rotate(Math.PI/2, 0, 0, 1);
 							if(this.branchesRotates[i]){
-								this.rotate(Math.PI/2, 1, 0, 0);
+								this.rotate(Math.PI/2, 0, 0, 1);
 							}
 							this.treeBranches[i].display();
 						this.popMatrix();
@@ -415,7 +416,7 @@ class MyScene extends CGFscene {
 
 		//TESTING
 		this.pushMatrix();
-			this.test_nest.display();
+			this.test_branch.display();
 		this.popMatrix();
 		
         // ---- END Primitive drawing section

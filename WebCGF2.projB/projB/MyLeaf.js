@@ -15,7 +15,14 @@ class MyLeaf extends CGFobject {
         this.leaf_material.setDiffuse(0.9, 0.9, 0.9, 1);
         this.leaf_material.setSpecular(0.1, 0.1, 0.1, 1);
         this.leaf_material.setShininess(10.0);
-        this.leaf_material.loadTexture('images/leaf.jpg');
+
+		const picker = Math.random();
+        if(picker < 1/3)
+        	this.leaf_material.loadTexture('images/leaf.jpg');
+        else if (picker >= 1/3 && picker < 2/3)
+        	this.leaf_material.loadTexture('images/cherry.jpg');
+        else
+        	this.leaf_material.loadTexture('images/autumn.jpg');
 
         this.initBuffers();
     }
