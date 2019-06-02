@@ -102,7 +102,7 @@ class MyBird extends CGFobject {
 
     	//Updates the y variable (depending on ascent, descent or neither)
 		if(!this.descending && !this.ascending){
-    		//this.y = 4.0 + 0.5 * Math.sin(t * 2 * Math.PI / 1000);
+    		this.y = 4.0 + 0.5 * Math.sin(t * 2 * Math.PI / 1000);
 		}
     	else if (!this.ascending){
     		this.descend(deltatime);
