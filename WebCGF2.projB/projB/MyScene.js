@@ -71,7 +71,7 @@ class MyScene extends CGFscene {
         this.retro = false;
         this.birdCameraActive = false;
         this.thirdPerson = false;
-        this.selectedCamera = "DEFAULT";
+        this.selectedCamera = "Default";
 
 		this.shadersDiv = document.getElementById("shaders");
 		this.vShaderDiv = document.getElementById("vshader");
@@ -104,7 +104,7 @@ class MyScene extends CGFscene {
     }
 
     initCameras() {
-    	this.cameraNames = ["DEFAULT", "TOP-DOWN", "BIRD CAMERA", "THIRD PERSON"];
+    	this.cameraNames = ["Default", "Top-down", "Bird fixed", "Third person"];
 
         this.defaultCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(-75, 50, 60), vec3.fromValues(0, 0, 0));
 		this.retroCamera = new CGFcamera(0.7, 0.1, 500, vec3.fromValues(this.bird.x, this.bird.y + 40, this.bird.z), vec3.fromValues(this.bird.x + Math.sin(this.bird.yy_angle), this.bird.y, this.bird.z + Math.cos(this.bird.yy_angle)));
@@ -115,17 +115,17 @@ class MyScene extends CGFscene {
     }
 
     updateCamera(){
-    	if(this.selectedCamera === "TOP-DOWN"){
+    	if(this.selectedCamera === "Top-down"){
     		this.retro = true;
     		this.thirdPerson = false;
     		this.birdCameraActive = false;
     	}
-    	else if(this.selectedCamera === "THIRD PERSON"){
+    	else if(this.selectedCamera === "Third person"){
     		this.thirdPerson = true;
     		this.retro = false;
     		this.birdCameraActive = false;
     	}
-    	else if(this.selectedCamera === "BIRD CAMERA"){
+    	else if(this.selectedCamera === "Bird fixed"){
     		this.birdCameraActive = true;
     		this.retro = false;
     		this.thirdPerson = false;
