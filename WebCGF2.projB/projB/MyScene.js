@@ -219,7 +219,7 @@ class MyScene extends CGFscene {
 		this.lightning.update(t);		
 
 		//Checks the collisions for branch catching
-		this.bird.checkCollisionsWithBranches(this.treeBranches, this.branchesTranslates, this.branchesRotates, this.catchingError);
+		this.bird.checkCollisionsWithBranches(this.treeBranches, this.branchesTranslates, this.branchesAngles, this.catchingError);
 		this.bird.checkCollisionsWithNest(this.nest, this.nestPosition, this.branchSound, this.catchingError);
     }
     

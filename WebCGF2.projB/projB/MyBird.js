@@ -185,7 +185,7 @@ class MyBird extends CGFobject {
 		this.wing_material.setTextureWrap('REPEAT', 'REPEAT');   	
     }
 
-	checkCollisionsWithBranches(treeBranches, branchesTranslates, branchesRotates, catchingError){
+	checkCollisionsWithBranches(treeBranches, branchesTranslates, branchesAngles, catchingError){
 		if(this.caughtBranch)
 			return;
 
@@ -211,7 +211,7 @@ class MyBird extends CGFobject {
 			
 			delete branchesTranslates[i];
 			delete treeBranches[i];
-			delete branchesRotates[i];
+			delete branchesAngles[i];
 			
 			this.caughtBranch = true;
 			break;
