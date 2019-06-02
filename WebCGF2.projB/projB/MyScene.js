@@ -219,8 +219,15 @@ class MyScene extends CGFscene {
 		this.bird.checkCollisionsWithBranches(this.treeBranches, this.branchesTranslates, this.branchesRotates, this.catchingError);
 		this.bird.checkCollisionsWithNest(this.nest, this.nestPosition, this.catchingError);
     }
-    	
-
+    
+    onZoomChange(){
+		if(!this.thirdPerson && !this.retro && !this.birdCameraActive){
+			if(this.zoom)
+				this.defaultCamera.setPosition(vec3.fromValues(-55, 45, 30));
+			else
+				this.defaultCamera.setPosition(vec3.fromValues(-75, 50, 60));
+		}
+    }	
 
     display() {
         // ---- BEGIN Background, camera and axis setup
@@ -245,8 +252,6 @@ class MyScene extends CGFscene {
 
         	this.retroCamera.setTarget(vec3.fromValues(this.bird.x + Math.sin(this.bird.yy_angle), this.bird.y, this.bird.z + Math.cos(this.bird.yy_angle)));
 
-        	//this.retroCamera.setTarget(vec3.fromValues(this.bird.x, this.bird.y, this.bird.z));
-        	//this.retroCamera.rotate(vec3.fromValues(0, 1, 0), this.bird.yy_angle);
         }
     	else if(this.thirdPerson){
         	this.camera = this.thirdPersonCamera;
@@ -271,12 +276,6 @@ class MyScene extends CGFscene {
 		
     	}
     	else{
-    		if(this.zoom){
-    			this.defaultCamera.setPosition(vec3.fromValues(-55, 45, 30));
-    		}
-    		else{
-    			this.defaultCamera.setPosition(vec3.fromValues(-75, 50, 60));
-    		}
     		this.camera = this.defaultCamera;
     	}
 

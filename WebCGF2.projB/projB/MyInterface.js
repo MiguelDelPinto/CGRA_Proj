@@ -51,7 +51,7 @@ class MyInterface extends CGFinterface {
 
         this.gui.add(this.scene, 'selectedCamera', this.scene.cameraNames).name('Camera').onChange(this.scene.updateCamera.bind(this.scene));
         
-        this.gui.add(this.scene, 'zoom').name('Zoom');
+        this.gui.add(this.scene, 'zoom').name('Zoom').onChange(this.scene.onZoomChange.bind(this.scene));
         
         this.initKeys();
         
