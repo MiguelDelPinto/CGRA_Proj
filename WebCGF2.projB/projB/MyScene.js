@@ -142,34 +142,36 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
 
-    checkKeys(t) {
+    checkKeys(t, deltaTime) {
 		var text="Keys pressed: ";
 		var keysPressed=false;
+
+		var timeIndependence = deltaTime/1000;
 		
 		//Accelerates the bird
 		if (this.gui.isKeyPressed("KeyW")) {
-			this.bird.accelerate(0.001);
+			this.bird.accelerate(0.015*timeIndependence*this.speedFactor);
 			text+=" W ";
 			keysPressed=true;
 		}
 		
 		//Decelerates the bird
 		if (this.gui.isKeyPressed("KeyS")) {
-			this.bird.accelerate(-0.001);			
+			this.bird.accelerate(-0.015*timeIndependence*this.speedFactor);			
 			text+=" S ";
 			keysPressed=true;
 		}
 
 		//Turns the bird to the right
 		if (this.gui.isKeyPressed("KeyD")) {
-			this.bird.turn(-Math.PI/20);
+			this.bird.turn(-Math.PI/1.2*timeIndependence*this.speedFactor);
 			text+=" D ";
 			keysPressed =true;
 		}
 
 		//Turns the bird to the left
 		if (this.gui.isKeyPressed("KeyA")) {
-			this.bird.turn(Math.PI/20);
+			this.bird.turn(Math.PI/1.2*timeIndependence*this.speedFactor);
 			text+=" A ";
 			keysPressed =true;
 		}
@@ -204,11 +206,12 @@ class MyScene extends CGFscene {
 	}
 
     update(t){
-    	this.checkKeys(t);
-
-		this.lastTime = this.lastTime || 0;
+    	this.lastTime = this.lastTime || 0;
 		this.deltaTime = t - this.lastTime;
 		this.lastTime = t;
+    	
+    	this.checkKeys(t, this.deltaTime);
+
 		this.bird.update(t, this.deltaTime);
 		
 		this.lightning.update(t);
@@ -439,7 +442,8 @@ class MyScene extends CGFscene {
 
 		//TESTING
 		this.pushMatrix();
-			this.test_branch.display();
+			//this.translate(-63, 42, 50);
+			//this.test_nest.display();
 		this.popMatrix();
 		
         // ---- END Primitive drawing section

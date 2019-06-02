@@ -7,7 +7,8 @@ class MyNest extends CGFobject {
         super(scene);
         
         this.cylinder = new MyCylinder(scene, 10, 0, true);
-        this.cylinder_inverted = new MyCylinderInverted(scene, 10, 0, true); 
+        this.cylinder_inverted = new MyCylinderInverted(scene, 10, 0, true);
+        this.branch = new MyTreeBranch(scene); 
 
         this.branches = [];
 
@@ -43,11 +44,59 @@ class MyNest extends CGFobject {
     	
     	//Displays the main nest
         this.scene.pushMatrix();
-			this.scene.scale(1, 0.25, 1);
+			this.scene.scale(1.2, 0.25, 1.2);
+			this.scene.translate(0, -0.7, 0);
 			this.nest_material.apply();
 			this.cylinder.display();
 			this.cylinder_inverted.display();
         this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        	this.scene.translate(0, 0.1, 0);
+        	for(let i = 0; i < 10; i++) {
+        		this.scene.pushMatrix();
+        			this.scene.rotate(Math.PI/2, 1, 0, 0);
+					this.scene.rotate(Math.PI/2.2, 0, 0, 1);
+					this.scene.scale(0.6, 0.6, 0.6);
+					this.branch.display();
+				this.scene.popMatrix();
+
+				this.scene.rotate(2*Math.PI/10, 0, 1, 0);
+        	}
+
+        	for(let i = 0; i < 8; i++) {
+				
+				this.scene.pushMatrix();
+					this.scene.rotate(Math.PI/3, 0, 0, 1);
+					this.scene.rotate(Math.PI/2, 0, 1, 0);
+					this.scene.translate(0, 0.2, -0.2);
+					this.scene.scale(0.4, 0.4, 0.4);
+					this.branch.display();
+				this.scene.popMatrix();
+
+				this.scene.rotate(2*Math.PI/8, 0, 1, 0);
+        	}
+
+			this.scene.pushMatrix();
+				this.scene.rotate(Math.PI/2, 1, 0, 0);
+				this.scene.rotate(Math.PI/2.2, 0, 0, 1);
+				this.scene.rotate(Math.PI/2, 0, 0, 1);
+				this.scene.translate(1, 0, 0);
+				this.scene.scale(0.5, 0.5, 0.5);
+				this.branch.display();
+			this.scene.popMatrix();
+
+			this.scene.pushMatrix();
+				this.scene.rotate(Math.PI/2, 1, 0, 0);
+				this.scene.rotate(Math.PI/2.2, 0, 0, 1);
+				this.scene.rotate(-Math.PI/3, 0, 0, 1);
+				this.scene.translate(1, 0, 0);
+				this.scene.scale(0.5, 0.5, 0.5);
+				this.branch.display();
+			this.scene.popMatrix();
+
+        this.scene.popMatrix();
+
 
 		//Displays the added branches
 		for(let i = 0; i < this.branches.length; i++) {
