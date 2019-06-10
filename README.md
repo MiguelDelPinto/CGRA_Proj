@@ -12,7 +12,6 @@ Project for CGRA (Computer Graphics - 2nd year of the Integrated Master Degree i
 * **Pedro Esteves** - [pemesteves](https://github.com/pemesteves)
 
 **First Submission:** 18.8 (50%)
-
 **Second Submission:** 18.8 (50%)
 
 **Project Grade:** 18.8
