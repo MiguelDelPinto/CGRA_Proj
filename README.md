@@ -1,6 +1,6 @@
 # CGRA Project
 
-Project for CGRA (Computer Graphics - 2nd year of the Integrated Master Degree in Computer Engineering).
+Project for CGRA (Computer Graphics - 2nd year of the Integrated Master in Informatics and Computing Engineering at FEUP).
 
 ## Course Information
 
